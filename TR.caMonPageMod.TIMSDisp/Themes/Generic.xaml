@@ -5,6 +5,11 @@
 
 
 	<Style TargetType="{x:Type local:TIMSButton}">
+		<Setter Property="HorizontalAlignment" Value="Left"/>
+		<Setter Property="VerticalAlignment" Value="Top"/>
+		<Setter Property="Padding" Value="3"/>
+		<Setter Property="FontFamily" Value="JF Dot jiskan16s"/>
+		<Setter Property="FontSize" Value="16"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type local:TIMSButton}">
@@ -12,25 +17,25 @@
 						<Border x:Name="BaseBorder" Margin="0" Padding="0"
 										Background="{Binding UsualBackground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}}"/>
 
-						<Image Source="/TR.caMonPageMod.TIMSDisp;component/Themes/BtnShadow.png"
+						<Image Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/BtnShadow.png"
 									 Stretch="Fill" Width="256" Height="256" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False"/>
-						<Image Source="/TR.caMonPageMod.TIMSDisp;component/Themes/BtnLight.png"
+						<Image Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/BtnLight.png"
 									 Stretch="Fill" Height="8" Width="8" Margin="0" HorizontalAlignment="Right" VerticalAlignment="Top" IsHitTestVisible="False"
 									 RenderTransformOrigin="0.5,0.5">
 							<Image.RenderTransform>
 								<RotateTransform x:Name="BtnLight1RotateTransform" Angle="0"/>
 							</Image.RenderTransform>
 						</Image>
-						<Image Source="/TR.caMonPageMod.TIMSDisp;component/Themes/BtnLight.png"
+						<Image Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/BtnLight.png"
 									 Stretch="Fill" Height="8" Width="8" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsHitTestVisible="False"
 									 RenderTransformOrigin="0.5,0.5">
-						<Image.RenderTransform>
+							<Image.RenderTransform>
 								<RotateTransform x:Name="BtnLight2RotateTransform" Angle="0"/>
-						</Image.RenderTransform>
+							</Image.RenderTransform>
 						</Image>
 
 						<Border x:Name="LightBorder" Margin="0,0,7,7" Padding="0" Background="White" IsHitTestVisible="False"/>
-						
+
 						<Border x:Name="InnerBorder" Margin="{TemplateBinding Padding}" Padding="0"
 										Background="{Binding UsualBackground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}}"/>
 
@@ -40,6 +45,28 @@
 											 Text="{Binding ButtonText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}}"/>
 
 					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type local:BlinkTB}">
+		<Setter Property="HorizontalAlignment" Value="Left"/>
+		<Setter Property="VerticalAlignment" Value="Top"/>
+		<Setter Property="FontFamily" Value="JF Dot jiskan16s"/>
+		<Setter Property="FontSize" Value="16"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:BlinkTB}">
+					<Border x:Name="b" Background="{TemplateBinding UsualBackground}">
+						<TextBlock x:Name="tb" Text="{TemplateBinding Text}"
+											 Margin="0"
+											 Padding="0"
+											 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+											 Foreground="{TemplateBinding UsualTextColor}"
+											 Background="{x:Null}"/>
+					</Border>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
