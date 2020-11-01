@@ -29,7 +29,7 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		{
 			FrontPage.DT400Tick += (s,e)=>
 			{
-				if (IsPushed || !IsBlinking)
+				if (!IsEnabled || IsPushed || !IsBlinking)
 					return;
 
 				if (InnerBorder == null || TB == null)
@@ -92,10 +92,10 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			InnerBorder = GetTemplateChild(InnerBorder_Name) as Border;
 			TB = GetTemplateChild(TB_Name) as TextBlock;
 
-			if (__Pushed == null)
-				__Pushed += TIMSButton___Pushed;
-			if (__Released == null)
-				__Released += TIMSButton___Released;
+			__Pushed += TIMSButton___Pushed;
+			__Released += TIMSButton___Released;
+
+			IsEnabledChanged += (s, e) => TB.Visibility = IsEnabled ? Visibility.Visible : Visibility.Collapsed;
 
 
 			if (BaseGrid != null)
@@ -131,8 +131,16 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			BtnLight1.Angle = BtnLight2.Angle = 0;
 		}
 
-		private void BaseGrid_MouseDown(object sender, MouseButtonEventArgs e) => __Pushed?.Invoke(this, null);
-		private void BaseGrid_MouseUp(object sender, MouseButtonEventArgs e) => __Released?.Invoke(this, null);
+		private void BaseGrid_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			if (IsEnabled)
+				__Pushed?.Invoke(this, null);
+		}
+		private void BaseGrid_MouseUp(object sender, MouseButtonEventArgs e)
+		{
+			if (IsEnabled)
+				__Released?.Invoke(this, null);
+		}
 
 
 		#region Properties
