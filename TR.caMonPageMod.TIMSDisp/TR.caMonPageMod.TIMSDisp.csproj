@@ -13,16 +13,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Themes\BtnLight.png" />
-    <None Remove="Themes\BtnShadow.png" />
     <None Remove="_Resources\Fonts\JF-Dot-jiskan16s.ttf" />
     <None Remove="_Resources\Images\BtnLight.png" />
     <None Remove="_Resources\Images\BtnShadow.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Themes\BtnLight.png" />
-    <Resource Include="Themes\BtnShadow.png" />
     <Resource Include="_Resources\Fonts\JF-Dot-jiskan16s.ttf" />
     <Resource Include="_Resources\Images\BtnLight.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

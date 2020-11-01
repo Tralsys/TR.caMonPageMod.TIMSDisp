@@ -3,19 +3,22 @@
 			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-			xmlns:local="clr-namespace:TR.caMonPageMod.TIMSDisp"
-			xmlns:MyCCtrl="clr-namespace:TR.caMonPageMod.TIMSDisp._CustomControl"
 			mc:Ignorable="d" 
 			d:DesignHeight="450" d:DesignWidth="800"
 			RenderOptions.BitmapScalingMode="NearestNeighbor"
 			RenderOptions.EdgeMode="Aliased"
+			FontFamily="JF Dot jiskan16s"
+			FontSize="16"
 			Title="FrontPage">
-
 	<Viewbox>
-		<StackPanel>
-			<MyCCtrl:TIMSButton Margin="0" Height="60" Width="60" Padding="6" ButtonText="ABCbacHHH"/>
-			<MyCCtrl:TIMSButton Margin="0" Height="60" Width="60" Padding="6" UsualBackground="Yellow" UsualTextColor="Black" PushedTextColor="Black"/>
-			<MyCCtrl:TIMSButton Margin="0" Height="60" Width="60" Padding="6" UsualBackground="Red" IsBlinking="True"/>
-		</StackPanel>
+		<Grid x:Name="FPMainGrid" Height="600" Width="800">
+			<Frame Height="64" Width="800" Margin="0,0,0,536" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/UpperArea.xaml"/>
+
+			<Frame Height="431" Width="800" Margin="0,64,0,105" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/ContentArea.xaml"/>
+
+			<Frame Height="82" Width="800" Margin="0,495,0,23" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/LowerArea.xaml"/>
+
+			<Frame Height="23" Width="800" Margin="0,577,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/MessageArea.xaml"/>
+		</Grid>
 	</Viewbox>
 </Page>
