@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Authors>Tetsu Otter</Authors>
+    <Product>caMon / BIDS / Tralsys</Product>
+    <Company>BIDS / Tralsys</Company>
+    <Copyright>Copyright 2020 Tetsu Otter</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Tralsys/TR.caMonPageMod.TIMSDisp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Tralsys/TR.caMonPageMod.TIMSDisp</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Themes\BtnLight.png" />
+    <None Remove="Themes\BtnShadow.png" />
+    <None Remove="_Resources\Fonts\JF-Dot-jiskan16s.ttf" />
+    <None Remove="_Resources\Images\BtnLight.png" />
+    <None Remove="_Resources\Images\BtnShadow.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Themes\BtnLight.png" />
+    <Resource Include="Themes\BtnShadow.png" />
+    <Resource Include="_Resources\Fonts\JF-Dot-jiskan16s.ttf" />
+    <Resource Include="_Resources\Images\BtnLight.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="_Resources\Images\BtnShadow.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="caMon.IPages" Version="1.0.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Start\" />
+    <Folder Include="Alert\" />
+    <Folder Include="Conductor\" />
+    <Folder Include="_Manager\" />
+  </ItemGroup>
+
+</Project>
