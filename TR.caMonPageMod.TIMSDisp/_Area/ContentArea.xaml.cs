@@ -11,5 +11,9 @@ namespace TR.caMonPageMod.TIMSDisp._Area
 		{
 			InitializeComponent();
 		}
+
+		private void Frame_ContentRendered(object sender, System.EventArgs e)
+		{
+		}
 	}
 }
