@@ -71,4 +71,45 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+	<Style TargetType="{x:Type local:ImgBtn}">
+		<Setter Property="HorizontalAlignment" Value="Left"/>
+		<Setter Property="VerticalAlignment" Value="Top"/>
+		<Setter Property="Padding" Value="3"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:ImgBtn}">
+					<Grid x:Name="BaseGrid" Background="{x:Null}">
+						<Border x:Name="BaseBorder" Margin="0" Padding="0"
+										Background="{Binding UsualBackground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ImgBtn}}}"/>
+
+						<Image Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/BtnShadow.png"
+									 Stretch="Fill" Width="256" Height="256" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False"/>
+						<Image Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/BtnLight.png"
+									 Stretch="Fill" Height="8" Width="8" Margin="0" HorizontalAlignment="Right" VerticalAlignment="Top" IsHitTestVisible="False"
+									 RenderTransformOrigin="0.5,0.5">
+							<Image.RenderTransform>
+								<RotateTransform x:Name="BtnLight1RotateTransform" Angle="0"/>
+							</Image.RenderTransform>
+						</Image>
+						<Image Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/BtnLight.png"
+									 Stretch="Fill" Height="8" Width="8" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsHitTestVisible="False"
+									 RenderTransformOrigin="0.5,0.5">
+							<Image.RenderTransform>
+								<RotateTransform x:Name="BtnLight2RotateTransform" Angle="0"/>
+							</Image.RenderTransform>
+						</Image>
+
+						<Border x:Name="LightBorder" Margin="0,0,7,7" Padding="0" Background="White" IsHitTestVisible="False"/>
+
+						<Border x:Name="InnerBorder" Margin="{TemplateBinding Padding}" Padding="0"
+										Background="{Binding UsualBackground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ImgBtn}}}"/>
+
+						<Image x:Name="img" Height="{TemplateBinding ImgHeight}" Width="{TemplateBinding ImgWidth}" Stretch="Fill"/>
+
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>
