@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TR.caMonPageMod.TIMSDisp", "TR.caMonPageMod.TIMSDisp\TR.caMonPageMod.TIMSDisp.csproj", "{BA0FC456-B946-4A49-B5E8-404385B05077}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA0FC456-B946-4A49-B5E8-404385B05077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0FC456-B946-4A49-B5E8-404385B05077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0FC456-B946-4A49-B5E8-404385B05077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0FC456-B946-4A49-B5E8-404385B05077}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {768BDCE7-B300-401A-9FF4-8BBB7CA86539}
+	EndGlobalSection
+EndGlobal
