@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -37,13 +38,13 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 
 				if (FrontPage.DT400_TFLoop)
 				{
-					InnerBorder.Background = FlippedBackground;
-					TB.Foreground = FlippedTextColor;
+					InnerBorder.SetBinding(BackgroundProperty, new Binding(nameof(FlippedBackground)) { Source = this });
+					TB.SetBinding(ForegroundProperty, new Binding(nameof(FlippedTextColor)) { Source = this });
 				}
 				else
 				{
-					InnerBorder.Background = UsualBackground;
-					TB.Foreground = UsualTextColor;
+					InnerBorder.SetBinding(BackgroundProperty, new Binding(nameof(UsualBackground)) { Source = this });
+					TB.SetBinding(ForegroundProperty, new Binding(nameof(UsualTextColor)) { Source = this });
 				}
 			};
 		}
@@ -111,9 +112,9 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			IsPushed = true;
 
 			BaseBorder.Background = Brushes.Black;
-			InnerBorder.Background = PushedBackground;
+			InnerBorder.SetBinding(BackgroundProperty, new Binding(nameof(PushedBackground)) { Source = this });
 
-			TB.Foreground = PushedTextColor;
+			TB.SetBinding(ForegroundProperty, new Binding(nameof(PushedTextColor)) { Source = this });
 
 			LightBorder.Margin = LightBorder_Margin_Pushed;
 			BtnLight1.Angle = BtnLight2.Angle = 180;
@@ -124,9 +125,10 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		{
 			IsPushed = false;
 
-			BaseBorder.Background = InnerBorder.Background = UsualBackground;
+			InnerBorder.SetBinding(BackgroundProperty, new Binding(nameof(UsualBackground)) { Source = this });
+			BaseBorder.SetBinding(BackgroundProperty, new Binding(nameof(UsualBackground)) { Source = this });
 
-			TB.Foreground = UsualTextColor;
+			TB.SetBinding(ForegroundProperty, new Binding(nameof(UsualTextColor)) { Source = this });
 
 			LightBorder.Margin = LightBorder_Margin_Usual;
 

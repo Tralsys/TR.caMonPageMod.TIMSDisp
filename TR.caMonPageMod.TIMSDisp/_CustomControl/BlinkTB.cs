@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace TR.caMonPageMod.TIMSDisp._CustomControl
@@ -32,13 +33,13 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 
 				if (FrontPage.DT400_TFLoop)
 				{
-					b.Background = FlippedBackground;
-					tb.Foreground = FlippedTextColor;
+					b.SetBinding(BackgroundProperty, new Binding(nameof(FlippedBackground)) { Source = this });
+					tb.SetBinding(ForegroundProperty, new Binding(nameof(FlippedTextColor)) { Source = this });
 				}
 				else
 				{
-					b.Background = UsualBackground;
-					tb.Foreground = UsualTextColor;
+					b.SetBinding(BackgroundProperty, new Binding(nameof(UsualBackground)) { Source = this });
+					tb.SetBinding(ForegroundProperty, new Binding(nameof(UsualTextColor)) { Source = this });
 				}
 			};
 
