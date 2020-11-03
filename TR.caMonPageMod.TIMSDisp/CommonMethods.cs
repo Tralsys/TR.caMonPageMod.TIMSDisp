@@ -19,7 +19,7 @@ namespace TR.caMonPageMod.TIMSDisp
 		static public void VolumeSettingUpdated(int num)
 			=> CurrentVolumeSetting = VolumeSettings[num < 0 ? 0 : (num > 2 ? 2 : num)];
 
-		static public readonly string CurrentDLLPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+		static public readonly string CurrentDLLPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
 		static CommonMethods()
 		{
