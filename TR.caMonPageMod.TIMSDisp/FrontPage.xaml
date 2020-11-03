@@ -16,9 +16,11 @@
 
 			<Frame Height="431" Width="800" Margin="0,64,0,105" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/ContentArea.xaml"/>
 
-			<Frame Height="82" Width="800" Margin="0,495,0,23" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/LowerArea.xaml"/>
+			<Frame ContentRendered="LowerAreaRendered" Height="82" Width="800" Margin="0,495,0,23" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/LowerArea.xaml"/>
 
 			<Frame Height="23" Width="800" Margin="0,577,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/MessageArea.xaml"/>
+
+			<Rectangle x:Name="BLRec" Fill="Black" Opacity="0" IsHitTestVisible="False"/>
 		</Grid>
 	</Viewbox>
 </Page>
