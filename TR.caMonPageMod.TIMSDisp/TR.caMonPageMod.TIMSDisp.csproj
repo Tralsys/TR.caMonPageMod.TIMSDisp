@@ -35,6 +35,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <COMReference Include="WMPLib.dll">
+      <Guid>6bf52a50-394a-11d3-b153-00c04f79faa6</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="_Resources\Fonts\JF-Dot-jiskan16s.ttf" />
     <Resource Include="_Resources\Images\BL\0b.png" />
     <Resource Include="_Resources\Images\BL\0w.png" />
@@ -67,6 +78,12 @@
     <Folder Include="Alert\" />
     <Folder Include="Conductor\" />
     <Folder Include="_Manager\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="_Resources\Sounds\Btn_Pi.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
