@@ -32,6 +32,9 @@
     <None Remove="_Resources\Images\SP\1w.png" />
     <None Remove="_Resources\Images\SP\2b.png" />
     <None Remove="_Resources\Images\SP\2w.png" />
+    <None Remove="_Resources\Images\TJMChars\joho.png" />
+    <None Remove="_Resources\Images\TJMChars\monitoring.png" />
+    <None Remove="_Resources\Images\TJMChars\tsukoku.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,9 +60,7 @@
     <Resource Include="_Resources\Images\BL\3w.png" />
     <Resource Include="_Resources\Images\BL\4b.png" />
     <Resource Include="_Resources\Images\BL\4w.png" />
-    <Resource Include="_Resources\Images\BtnLight.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="_Resources\Images\BtnLight.png" />
     <Resource Include="_Resources\Images\BtnShadow.png" />
     <Resource Include="_Resources\Images\SP\0b.png" />
     <Resource Include="_Resources\Images\SP\1b.png" />
@@ -67,10 +68,14 @@
     <Resource Include="_Resources\Images\SP\0w.png" />
     <Resource Include="_Resources\Images\SP\1w.png" />
     <Resource Include="_Resources\Images\SP\2w.png" />
+    <Resource Include="_Resources\Images\TJMChars\joho.png" />
+    <Resource Include="_Resources\Images\TJMChars\monitoring.png" />
+    <Resource Include="_Resources\Images\TJMChars\tsukoku.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="caMon.IPages" Version="1.0.0.1" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
   </ItemGroup>
 
   <ItemGroup>
