@@ -9,6 +9,9 @@ namespace TR.caMonPageMod.TIMSDisp._Area
 	/// </summary>
 	public partial class LowerArea : Page
 	{
+		public event EventHandler<ValueChangedEventArgs<int>> SPBtnCVChanged;
+		public event EventHandler<ValueChangedEventArgs<int>> BLBtnCVChanged;
+
 		public LowerArea()
 		{
 			InitializeComponent();
@@ -101,5 +104,10 @@ namespace TR.caMonPageMod.TIMSDisp._Area
 				}
 			}
 		}
+
+		private void SPBtn_OnCVChanged(object s, ValueChangedEventArgs<int> e)
+			=> SPBtnCVChanged?.Invoke(s, e);
+		private void BLBtn_OnCVChanged(object s, ValueChangedEventArgs<int> e)
+			=> BLBtnCVChanged?.Invoke(s, e);
 	}
 }
