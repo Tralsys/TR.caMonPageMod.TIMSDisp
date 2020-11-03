@@ -48,15 +48,19 @@
 										Text="空転"
 										UsualBackground="Aqua" UsualTextColor="Black" FlippedBackground="{x:Null}" FlippedTextColor="Aqua" IsBlinking="True"/>
 			</Grid>
-			
-			<cc:TIMSButton ButtonText="SP" Pushed="OnSPPushed" Margin="0,6,58,0"
-										 Height="{StaticResource SPBLBtn_H}"
-										 Width="{StaticResource SPBLBtn_W}"
-										 HorizontalAlignment="Right"/>
-			<cc:TIMSButton ButtonText="BL" Pushed="OnBLPushed" Margin="0,6,3,0"
-										 Height="{StaticResource SPBLBtn_H}"
-										 Width="{StaticResource SPBLBtn_W}"
-										 HorizontalAlignment="Right"/>
+
+			<cc:ImgBtn Margin="0,6,58,0"
+								 Height="{StaticResource SPBLBtn_H}"
+								 Width="{StaticResource SPBLBtn_W}"
+								 ValueMax="2"
+								 Directory="_Resources/Images/SP"
+								 HorizontalAlignment="Right"/>
+			<cc:ImgBtn Margin="0,6,3,0"
+								 Height="{StaticResource SPBLBtn_H}"
+								 Width="{StaticResource SPBLBtn_W}"
+								 ValueMax="4"
+								 Directory="_Resources/Images/BL"
+								 HorizontalAlignment="Right"/>
 
 			<Rectangle Width="800" Height="1" Margin="0" Fill="#FF00FF00" VerticalAlignment="Bottom"/>
 		</Grid>
