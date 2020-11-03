@@ -60,7 +60,7 @@
 				<ControlTemplate TargetType="{x:Type local:BlinkTB}">
 					<Border x:Name="b" Background="{TemplateBinding UsualBackground}">
 						<TextBlock x:Name="tb" Text="{TemplateBinding Text}"
-											 Margin="0"
+											 Margin="{TemplateBinding Padding}"
 											 Padding="0"
 											 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 											 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
