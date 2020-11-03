@@ -14,16 +14,48 @@
 
   <ItemGroup>
     <None Remove="_Resources\Fonts\JF-Dot-jiskan16s.ttf" />
+    <None Remove="_Resources\Images\BL\0b.png" />
+    <None Remove="_Resources\Images\BL\0w.png" />
+    <None Remove="_Resources\Images\BL\1b.png" />
+    <None Remove="_Resources\Images\BL\1w.png" />
+    <None Remove="_Resources\Images\BL\2b.png" />
+    <None Remove="_Resources\Images\BL\2w.png" />
+    <None Remove="_Resources\Images\BL\3b.png" />
+    <None Remove="_Resources\Images\BL\3w.png" />
+    <None Remove="_Resources\Images\BL\4b.png" />
+    <None Remove="_Resources\Images\BL\4w.png" />
     <None Remove="_Resources\Images\BtnLight.png" />
     <None Remove="_Resources\Images\BtnShadow.png" />
+    <None Remove="_Resources\Images\SP\0b.png" />
+    <None Remove="_Resources\Images\SP\0w.png" />
+    <None Remove="_Resources\Images\SP\1b.png" />
+    <None Remove="_Resources\Images\SP\1w.png" />
+    <None Remove="_Resources\Images\SP\2b.png" />
+    <None Remove="_Resources\Images\SP\2w.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="_Resources\Fonts\JF-Dot-jiskan16s.ttf" />
+    <Resource Include="_Resources\Images\BL\0b.png" />
+    <Resource Include="_Resources\Images\BL\0w.png" />
+    <Resource Include="_Resources\Images\BL\1b.png" />
+    <Resource Include="_Resources\Images\BL\1w.png" />
+    <Resource Include="_Resources\Images\BL\2b.png" />
+    <Resource Include="_Resources\Images\BL\2w.png" />
+    <Resource Include="_Resources\Images\BL\3b.png" />
+    <Resource Include="_Resources\Images\BL\3w.png" />
+    <Resource Include="_Resources\Images\BL\4b.png" />
+    <Resource Include="_Resources\Images\BL\4w.png" />
     <Resource Include="_Resources\Images\BtnLight.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="_Resources\Images\BtnShadow.png" />
+    <Resource Include="_Resources\Images\SP\0b.png" />
+    <Resource Include="_Resources\Images\SP\1b.png" />
+    <Resource Include="_Resources\Images\SP\2b.png" />
+    <Resource Include="_Resources\Images\SP\0w.png" />
+    <Resource Include="_Resources\Images\SP\1w.png" />
+    <Resource Include="_Resources\Images\SP\2w.png" />
   </ItemGroup>
 
   <ItemGroup>
