@@ -117,6 +117,8 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 
 			LightBorder.Margin = LightBorder_Margin_Pushed;
 			BtnLight1.Angle = BtnLight2.Angle = 180;
+
+			CommonMethods.ButtonPushed();
 		}
 		private void TIMSButton___Released(object sender, EventArgs e)
 		{
@@ -186,7 +188,9 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			get => (bool)GetValue(IsBlinkingProperty);
 			set => SetValue(IsBlinkingProperty, value);
 		}
+		#endregion
 
+		#region Events
 		private event EventHandler __Pushed;
 		public event EventHandler Pushed { add => __Pushed += value; remove => __Pushed -= value; }
 		private event EventHandler __Released;

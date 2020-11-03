@@ -46,6 +46,8 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			PushedImg = GetImgSource(v, PushedSuffix);
 			FlippedImg = null;
 			CurrentBI = null;
+
+			__CurrentValueChanged?.Invoke(this, new ValueChangedEventArgs<int>((int)e.OldValue, v));
 		}
 
 		public static readonly DependencyProperty UsualBackgroundProperty = DependencyProperty.Register("UsualBackground", typeof(Brush), typeof(ImgBtn), new PropertyMetadata(Brushes.Blue));
@@ -177,6 +179,8 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 
 			LightBorder.Margin = LightBorder_Margin_Pushed;
 			BtnLight1.Angle = BtnLight2.Angle = 180;
+
+			CommonMethods.ButtonPushed();
 		}
 		private void ImgBtn___Released(object sender, EventArgs e)
 		{
@@ -273,6 +277,11 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			get => (bool)GetValue(IsBlinkingProperty);
 			set => SetValue(IsBlinkingProperty, value);
 		}
+		#endregion
+
+		#region Events
+		private event EventHandler<ValueChangedEventArgs<int>> __CurrentValueChanged;
+		public event EventHandler<ValueChangedEventArgs<int>> CurrentValueChanged { add => __CurrentValueChanged += value; remove => __CurrentValueChanged -= value; }
 
 		private event EventHandler __Pushed;
 		public event EventHandler Pushed { add => __Pushed += value; remove => __Pushed -= value; }
