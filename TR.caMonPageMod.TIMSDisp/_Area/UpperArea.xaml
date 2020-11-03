@@ -161,7 +161,6 @@
 		</Grid>
 		<cc:TIMSButton x:Name="ShokiSentakuBtn"
 									 ButtonText="初期&#xa;選択"
-									 Pushed="ShokiSentakuBtn_Pushed"
 									 Grid.Column="5"
 									 Margin="0,4,0,0"
 									 Height="{StaticResource SqBtn_WH}"
