@@ -7,17 +7,24 @@
 			mc:Ignorable="d" 
 			Title="UpperArea">
 	<Page.Resources>
-		<System:Double x:Key="SqBtn_WH">54</System:Double>
-		<Visibility x:Key="LineVisibility">Visible</Visibility>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/ConstVars.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+			
+			<System:Double x:Key="SqBtn_WH">54</System:Double>
 
-		<System:Double x:Key="MsgArea_H">22</System:Double>
-		<GridLength x:Key="MsgArea_RH">22</GridLength>
-		<Brush x:Key="MsgArea_BG">Black</Brush>
-		<Thickness x:Key="MsgArea_TBPadding">2</Thickness>
-		<Thickness x:Key="MsgArea_Margin">114,6,58,12</Thickness>
+			<System:Double x:Key="MsgArea_H">22</System:Double>
+			<GridLength x:Key="MsgArea_RH">22</GridLength>
+			<Brush x:Key="MsgArea_BG">Black</Brush>
+			<Thickness x:Key="MsgArea_TBPadding">2</Thickness>
+			<Thickness x:Key="MsgArea_KoKoTBPadding">9,1</Thickness>
+			<!--1 + (16 / 2)-->
+			<Thickness x:Key="MsgArea_Margin">114,6,58,12</Thickness>
 
-		<Thickness x:Key="KoshoHasseiBtn_Margin">2,4,0,0</Thickness>
-		<Thickness x:Key="KikiJohoBtn_Margin">58,4,0,0</Thickness>
+			<Thickness x:Key="KoshoHasseiBtn_Margin">2,4,0,0</Thickness>
+			<Thickness x:Key="KikiJohoBtn_Margin">58,4,0,0</Thickness>
+		</ResourceDictionary>
 	</Page.Resources>
 	<Grid Height="64" Width="800">
 		<Grid.ColumnDefinitions>
@@ -30,15 +37,134 @@
 		</Grid.ColumnDefinitions>
 		<!--#region ツウコクジョウホウ 表示部-->
 		<Grid Grid.Column="0">
-			
+			<Image x:Name="TsukokuStr"
+						 Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/TJMChars/tsukoku.png"
+						 Stretch="Fill"
+						 Margin="8,0,0,0"
+						 Height="8"
+						 Width="32"
+						 HorizontalAlignment="Left"
+						 VerticalAlignment="Top"/>
+			<Image x:Name="JohoStr"
+						 Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/TJMChars/joho.png"
+						 Stretch="Fill"
+						 Margin="56,0,0,0"
+						 Height="8"
+						 Width="48"
+						 HorizontalAlignment="Left"
+						 VerticalAlignment="Top"/>
+			<Image x:Name="MonitoringStr"
+						 Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/TJMChars/monitoring.png"
+						 Stretch="Fill"
+						 Margin="120,0,0,0"
+						 Height="8"
+						 Width="56"
+						 HorizontalAlignment="Left"
+						 VerticalAlignment="Top"/>
+			<Grid Margin="0,10,2,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+
+				<cc:TIMSButton ButtonText="通告"
+											 x:Name="TsukokuBtn"
+											 Grid.Column="0"
+											 
+											 IsBlinking="True"
+											 
+											 UsualBackground="Aqua"
+											 UsualTextColor="Black"
+											 
+											 FlippedBackground="Black"
+											 FlippedTextColor="Aqua"
+											 HorizontalAlignment="Center"
+											 Height="{StaticResource SqBtn_WH}"
+											 Width="{StaticResource SqBtn_WH}"/>
+				<cc:TIMSButton ButtonText="規制&#xa;一覧"
+											 x:Name="KiseiIchiranBtn"
+											 Grid.Column="1"
+											 
+											 IsBlinking="True"
+											 
+											 UsualBackground="Aqua"
+											 UsualTextColor="Black"
+											 
+											 FlippedBackground="Black"
+											 FlippedTextColor="Aqua"
+											 HorizontalAlignment="Center"
+											 Height="{StaticResource SqBtn_WH}"
+											 Width="{StaticResource SqBtn_WH}"/>
+				<cc:TIMSButton ButtonText="指令&#xa;情報"
+											 x:Name="ShireiJohoBtn"
+											 Grid.Column="2"
+											 
+											 IsBlinking="True"
+											 
+											 UsualBackground="Aqua"
+											 UsualTextColor="Black"
+											 
+											 FlippedBackground="Black"
+											 FlippedTextColor="Aqua"
+											 HorizontalAlignment="Center"
+											 Height="{StaticResource SqBtn_WH}"
+											 Width="{StaticResource SqBtn_WH}"/>
+				<cc:TIMSButton ButtonText="運行&#xa;情報"
+											 x:Name="UnkoJohoBtn"
+											 Grid.Column="3"
+											 
+											 IsBlinking="True"
+											 
+											 UsualBackground="Aqua"
+											 UsualTextColor="Black"
+											 
+											 FlippedBackground="Black"
+											 FlippedTextColor="Aqua"
+											 HorizontalAlignment="Center"
+											 Height="{StaticResource SqBtn_WH}"
+											 Width="{StaticResource SqBtn_WH}"/>
+			</Grid>
 		</Grid>
 		<!--#endregion ツウコクジョウホウ 表示部-->
 		
 		<!--#region 時刻/速度/キロ程表示部-->
 		<Grid Grid.Column="2">
-			
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<cc:TimeDisplay x:Name="TimeDisplayCtrl"
+											Grid.Row="0"
+											Margin="1"
+											VerticalAlignment="Top"
+											HorizontalAlignment="Right"/>
+			<StackPanel Orientation="Horizontal"
+									Grid.Row="1"
+									VerticalAlignment="Top"
+									HorizontalAlignment="Right"
+									Margin="1">
+				<TextBlock x:Name="SpeedTB"
+									 Text="１２３"
+									 Foreground="White"
+									 FontFamily="{StaticResource TIMSFontFamily}"
+									 FontSize="{StaticResource TIMSFontSizeX1}"/>
+				<TextBlock Text="km/h"
+									 Foreground="{StaticResource ConstantStrBrush}"
+									 FontFamily="{StaticResource TIMSFontFamily}"
+									 FontSize="{StaticResource TIMSFontSizeX1}"/>
+			</StackPanel>
+			<cc:LocationDisplay x:Name="LocationDisplayCtrl"
+													IsEnabled="False"
+													Grid.Row="2"
+													Margin="1"
+													VerticalAlignment="Top"
+													HorizontalAlignment="Right"/>
 		</Grid>
 		<!--#endregion 時刻/速度/キロ程表示部-->
+		
 		<Grid Grid.Column="4">
 			<cc:TIMSButton x:Name="KoshoHasseiBtn"
 										 ButtonText="故障&#xa;発生"
@@ -133,13 +259,13 @@
 											FlippedTextColor="Yellow"/>
 
 					<cc:BlinkTB x:Name="ACACSec_TB"
-											Text=" 交　交 "
+											Text="交　交"
 											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											HorizontalAlignment="Right"
 											Margin="0,0,120,0"
-											Padding="{StaticResource MsgArea_TBPadding}"
+											Padding="{StaticResource MsgArea_KoKoTBPadding}"
 											UsualBackground="Yellow"
 											UsualTextColor="Black"
 											FlippedBackground="{x:Null}"
