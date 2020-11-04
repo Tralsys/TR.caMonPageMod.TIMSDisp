@@ -117,7 +117,7 @@
 	</Style>
 
 	<Style TargetType="{x:Type local:PageIDName}">
-		<Setter Property="Margin" Value="21,4,0,0"/>
+		<Setter Property="Margin" Value="18,4,0,0"/>
 		<Setter Property="HorizontalAlignment" Value="Left"/>
 		<Setter Property="VerticalAlignment" Value="Top"/>
 		<Setter Property="FontFamily" Value="{StaticResource TIMSFontFamily}"/>
@@ -134,7 +134,7 @@
 						<TextBlock Text="{TemplateBinding PageName}"
 											 Foreground="{TemplateBinding PageNameBrush}"
 											 Visibility="{TemplateBinding PageNameVisibility}"
-											 Margin="81,0,0,0"
+											 Margin="72,0,0,0"
 											 Padding="0">
 							<TextBlock.RenderTransform>
 								<ScaleTransform ScaleX="2"/>
@@ -199,6 +199,22 @@
 						<TextBlock Text="km"
 											 Margin="0"
 											 Foreground="{TemplateBinding ConstantTextBrush}"/>
+					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type local:TrainNumberDisplay}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:TrainNumberDisplay}">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Width="36"
+											 TextAlignment="Right"
+											 Text="{TemplateBinding TNPrefix}"/>
+						<TextBlock TextAlignment="Left" Text="{TemplateBinding TrainNumber}"/>
+						<TextBlock TextAlignment="Left" Text="{TemplateBinding TNSuffix}"/>
 					</StackPanel>
 				</ControlTemplate>
 			</Setter.Value>
