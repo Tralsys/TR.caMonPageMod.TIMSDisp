@@ -6,5 +6,6 @@
 
 	<Visibility x:Key="LineVisibility">Visible</Visibility>
 	<Brush x:Key="ConstantStrBrush">Lime</Brush>
+	<Brush x:Key="VariableStrBrush">White</Brush>
 
 </ResourceDictionary>
