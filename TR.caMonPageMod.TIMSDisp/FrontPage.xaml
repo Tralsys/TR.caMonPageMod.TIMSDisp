@@ -13,11 +13,11 @@
 		<Grid x:Name="FPMainGrid" Height="600" Width="800">
 			<Frame Height="64" Width="800" Margin="0,0,0,536" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/UpperArea.xaml"/>
 
-			<Frame Height="431" Width="800" Margin="0,64,0,105" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/ContentArea.xaml"/>
+			<Frame Height="432" Width="800" Margin="0,64,0,105" HorizontalAlignment="Center" VerticalAlignment="Top" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/ContentArea.xaml"/>
 
-			<Frame ContentRendered="LowerAreaRendered" Height="82" Width="800" Margin="0,495,0,23" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/LowerArea.xaml"/>
+			<Frame ContentRendered="LowerAreaRendered" Height="80" Width="800" Margin="0,495,0,23" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/LowerArea.xaml"/>
 
-			<Frame Height="23" Width="800" Margin="0,577,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/MessageArea.xaml"/>
+			<Frame Height="24" Width="800" Margin="0,576,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Source="/TR.caMonPageMod.TIMSDisp;component/_Area/MessageArea.xaml"/>
 
 			<Rectangle x:Name="BLRec" Fill="Black" Opacity="0" IsHitTestVisible="False"/>
 		</Grid>

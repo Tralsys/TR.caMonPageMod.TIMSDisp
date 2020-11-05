@@ -22,7 +22,7 @@
 
 	</Page.Resources>
 	<Grid>
-		<Grid Height="82" Width="800">
+		<Grid Height="80" Width="800">
 			<Rectangle Width="800" Height="1" Margin="0" Fill="#FF00FF00" VerticalAlignment="Top"/>
 
 			<cc:TIMSButton ButtonText="{Binding L1BText}" Pushed="OnL1Pushed" Margin="10,5"
@@ -115,8 +115,6 @@
 								 ValueMax="4"
 								 CurrentValue="4"
 								 HorizontalAlignment="Right"/>
-
-			<Rectangle Width="800" Height="1" Margin="0" Fill="#FF00FF00" VerticalAlignment="Bottom"/>
 		</Grid>
 	</Grid>
 </Page>

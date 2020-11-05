@@ -6,7 +6,8 @@
 			mc:Ignorable="d" 
 			Title="MessageArea">
 
-		<Grid Height="23" Width="800">
-				
-		</Grid>
+	<Grid Height="24" Width="800">
+		<Rectangle Width="800" Height="1" Margin="0" Fill="#FF00FF00" VerticalAlignment="Top"/>
+
+	</Grid>
 </Page>
