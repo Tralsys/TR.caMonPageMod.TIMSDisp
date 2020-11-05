@@ -4,10 +4,33 @@
 			xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			xmlns:cc="clr-namespace:TR.caMonPageMod.TIMSDisp._CustomControl"
+			xmlns:System="clr-namespace:System;assembly=mscorlib"
 			mc:Ignorable="d" 
 			Title="A_5Row">
+	<Page.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/ConstVars.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
 
-	<Grid Height="431" Width="800">
+		</ResourceDictionary>
+	</Page.Resources>
+
+	<Grid	Height="431"
+				Width="800">
 		<cc:PageIDName PageID="D01AA" PageName="運転情報"/>
+		<TextBlock Text="列車番号"
+							 Margin="90,24,0,0"
+							 HorizontalAlignment="Left"
+							 VerticalAlignment="Top"
+							 FontSize="{StaticResource TIMSFontSizeX1}"
+							 FontFamily="{StaticResource TIMSFontFamily}"
+							 Foreground="{StaticResource ConstantStrBrush}"/>
+		<cc:TrainNumberDisplay Margin="180,24,0,0" TNPrefix="推回" TrainNumber="８０１０" TNSuffix="ＭＨ">
+			<cc:TrainNumberDisplay.RenderTransform>
+				<ScaleTransform ScaleX="2"/>
+			</cc:TrainNumberDisplay.RenderTransform>
+		</cc:TrainNumberDisplay>
+
 	</Grid>
 </Page>
