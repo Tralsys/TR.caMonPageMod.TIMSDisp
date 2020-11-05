@@ -28,4 +28,12 @@ namespace TR.caMonPageMod.TIMSDisp._UsefulFuncs
 	{
 		public bool IsHankaku { get; }
 	}
+	public class Char_WideNarrowSetting : DependencyObject, IChar_WideNarrow
+	{
+		public bool IsHankaku { get; protected set; }
+
+		public Char_WideNarrowSetting(bool isHankaku = false) => IsHankaku = isHankaku;
+		
+
+	}
 }
