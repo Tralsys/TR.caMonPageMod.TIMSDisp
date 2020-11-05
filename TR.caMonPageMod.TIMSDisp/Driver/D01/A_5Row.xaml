@@ -16,21 +16,96 @@
 		</ResourceDictionary>
 	</Page.Resources>
 
-	<Grid	Height="431"
+	<Grid	Height="432"
 				Width="800">
-		<cc:PageIDName PageID="D01AA" PageName="運転情報"/>
-		<TextBlock Text="列車番号"
-							 Margin="90,24,0,0"
-							 HorizontalAlignment="Left"
-							 VerticalAlignment="Top"
-							 FontSize="{StaticResource TIMSFontSizeX1}"
-							 FontFamily="{StaticResource TIMSFontFamily}"
-							 Foreground="{StaticResource ConstantStrBrush}"/>
-		<cc:TrainNumberDisplay Margin="180,24,0,0" TNPrefix="推回" TrainNumber="８０１０" TNSuffix="ＭＨ">
-			<cc:TrainNumberDisplay.RenderTransform>
-				<ScaleTransform ScaleX="2"/>
-			</cc:TrainNumberDisplay.RenderTransform>
-		</cc:TrainNumberDisplay>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="48"/><!--列番などなど-->
+			<RowDefinition Height="210"/><!--時刻表エリア-->
+			<RowDefinition Height="90"/><!--徐行/次停車駅など-->
+			<RowDefinition Height="80"/><!--編成図領域-->
+			<RowDefinition Height="4"/><!--編成図領域下の空白-->
+		</Grid.RowDefinitions>
+		<Grid Grid.Row="0">
+			<cc:PageIDName PageID="D01AA" PageName="運転情報"/>
+			<TextBlock Text="列車番号"
+								 Margin="90,24,0,0"
+								 HorizontalAlignment="Left"
+								 VerticalAlignment="Top"
+								 FontSize="{StaticResource TIMSFontSizeX1}"
+								 FontFamily="{StaticResource TIMSFontFamily}"
+								 Foreground="{StaticResource ConstantStrBrush}"/>
+			<cc:TrainNumberDisplay Margin="180,24,0,0"
+														 HorizontalAlignment="Left"
+														 VerticalAlignment="Top"
+														 TNPrefix="推回"
+														 TrainNumber="8010"
+														 TNSuffix="MH">
+				<cc:TrainNumberDisplay.RenderTransform>
+					<ScaleTransform ScaleX="2"/>
+				</cc:TrainNumberDisplay.RenderTransform>
+			</cc:TrainNumberDisplay>
+
+			<cc:BlinkTB Text="設定完了"
+									UsualTextColor="Black"
+									UsualBackground="Aqua"
+									Margin="0,4,12,0"
+									HorizontalAlignment="Right"
+									HorizontalContentAlignment="Center"
+									VerticalAlignment="Top"
+									VerticalContentAlignment="Bottom"
+									Padding="1"
+									Height="20"
+									Width="90"/>
+			<cc:BlinkTB Text="通過設定"
+									UsualTextColor="Black"
+									UsualBackground="Yellow"
+									Margin="0,24,12,0"
+									HorizontalAlignment="Right"
+									HorizontalContentAlignment="Center"
+									VerticalAlignment="Top"
+									VerticalContentAlignment="Bottom"
+									Padding="1"
+									Height="20"
+									Width="90"/>
+
+			<TextBlock Text="Ｐ列番"
+								 Margin="0,4,126,0"
+								 HorizontalAlignment="Right"
+								 VerticalAlignment="Top"
+								 FontSize="{StaticResource TIMSFontSizeX1}"
+								 FontFamily="{StaticResource TIMSFontFamily}"
+								 Foreground="{StaticResource ConstantStrBrush}"/>
+
+			<cc:TrainNumberDisplay Margin="0,4,180,0"
+														 HorizontalAlignment="Right"
+														 VerticalAlignment="Top"
+														 TNPrefix="通回"
+														 TrainNumber="8010"
+														 TNSuffix="MH"/>
+
+			<TextBlock Text="無線"
+								 Margin="0,24,270,0"
+								 HorizontalAlignment="Right"
+								 VerticalAlignment="Top"
+								 FontSize="{StaticResource TIMSFontSizeX1}"
+								 FontFamily="{StaticResource TIMSFontFamily}"
+								 Foreground="{StaticResource ConstantStrBrush}"/>
+			<TextBlock Text="A9"
+								 Margin="0,24,225,0"
+								 HorizontalAlignment="Right"
+								 TextAlignment="Right"
+								 VerticalAlignment="Top"
+								 FontSize="{StaticResource TIMSFontSizeX1}"
+								 FontFamily="{StaticResource TIMSFontFamily}"
+								 Foreground="{StaticResource VariableStrBrush}"/>
+			<TextBlock Text="ch"
+								 Margin="0,24,207,0"
+								 HorizontalAlignment="Right"
+								 VerticalAlignment="Top"
+								 FontSize="{StaticResource TIMSFontSizeX1}"
+								 FontFamily="{StaticResource TIMSFontFamily}"
+								 Foreground="{StaticResource ConstantStrBrush}"/>
+		</Grid>
 
 	</Grid>
 </Page>
