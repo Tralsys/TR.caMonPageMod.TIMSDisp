@@ -12,7 +12,7 @@ namespace TR.caMonPageMod.TIMSDisp
 		{
 			//ref : https://aquasoftware.net/blog/?p=895
 			//エンコード932(Shift-JIS)に対応するため
-			Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+			//Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);// => _UsefulFuncs/UsefulFuncs.csに移動
 		}
 
 		public Page FrontPage { get; } = new FrontPage();
