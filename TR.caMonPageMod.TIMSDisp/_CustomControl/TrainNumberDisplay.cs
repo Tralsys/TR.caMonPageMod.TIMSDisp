@@ -1,13 +1,15 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
+using TR.caMonPageMod.TIMSDisp._UsefulFuncs;
+
 namespace TR.caMonPageMod.TIMSDisp._CustomControl
 {
-	public class TrainNumberDisplay : Control
+	public class TrainNumberDisplay : Control, IChar_WideNarrow
 	{
-		public static readonly DependencyProperty TNPrefixProperty = DependencyProperty.Register("TNPrefix", typeof(string), typeof(TIMSButton), new PropertyMetadata("試験"));
-		public static readonly DependencyProperty TrainNumberProperty = DependencyProperty.Register("TrainNumber", typeof(string), typeof(TIMSButton), new PropertyMetadata("9999"));
-		public static readonly DependencyProperty TNSuffixProperty = DependencyProperty.Register("TNSuffix", typeof(string), typeof(TIMSButton), new PropertyMetadata("MH"));
+		public static readonly DependencyProperty TNPrefixProperty = DependencyProperty.Register("TNPrefix", typeof(string), typeof(TrainNumberDisplay), new PropertyMetadata("試験", null, UsefulFuncs.WideNarrowConv));
+		public static readonly DependencyProperty TrainNumberProperty = DependencyProperty.Register("TrainNumber", typeof(string), typeof(TrainNumberDisplay), new PropertyMetadata("９９９９", null, UsefulFuncs.WideNarrowConv));
+		public static readonly DependencyProperty TNSuffixProperty = DependencyProperty.Register("TNSuffix", typeof(string), typeof(TrainNumberDisplay), new PropertyMetadata("ＭＨ", null, UsefulFuncs.WideNarrowConv));
 		static TrainNumberDisplay() => DefaultStyleKeyProperty.OverrideMetadata(typeof(TrainNumberDisplay), new FrameworkPropertyMetadata(typeof(TrainNumberDisplay)));
 		
 		public string TNPrefix
@@ -25,5 +27,6 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			get => (string)GetValue(TNSuffixProperty);
 			set => SetValue(TrainNumberProperty, value);
 		}
+		public bool IsHankaku { get; } = false;
 	}
 }
