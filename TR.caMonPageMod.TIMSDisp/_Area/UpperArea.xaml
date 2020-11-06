@@ -12,7 +12,7 @@
 				<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/ConstVars.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 			
-			<System:Double x:Key="SqBtn_WH">54</System:Double>
+			<System:Double x:Key="SqBtn_WH">52</System:Double>
 
 			<System:Double x:Key="MsgArea_H">22</System:Double>
 			<GridLength x:Key="MsgArea_RH">22</GridLength>
@@ -51,14 +51,14 @@
 						 Width="48"
 						 HorizontalAlignment="Left"
 						 VerticalAlignment="Top"/>
-			<Image x:Name="MonitoringStr"
+			<cc:MyImage x:Name="MonitoringStr"
 						 Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/TJMChars/monitoring.png"
 						 Margin="120,0,0,0"
 						 Height="8"
 						 Width="56"
 						 HorizontalAlignment="Left"
 						 VerticalAlignment="Top"/>
-			<Grid Margin="0,10,2,0">
+			<Grid Margin="1,10,1,1">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="*"/>
