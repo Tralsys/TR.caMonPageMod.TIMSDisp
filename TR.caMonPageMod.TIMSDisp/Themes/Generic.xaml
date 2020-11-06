@@ -11,6 +11,7 @@
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/CarDisp.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/ImgBtn.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/LocationDisplay.xaml"/>
+		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/MyImage.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/PageIDName.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/TimeDisplay.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/TIMSButton.xaml"/>
