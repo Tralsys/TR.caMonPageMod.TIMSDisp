@@ -5,6 +5,8 @@
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/ConstVars.xaml"/>
+		
+		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/BitmapCircle.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/BlinkTB.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/CarDisp.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/ImgBtn.xaml"/>
