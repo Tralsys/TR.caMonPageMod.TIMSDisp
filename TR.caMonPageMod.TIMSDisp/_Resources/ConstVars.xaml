@@ -11,4 +11,7 @@
 	<System:Double x:Key="CarDisp_DoorBorderW">45</System:Double>
 	<System:Double x:Key="CarDisp_DoorBorderH">22</System:Double>
 
+	<BitmapScalingMode x:Key="ImageCtrl_BitmapScalingMode">NearestNeighbor</BitmapScalingMode>
+	<EdgeMode x:Key="ImageCtrl_EdgeMode">Aliased</EdgeMode>
+
 </ResourceDictionary>

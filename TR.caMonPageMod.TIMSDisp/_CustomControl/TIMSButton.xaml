@@ -19,8 +19,12 @@
 										Background="{Binding UsualBackground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}}"/>
 
 						<Image Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/BtnShadow.png"
+									 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
+									 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
 									 Stretch="Fill" Width="256" Height="256" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False"/>
 						<Image Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/BtnLight.png"
+									 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
+									 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
 									 Stretch="Fill" Height="8" Width="8" Margin="0" HorizontalAlignment="Right" VerticalAlignment="Top" IsHitTestVisible="False"
 									 RenderTransformOrigin="0.5,0.5">
 							<Image.RenderTransform>
@@ -28,6 +32,8 @@
 							</Image.RenderTransform>
 						</Image>
 						<Image Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/BtnLight.png"
+									 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
+									 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
 									 Stretch="Fill" Height="8" Width="8" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsHitTestVisible="False"
 									 RenderTransformOrigin="0.5,0.5">
 							<Image.RenderTransform>

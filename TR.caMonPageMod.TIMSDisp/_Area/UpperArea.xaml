@@ -38,6 +38,8 @@
 		<!--#region ツウコクジョウホウ 表示部-->
 		<Grid Grid.Column="0">
 			<Image x:Name="TsukokuStr"
+						 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
+						 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
 						 Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/TJMChars/tsukoku.png"
 						 Stretch="Fill"
 						 Margin="8,0,0,0"
@@ -46,6 +48,8 @@
 						 HorizontalAlignment="Left"
 						 VerticalAlignment="Top"/>
 			<Image x:Name="JohoStr"
+						 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
+						 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
 						 Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/TJMChars/joho.png"
 						 Stretch="Fill"
 						 Margin="56,0,0,0"
@@ -54,6 +58,8 @@
 						 HorizontalAlignment="Left"
 						 VerticalAlignment="Top"/>
 			<Image x:Name="MonitoringStr"
+						 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
+						 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
 						 Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/TJMChars/monitoring.png"
 						 Stretch="Fill"
 						 Margin="120,0,0,0"
