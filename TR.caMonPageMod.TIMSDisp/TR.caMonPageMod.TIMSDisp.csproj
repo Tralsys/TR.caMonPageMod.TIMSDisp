@@ -91,4 +91,25 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="_CustomControl\TrainNumberDisplay.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="_CustomControl\TIMSButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="_CustomControl\TimeDisplay.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="_CustomControl\PageIDName.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="_CustomControl\LocationDisplay.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="_CustomControl\ImgBtn.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>
