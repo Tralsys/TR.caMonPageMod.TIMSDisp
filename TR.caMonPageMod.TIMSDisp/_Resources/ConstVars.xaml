@@ -8,4 +8,7 @@
 	<Brush x:Key="ConstantStrBrush">Lime</Brush>
 	<Brush x:Key="VariableStrBrush">White</Brush>
 
+	<System:Double x:Key="CarDisp_DoorBorderW">45</System:Double>
+	<System:Double x:Key="CarDisp_DoorBorderH">22</System:Double>
+
 </ResourceDictionary>
