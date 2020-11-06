@@ -13,16 +13,86 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type local:CarDisp}">
 					<Grid Background="{x:Null}">
-						<Border Margin="0"
-										
+						<Border x:Name="DoorBorder" Margin="0"
+									  Visibility="{TemplateBinding HasDoor, Converter={StaticResource BoolToVisibility}}"
+										VerticalAlignment="Top"
+										HorizontalAlignment="Center"
+										Height="{TemplateBinding DoorBlockHeight}"
+										Width="{TemplateBinding DoorBlockWidth}"
 										BorderBrush="{TemplateBinding BorderBrush}"
 										BorderThickness="1"
 										Background="{TemplateBinding CurrentDoorBrush}">
-							<TextBlock Text="{TemplateBinding CarNumberStr}"
+							<TextBlock Text="{TemplateBinding IsDoorClosed, Converter={StaticResource IsDoorClosedToString}}"
 												 HorizontalAlignment="Center"
 												 VerticalAlignment="Center"
 												 Foreground="{TemplateBinding CurrentDoorTextColor}"/>
 						</Border>
+						<StackPanel VerticalAlignment="Bottom"
+												Margin="0,0,1,0">
+							<!--Pan / Arrow-->
+							<Grid>
+								<Image x:Name="LeftPanImageCtrl"
+											 Margin="{TemplateBinding LeftPanMargin}"
+											 VerticalAlignment="Bottom"
+											 HorizontalAlignment="Left"
+	
+											 Height="7"
+											 Width="8"
+											 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
+											 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"/>
+								<Image x:Name="RightPanImageCtrl"
+											 Margin="{TemplateBinding RightPanMargin}"
+											 VerticalAlignment="Bottom"
+											 HorizontalAlignment="Right"
+										 
+											 Height="7"
+											 Width="8"
+											 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
+											 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"/>
+							</Grid>
+
+							<!--Car Block-->
+							<Grid Margin="{TemplateBinding CarBlockMargin}" Panel.ZIndex="1">
+								<Image x:Name="CarImageCtrl"
+											 Margin="{TemplateBinding CarBlockMargin}"
+											 VerticalAlignment="Bottom"
+											 HorizontalAlignment="Left"
+											 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
+											 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"/>
+								<TextBlock Text="{TemplateBinding CarNumberStr}"
+													 VerticalAlignment="Center"
+													 HorizontalAlignment="Center"
+													 Foreground="{TemplateBinding CarNumberTextColor}"/>
+							</Grid>
+
+							<Grid>
+								<!--Bogie-->
+								<local:BitmapCircle Margin="{TemplateBinding LeftBogieMargin}"
+																		Height="{TemplateBinding BogieHeight}"
+																		Width="{TemplateBinding BogieWidth}"
+																		CircleType="X8Y7"
+																		Foreground="{TemplateBinding MotoredBogieBrush}"
+																		Background="{x:Null}"
+																		BorderBrush="{TemplateBinding TrailerBogieBrush}"
+																		
+																		HorizontalAlignment="Left"
+																		VerticalAlignment="Bottom"
+																		FillWithEdge="True"
+																		IsFilled="{TemplateBinding IsLeftBogieMotored}"/>
+								<local:BitmapCircle Margin="{TemplateBinding RightBogieMargin}"
+																		Height="{TemplateBinding BogieHeight}"
+																		Width="{TemplateBinding BogieWidth}"
+																		CircleType="X8Y7"
+																		Foreground="{TemplateBinding MotoredBogieBrush}"
+																		Background="{x:Null}"
+																		BorderBrush="{TemplateBinding TrailerBogieBrush}"
+																		
+																		HorizontalAlignment="Right"
+																		VerticalAlignment="Bottom"
+																		FillWithEdge="True"
+																		IsFilled="{TemplateBinding IsRightBogieMotored}"/>
+							</Grid>
+						</StackPanel>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

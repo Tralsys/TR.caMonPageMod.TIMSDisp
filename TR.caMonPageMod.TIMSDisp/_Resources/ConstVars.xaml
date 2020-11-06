@@ -16,5 +16,5 @@
 	<EdgeMode x:Key="ImageCtrl_EdgeMode">Aliased</EdgeMode>
 
 	<uf:BoolToVisibility x:Key="BoolToVisibility"/>
-	<uf:IsClosedToString x:Key="IsDoorClosedToString"/>
+	<uf:IsDoorClosedToString x:Key="IsDoorClosedToString"/>
 </ResourceDictionary>
