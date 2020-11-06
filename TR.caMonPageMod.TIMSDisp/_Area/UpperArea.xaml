@@ -18,7 +18,7 @@
 			<GridLength x:Key="MsgArea_RH">22</GridLength>
 			<Brush x:Key="MsgArea_BG">Black</Brush>
 			<Thickness x:Key="MsgArea_TBPadding">2</Thickness>
-			<Thickness x:Key="MsgArea_KoKoTBPadding">9,1</Thickness>
+			<Thickness x:Key="MsgArea_KoKoTBPadding">9,2</Thickness>
 			<!--1 + (16 / 2)-->
 			<Thickness x:Key="MsgArea_Margin">114,6,58,12</Thickness>
 
@@ -38,30 +38,21 @@
 		<!--#region ツウコクジョウホウ 表示部-->
 		<Grid Grid.Column="0">
 			<Image x:Name="TsukokuStr"
-						 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
-						 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
 						 Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/TJMChars/tsukoku.png"
-						 Stretch="Fill"
 						 Margin="8,0,0,0"
 						 Height="8"
 						 Width="32"
 						 HorizontalAlignment="Left"
 						 VerticalAlignment="Top"/>
 			<Image x:Name="JohoStr"
-						 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
-						 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
 						 Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/TJMChars/joho.png"
-						 Stretch="Fill"
 						 Margin="56,0,0,0"
 						 Height="8"
 						 Width="48"
 						 HorizontalAlignment="Left"
 						 VerticalAlignment="Top"/>
 			<Image x:Name="MonitoringStr"
-						 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
-						 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
 						 Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/TJMChars/monitoring.png"
-						 Stretch="Fill"
 						 Margin="120,0,0,0"
 						 Height="8"
 						 Width="56"

@@ -14,7 +14,14 @@
 
 	<BitmapScalingMode x:Key="ImageCtrl_BitmapScalingMode">NearestNeighbor</BitmapScalingMode>
 	<EdgeMode x:Key="ImageCtrl_EdgeMode">Aliased</EdgeMode>
+	
+	
 
 	<uf:BoolToVisibility x:Key="BoolToVisibility"/>
 	<uf:IsDoorClosedToString x:Key="IsDoorClosedToString"/>
+	<Style TargetType="{x:Type Image}">
+		<Setter Property="RenderOptions.BitmapScalingMode" Value="NearestNeighbor"/>
+		<Setter Property="RenderOptions.EdgeMode" Value="Aliased"/>
+		<Setter Property="Stretch" Value="Uniform"/>
+	</Style>
 </ResourceDictionary>

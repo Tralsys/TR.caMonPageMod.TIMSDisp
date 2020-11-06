@@ -37,18 +37,14 @@
 											 HorizontalAlignment="Left"
 	
 											 Height="7"
-											 Width="8"
-											 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
-											 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"/>
+											 Width="8"/>
 								<Image x:Name="RightPanImageCtrl"
 											 Margin="{TemplateBinding RightPanMargin}"
 											 VerticalAlignment="Bottom"
 											 HorizontalAlignment="Right"
 										 
 											 Height="7"
-											 Width="8"
-											 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
-											 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"/>
+											 Width="8"/>
 							</Grid>
 
 							<!--Car Block-->
@@ -56,9 +52,7 @@
 								<Image x:Name="CarImageCtrl"
 											 Margin="{TemplateBinding CarBlockMargin}"
 											 VerticalAlignment="Bottom"
-											 HorizontalAlignment="Left"
-											 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
-											 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"/>
+											 HorizontalAlignment="Left"/>
 								<TextBlock Text="{TemplateBinding CarNumberStr}"
 													 VerticalAlignment="Center"
 													 HorizontalAlignment="Center"

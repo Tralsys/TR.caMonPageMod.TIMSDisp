@@ -8,10 +8,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type local:BitmapCircle}">
-					<Image x:Name="CircleImg"
-								 Stretch="Fill"
-								 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
-								 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"/>
+					<Image x:Name="CircleImg" Margin="{TemplateBinding Margin}"/>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
