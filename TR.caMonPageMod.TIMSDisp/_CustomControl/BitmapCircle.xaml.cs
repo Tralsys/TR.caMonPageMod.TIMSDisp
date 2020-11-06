@@ -79,7 +79,7 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			Point p = Radius.GetValueOrDefault(CircleType);
 			int h = (int)(p.Y);
 			int w = (int)(p.X);
-			WriteableBitmap wb = new WriteableBitmap(w, h, 96, 96, PixelFormats.Pbgra32, null);
+			WriteableBitmap wb = new WriteableBitmap(w + 2, h + 2, 96, 96, PixelFormats.Pbgra32, null);//下部消失対策に, 余白を取る
 
 			byte[] pxArr = new byte[h * w * BytesPerPixel];
 			Parallel.For(0, pxArr.Length, (i) => pxArr[i] = 0x00);
@@ -110,7 +110,7 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			wb.Lock();
 			try
 			{
-				wb.WritePixels(new Int32Rect(0, 0, w, h), pxArr, w * BytesPerPixel, 0);
+				wb.WritePixels(new Int32Rect(1, 1, w, h), pxArr, w * BytesPerPixel, 0);//余白分だけ内側に描画
 			}
 			catch (Exception e)
 			{
