@@ -14,8 +14,18 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 
 		public static readonly DependencyProperty CarInnerBrushProperty = DependencyProperty.Register("CarInnerBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Black));
 
+		#region Door Block
+		public static readonly DependencyProperty HasDoorProperty = DependencyProperty.Register("HasDoor", typeof(bool), typeof(CarDisp), new PropertyMetadata(true));
+		public static readonly DependencyProperty IsDoorClosedProperty = DependencyProperty.Register("IsDoorClosed", typeof(bool), typeof(CarDisp), new PropertyMetadata(true));
+
+		public static readonly DependencyProperty CurrentDoorBrushProperty = DependencyProperty.Register("CurrentDoorBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Red));
+		public static readonly DependencyProperty CurrentDoorTextColorProperty = DependencyProperty.Register("CurrentDoorTextColor", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Red));
+
 		public static readonly DependencyProperty DoorOpenBrushProperty = DependencyProperty.Register("DoorOpenBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Red));
 		public static readonly DependencyProperty DoorCloseBrushProperty = DependencyProperty.Register("DoorCloseBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Transparent));
+		public static readonly DependencyProperty DoorOpenTextColorProperty = DependencyProperty.Register("DoorOpenTextColor", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Red));
+		public static readonly DependencyProperty DoorCloseTextColorProperty = DependencyProperty.Register("DoorCloseTextColor", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Transparent));
+		#endregion Door Block
 
 		public static readonly DependencyProperty IsLeftEdgeHEADProperty = DependencyProperty.Register("IsLeftEdgeHEAD", typeof(bool), typeof(CarDisp), new PropertyMetadata(true));
 		public static readonly DependencyProperty IsRightEdgeHEADProperty = DependencyProperty.Register("IsRightEdgeHEAD", typeof(bool), typeof(CarDisp), new PropertyMetadata(true));
@@ -34,7 +44,6 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		public static readonly DependencyProperty IsLeftEdgeRescueSWTrippedProperty = DependencyProperty.Register("IsLeftEdgeRescueSWTripped", typeof(bool), typeof(CarDisp), new PropertyMetadata(false));
 		public static readonly DependencyProperty IsRightEdgeRescueSWTrippedProperty = DependencyProperty.Register("IsRightEdgeRescueSWTripped", typeof(bool), typeof(CarDisp), new PropertyMetadata(false));
 
-		public static readonly DependencyProperty HasDoorProperty = DependencyProperty.Register("HasDoor", typeof(bool), typeof(CarDisp), new PropertyMetadata(true));
 		public static readonly DependencyProperty IsDoubleDeckerProperty = DependencyProperty.Register("IsDoubleDecker", typeof(bool), typeof(CarDisp), new PropertyMetadata(false));
 
 		private static void CarNumberPropChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -79,6 +88,25 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			get => (Brush)GetValue(CarInnerBrushProperty);
 			set => SetValue(CarInnerBrushProperty, value);
 		}
+
+		#region Door Properties
+		public bool HasDoor
+		{
+			get => (bool)GetValue(HasDoorProperty);
+			set => SetValue(HasDoorProperty, value);
+		}
+
+		public Brush CurrentDoorBrush
+		{
+			get => (Brush)GetValue(CurrentDoorBrushProperty);
+			set => SetValue(CurrentDoorBrushProperty, value);
+		}
+		public Brush CurrentDoorTextColor
+		{
+			get => (Brush)GetValue(CurrentDoorTextColorProperty);
+			set => SetValue(CurrentDoorTextColorProperty, value);
+		}
+
 		public Brush DoorOpenBrush
 		{
 			get => (Brush)GetValue(DoorOpenBrushProperty);
@@ -89,6 +117,17 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			get => (Brush)GetValue(DoorCloseBrushProperty);
 			set => SetValue(DoorCloseBrushProperty, value);
 		}
+		public Brush DoorOpenTextColor
+		{
+			get => (Brush)GetValue(DoorOpenTextColorProperty);
+			set => SetValue(DoorOpenTextColorProperty, value);
+		}
+		public Brush DoorCloseTextColor
+		{
+			get => (Brush)GetValue(DoorCloseTextColorProperty);
+			set => SetValue(DoorCloseTextColorProperty, value);
+		}
+		#endregion
 		public bool IsLeftEdgeHEAD
 		{
 			get => (bool)GetValue(IsLeftEdgeHEADProperty);
@@ -146,11 +185,6 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			set => SetValue(IsRightEdgeRescueSWTrippedProperty, value);
 		}
 
-		public bool HasDoor
-		{
-			get => (bool)GetValue(HasDoorProperty);
-			set => SetValue(HasDoorProperty, value);
-		}
 		public bool IsDoubleDecker
 		{
 			get => (bool)GetValue(IsDoubleDeckerProperty);
