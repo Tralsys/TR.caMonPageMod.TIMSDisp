@@ -17,7 +17,7 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 
 	public class BitmapCircle : Control
 	{
-		static public readonly DependencyProperty IsFilledProperty = DependencyProperty.Register("IsFilledBrush", typeof(bool), typeof(BitmapCircle),
+		static public readonly DependencyProperty IsFilledProperty = DependencyProperty.Register("IsFilled", typeof(bool), typeof(BitmapCircle),
 			new PropertyMetadata(false, (s, e) => (s as BitmapCircle)?.UpdateCircleImage()));
 		static public readonly DependencyProperty FillWithEdgeProperty = DependencyProperty.Register("FillWithEdge", typeof(bool), typeof(BitmapCircle),
 			new PropertyMetadata(true, (s, e) => (s as BitmapCircle)?.UpdateCircleImage()));
