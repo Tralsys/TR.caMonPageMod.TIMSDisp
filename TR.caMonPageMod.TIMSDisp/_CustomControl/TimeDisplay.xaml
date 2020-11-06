@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+										xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+										xmlns:local="clr-namespace:TR.caMonPageMod.TIMSDisp._CustomControl">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/ConstVars.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+
+	<Style TargetType="{x:Type local:TimeDisplay}">
+		<Setter Property="HorizontalAlignment" Value="Left"/>
+		<Setter Property="VerticalAlignment" Value="Top"/>
+		<Setter Property="FontFamily" Value="{StaticResource TIMSFontFamily}"/>
+		<Setter Property="FontSize" Value="{StaticResource TIMSFontSizeX1}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:TimeDisplay}">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="{TemplateBinding HH}"
+											 Margin="0"
+											 Foreground="{TemplateBinding VariableTextBrush}"/>
+						<TextBlock Text="{TemplateBinding Separator}"
+											 Margin="0"
+											 Foreground="{TemplateBinding ConstantTextBrush}"/>
+						<TextBlock Text="{TemplateBinding MM}"
+											 Margin="0"
+											 Foreground="{TemplateBinding VariableTextBrush}"/>
+						<TextBlock Text="{TemplateBinding Separator}"
+											 Margin="0"
+											 Foreground="{TemplateBinding ConstantTextBrush}"/>
+						<TextBlock Text="{TemplateBinding SS}"
+											 Margin="0"
+											 Foreground="{TemplateBinding VariableTextBrush}"/>
+					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>

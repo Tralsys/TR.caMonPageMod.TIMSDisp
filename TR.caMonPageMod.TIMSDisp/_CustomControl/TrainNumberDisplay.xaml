@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+										xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+										xmlns:local="clr-namespace:TR.caMonPageMod.TIMSDisp._CustomControl">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/ConstVars.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+
+	<Style TargetType="{x:Type local:TrainNumberDisplay}">
+		<Setter Property="FontFamily" Value="{StaticResource TIMSFontFamily}"/>
+		<Setter Property="FontSize" Value="{StaticResource TIMSFontSizeX1}"/>
+		<Setter Property="Foreground" Value="{StaticResource VariableStrBrush}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:TrainNumberDisplay}">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Width="36"
+											 TextAlignment="Right"
+											 Text="{TemplateBinding TNPrefix}"/>
+						<TextBlock TextAlignment="Left" Text="{TemplateBinding TrainNumber}"/>
+						<TextBlock TextAlignment="Left" Text="{TemplateBinding TNSuffix}"/>
+					</StackPanel>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>
