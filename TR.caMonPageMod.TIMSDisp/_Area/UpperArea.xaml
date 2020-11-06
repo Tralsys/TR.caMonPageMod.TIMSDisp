@@ -79,8 +79,6 @@
 											 x:Name="TsukokuBtn"
 											 Grid.Column="0"
 											 
-											 IsBlinking="True"
-											 
 											 UsualBackground="Aqua"
 											 UsualTextColor="Black"
 											 
@@ -92,8 +90,6 @@
 				<cc:TIMSButton ButtonText="規制&#xa;一覧"
 											 x:Name="KiseiIchiranBtn"
 											 Grid.Column="1"
-											 
-											 IsBlinking="True"
 											 
 											 UsualBackground="Aqua"
 											 UsualTextColor="Black"
@@ -107,8 +103,6 @@
 											 x:Name="ShireiJohoBtn"
 											 Grid.Column="2"
 											 
-											 IsBlinking="True"
-											 
 											 UsualBackground="Aqua"
 											 UsualTextColor="Black"
 											 
@@ -120,8 +114,6 @@
 				<cc:TIMSButton ButtonText="運行&#xa;情報"
 											 x:Name="UnkoJohoBtn"
 											 Grid.Column="3"
-											 
-											 IsBlinking="True"
 											 
 											 UsualBackground="Aqua"
 											 UsualTextColor="Black"
@@ -175,7 +167,6 @@
 			<cc:TIMSButton x:Name="KoshoHasseiBtn"
 										 ButtonText="故障&#xa;発生"
 										 Margin="{StaticResource KoshoHasseiBtn_Margin}"
-										 IsBlinking="True"
 										 
 										 UsualBackground="Red"
 										 UsualTextColor="White"
@@ -186,7 +177,6 @@
 			<cc:TIMSButton x:Name="KikiJohoBtn"
 										 ButtonText="機器&#xa;情報"
 										 Margin="{StaticResource KikiJohoBtn_Margin}"
-										 IsBlinking="True"
 										 
 										 UsualBackground="Aqua"
 										 UsualTextColor="Black"
@@ -204,7 +194,6 @@
 				<Grid Grid.Row="0" Background="{StaticResource MsgArea_BG}">
 					<cc:BlinkTB x:Name="Kaiho_TB"
 											Text="開放"
-											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											Margin="0,0,0,0"
@@ -215,7 +204,6 @@
 											FlippedTextColor="Yellow"/>
 					<cc:BlinkTB x:Name="Chusha_TB"
 											Text="駐車"
-											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											Margin="42,0,0,0"
@@ -226,7 +214,6 @@
 											FlippedTextColor="Yellow"/>
 					<cc:BlinkTB x:Name="IdoKinshi_TB"
 											Text="移動禁止"
-											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											Margin="84,0,0,0"
@@ -240,11 +227,10 @@
 				<Grid Grid.Row="2" Background="{StaticResource MsgArea_BG}">
 					<cc:BlinkTB x:Name="AirSec_TB"
 											Text=" A･S"
-											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											HorizontalAlignment="Right"
-											Margin="0,0,0,0"
+											Margin="0"
 											Padding="{StaticResource MsgArea_TBPadding}"
 											UsualBackground="Yellow"
 											UsualTextColor="Black"
@@ -253,11 +239,10 @@
 
 					<cc:BlinkTB x:Name="ACDCSec_TB"
 											Text="交直切換"
-											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											HorizontalAlignment="Right"
-											Margin="0,0,42,0"
+											Margin="0"
 											Padding="{StaticResource MsgArea_TBPadding}"
 											UsualBackground="Yellow"
 											UsualTextColor="Black"
@@ -266,11 +251,10 @@
 
 					<cc:BlinkTB x:Name="ACACSec_TB"
 											Text="交　交"
-											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											HorizontalAlignment="Right"
-											Margin="0,0,120,0"
+											Margin="0"
 											Padding="{StaticResource MsgArea_KoKoTBPadding}"
 											UsualBackground="Yellow"
 											UsualTextColor="Black"
@@ -282,7 +266,6 @@
 			<cc:TIMSButton x:Name="PassengerEmergencyBtn"
 										 ButtonText="非常&#xa;通報"
 										 Margin="0,4,2,0"
-										 IsBlinking="True"
 										 
 										 UsualBackground="Yellow"
 										 UsualTextColor="Black"

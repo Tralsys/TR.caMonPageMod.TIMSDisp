@@ -66,8 +66,7 @@
 											UsualBackground="Aqua"
 											UsualTextColor="Black"
 											FlippedBackground="{x:Null}"
-											FlippedTextColor="Aqua"
-											IsBlinking="True"/>
+											FlippedTextColor="Aqua"/>
 					<cc:BlinkTB x:Name="OVD_TB"
 											Text=" OVD"
 											Height="{StaticResource MsgArea_H}"
@@ -77,8 +76,7 @@
 											UsualBackground="Yellow"
 											UsualTextColor="Black"
 											FlippedBackground="{x:Null}"
-											FlippedTextColor="Yellow"
-											IsBlinking="True"/>
+											FlippedTextColor="Yellow"/>
 					<cc:BlinkTB x:Name="SeigyoIjo_TB"
 											Text="制御異常"
 											Height="{StaticResource MsgArea_H}"
@@ -88,8 +86,7 @@
 											UsualBackground="Yellow"
 											UsualTextColor="Black"
 											FlippedBackground="{x:Null}"
-											FlippedTextColor="Yellow"
-											IsBlinking="True"/>
+											FlippedTextColor="Yellow"/>
 				</Grid>
 				<Grid Grid.Row="2" Background="{StaticResource MsgArea_BG}">
 					<!--表示内容不明-->
