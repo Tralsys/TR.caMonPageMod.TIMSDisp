@@ -39,7 +39,7 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 
 		public static readonly DependencyProperty DoorOpenBrushProperty = DependencyProperty.Register("DoorOpenBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Red));
 		public static readonly DependencyProperty DoorCloseBrushProperty = DependencyProperty.Register("DoorCloseBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Black));
-		public static readonly DependencyProperty DoorOpenTextColorProperty = DependencyProperty.Register("DoorOpenTextColor", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Black));
+		public static readonly DependencyProperty DoorOpenTextColorProperty = DependencyProperty.Register("DoorOpenTextColor", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.White));
 		public static readonly DependencyProperty DoorCloseTextColorProperty = DependencyProperty.Register("DoorCloseTextColor", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.White));
 
 		public static readonly DependencyProperty DoorBlockWidthProperty = DependencyProperty.Register("DoorBlockWidth", typeof(double), typeof(CarDisp), new PropertyMetadata(45.0));
