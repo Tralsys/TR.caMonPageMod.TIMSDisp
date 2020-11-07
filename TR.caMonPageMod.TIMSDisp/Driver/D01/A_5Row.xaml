@@ -28,6 +28,7 @@
 			<RowDefinition Height="80"/>	<!-- 3. 編成図領域-->
 			<RowDefinition Height="4"/>		<!-- 4. 編成図領域下の空白-->
 		</Grid.RowDefinitions>
+		
 		<Grid Grid.Row="0">
 			<cc:PageIDName PageID="D01AA" PageName="運転情報"/>
 			<TextBlock Text="列車番号"
@@ -109,6 +110,23 @@
 								 FontFamily="{StaticResource TIMSFontFamily}"
 								 Foreground="{StaticResource ConstantStrBrush}"/>
 		</Grid>
+
+		<Grid Grid.Row="1" Background="Transparent">
+			<Grid Margin="0,10,0,0">
+				<cc:D01AATimetable1Row Margin="0,0,0,0" StaName="東京" IsThisStaOpStop="True" TextColor="Red"
+															 RunInLimit="3" RunOutLimit="900"/>
+				<cc:D01AATimetable1Row Margin="0,40,0,0" StaName="名古屋" IsThisStaOpStop="True"
+															 ArrTimeHH="12" RuntimeMM="12" RuntimeSS="34"/>
+				<cc:D01AATimetable1Row Margin="0,80,0,0" StaName="津" IsThisStaOpStop="True" TextColor="Yellow"
+															 TrackNum="試験" IsRunInLimitEnabled="False"/>
+				<cc:D01AATimetable1Row Margin="0,120,0,0" StaName="関西空港" IsThisStaOpStop="True" TextColor="Lime"
+															 ArrTimeSS="12" DepTimeMM="99"/>
+				<cc:D01AATimetable1Row Margin="0,160,0,0" StaName="鹿児島中央" IsThisStaOpStop="True" TextColor="Aqua"
+															 DepTimeSep="="/>
+
+			</Grid>
+		</Grid>
+		
 		<Grid Grid.Row="3">
 
 			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
