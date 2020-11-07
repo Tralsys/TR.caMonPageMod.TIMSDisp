@@ -34,4 +34,20 @@ namespace TR.caMonPageMod.TIMSDisp._UsefulFuncs
 				_ => false
 			};
 	}
+	public class DoublePlus2 : IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+			=> (double)(value ?? 0.0) + 2;
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+			=> (double)(value ?? 2.0) - 2;
+	}
+	public class DoubleMinus1 : IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+			=> (double)(value ?? 1.0) - 1;
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+			=> (double)(value ?? 0.0) + 1;
+	}
 }
