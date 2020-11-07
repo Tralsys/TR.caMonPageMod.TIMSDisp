@@ -12,18 +12,21 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/ConstVars.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
-
+			<System:Double x:Key="CarDispW">54</System:Double>
+			<System:Double x:Key="CarDispW_Block">53</System:Double>
+			<System:Double x:Key="CarDispH">71</System:Double>
+			
 		</ResourceDictionary>
 	</Page.Resources>
 
 	<Grid	Height="432"
 				Width="800">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="48"/><!--列番などなど-->
-			<RowDefinition Height="210"/><!--時刻表エリア-->
-			<RowDefinition Height="90"/><!--徐行/次停車駅など-->
-			<RowDefinition Height="80"/><!--編成図領域-->
-			<RowDefinition Height="4"/><!--編成図領域下の空白-->
+			<RowDefinition Height="48"/>	<!-- 0. 列番などなど-->
+			<RowDefinition Height="210"/>	<!-- 1. 時刻表エリア-->
+			<RowDefinition Height="90"/>	<!-- 2. 徐行/次停車駅など-->
+			<RowDefinition Height="80"/>	<!-- 3. 編成図領域-->
+			<RowDefinition Height="4"/>		<!-- 4. 編成図領域下の空白-->
 		</Grid.RowDefinitions>
 		<Grid Grid.Row="0">
 			<cc:PageIDName PageID="D01AA" PageName="運転情報"/>
@@ -106,6 +109,54 @@
 								 FontFamily="{StaticResource TIMSFontFamily}"
 								 Foreground="{StaticResource ConstantStrBrush}"/>
 		</Grid>
+		<Grid Grid.Row="3">
 
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+				<cc:CarDisp CarNumber="1"
+										MotorState="None"
+										Margin="0"
+									IsDoorClosed="False"
+									IsLeftBogieMotored="False"
+									IsRightBogieMotored="True"
+										IsLeftEdgeHEAD="True"
+										IsRightEdgeHEAD="False"
+
+										Height="{StaticResource CarDispH}"
+									Width="{StaticResource CarDispW}"
+										CarBlockWidth="{StaticResource CarDispW_Block}"
+									BorderThickness="1"/>
+				<cc:CarDisp CarNumber="2"
+										MotorState="None"
+										Margin="0"
+									IsDoorClosed="False"
+									IsLeftBogieMotored="False"
+									IsRightBogieMotored="True"
+										LeftPanStyle="Crossed"
+										RightPanStyle="Diamond"
+										IsLeftEdgeHEAD="False"
+										IsRightEdgeHEAD="False"
+										
+									Height="{StaticResource CarDispH}"
+									Width="{StaticResource CarDispW}"
+										CarBlockWidth="{StaticResource CarDispW_Block}"
+									BorderThickness="1"/>
+				<cc:CarDisp CarNumber="3"
+										MotorState="None"
+										Margin="0"
+									IsDoorClosed="False"
+									IsLeftBogieMotored="False"
+									IsRightBogieMotored="True"
+										LeftPanStyle="SingleArm_RightJoint"
+										RightPanStyle="Diamond"
+										RightPanRaised="False"
+										IsLeftEdgeHEAD="False"
+										IsRightEdgeHEAD="False"
+										
+									Height="{StaticResource CarDispH}"
+									Width="{StaticResource CarDispW}"
+										CarBlockWidth="{StaticResource CarDispW_Block}"
+									BorderThickness="1"/>
+			</StackPanel>
+		</Grid>
 	</Grid>
 </Page>
