@@ -35,6 +35,9 @@
 											 Margin="{TemplateBinding LeftPanMargin}"
 											 VerticalAlignment="Bottom"
 											 HorizontalAlignment="Left"
+												 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
+												 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
+												 SnapsToDevicePixels="{StaticResource ImageCtrl_SnapsToDevicePixels}"
 	
 											 Height="7"
 											 Width="8"/>
@@ -42,21 +45,33 @@
 											 Margin="{TemplateBinding RightPanMargin}"
 											 VerticalAlignment="Bottom"
 											 HorizontalAlignment="Right"
+												 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
+												 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
+												 SnapsToDevicePixels="{StaticResource ImageCtrl_SnapsToDevicePixels}"
 										 
 											 Height="7"
 											 Width="8"/>
 							</Grid>
 
 							<!--Car Block-->
-							<Grid Margin="{TemplateBinding CarBlockMargin}" Panel.ZIndex="1">
-								<Image x:Name="CarImageCtrl"
-											 Margin="{TemplateBinding CarBlockMargin}"
-											 VerticalAlignment="Bottom"
-											 HorizontalAlignment="Left"/>
+							<Grid Margin="{TemplateBinding CarBlockMargin}" Height="{TemplateBinding CarBlockCurrentHeight}" Width="{TemplateBinding CarBlockWidth}" Panel.ZIndex="1">
+								<Border Margin="-1"
+												VerticalAlignment="Bottom"
+												HorizontalAlignment="Left"
+												BorderBrush="{x:Null}"
+												Background="{x:Null}">
+									<Image x:Name="CarImg"
+												 Height="{TemplateBinding CarBlockCurrentHeight, Converter={StaticResource DoublePlus2}}"
+												 Width="{TemplateBinding CarBlockWidth, Converter={StaticResource DoublePlus2}}"
+												 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
+												 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
+												 SnapsToDevicePixels="{StaticResource ImageCtrl_SnapsToDevicePixels}"
+												 Margin="0"/>
+								</Border>
 								<TextBlock Text="{TemplateBinding CarNumberStr}"
 													 VerticalAlignment="Center"
 													 HorizontalAlignment="Center"
-													 Foreground="{TemplateBinding CarNumberTextColor}"/>
+													 Foreground="{TemplateBinding CurrentCarNumberTextColor}"/>
 							</Grid>
 
 							<Grid>
