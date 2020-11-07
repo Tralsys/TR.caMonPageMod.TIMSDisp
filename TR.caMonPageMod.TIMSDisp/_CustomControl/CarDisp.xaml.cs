@@ -50,17 +50,29 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		#endregion Door Block
 
 		#region Pantograph
-		public static readonly DependencyProperty LeftPanRaisedProperty = DependencyProperty.Register("LeftPanRaised", typeof(bool), typeof(CarDisp), new PropertyMetadata(true));
-		public static readonly DependencyProperty RightPanRaisedProperty = DependencyProperty.Register("RightPanRaised", typeof(bool), typeof(CarDisp), new PropertyMetadata(true));
+		public static readonly DependencyProperty LeftPanRaisedProperty = DependencyProperty.Register("LeftPanRaised", typeof(bool), typeof(CarDisp), new PropertyMetadata(true, (d, e) => UpdatePanImg(d, true, false)));
+		public static readonly DependencyProperty RightPanRaisedProperty = DependencyProperty.Register("RightPanRaised", typeof(bool), typeof(CarDisp), new PropertyMetadata(true, (d, e) => UpdatePanImg(d, false, true)));
 
-		public static readonly DependencyProperty RaisedPanBrushProperty = DependencyProperty.Register("RaisedPanBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.White));
-		public static readonly DependencyProperty LowerPanBrushProperty = DependencyProperty.Register("LowerPanBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.White));
+		public static readonly DependencyProperty RaisedPanBrushProperty = DependencyProperty.Register("RaisedPanBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.White, (d, e) => UpdatePanImg(d, true, true)));
+		public static readonly DependencyProperty LowerPanBrushProperty = DependencyProperty.Register("LowerPanBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Yellow, (d, e) => UpdatePanImg(d, true, true)));
 
-		public static readonly DependencyProperty LeftPanStyleProperty = DependencyProperty.Register("LeftPanStyle", typeof(PantographStyle), typeof(CarDisp), new PropertyMetadata(PantographStyle.SingleArm_LeftJoint));
-		public static readonly DependencyProperty RightPanStyleProperty = DependencyProperty.Register("RightPanStyle", typeof(PantographStyle), typeof(CarDisp), new PropertyMetadata(PantographStyle.SingleArm_RightJoint));
+		public static readonly DependencyProperty LeftPanStyleProperty = DependencyProperty.Register("LeftPanStyle", typeof(PantographStyle), typeof(CarDisp), new PropertyMetadata(PantographStyle.SingleArm_LeftJoint, (d, e) => UpdatePanImg(d, true, false)));
+		public static readonly DependencyProperty RightPanStyleProperty = DependencyProperty.Register("RightPanStyle", typeof(PantographStyle), typeof(CarDisp), new PropertyMetadata(PantographStyle.SingleArm_RightJoint, (d, e) => UpdatePanImg(d, false, true)));
 
 		public static readonly DependencyProperty LeftPanMarginProperty = DependencyProperty.Register("LeftPanMargin", typeof(Thickness), typeof(CarDisp), new PropertyMetadata(new Thickness(6, 0, 6, 0)));
 		public static readonly DependencyProperty RightPanMarginProperty = DependencyProperty.Register("RightPanMargin", typeof(Thickness), typeof(CarDisp), new PropertyMetadata(new Thickness(6, 0, 6, 0)));
+		
+		static private void UpdatePanImg(DependencyObject d, bool IsLeft, bool IsRight)
+		{
+			if(d is CarDisp cd)
+			{
+				if (cd.LPanImg != null && IsLeft)
+					cd.LPanImg.Source = cd.SetPanBitmap(cd.LeftPanRaised, cd.LeftPanStyle, cd.LPanImg.Source as WriteableBitmap);
+				if (cd.RPanImg != null && IsRight)
+					cd.RPanImg.Source = cd.SetPanBitmap(cd.RightPanRaised, cd.RightPanStyle, cd.RPanImg.Source as WriteableBitmap);
+				
+			}
+		}
 		#endregion
 
 		#region Bogie
@@ -153,16 +165,21 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 
 		static CarDisp() => DefaultStyleKeyProperty.OverrideMetadata(typeof(CarDisp), new FrameworkPropertyMetadata(typeof(CarDisp)));
 
-		Image CarImg = null;
+		Image CarImg, LPanImg, RPanImg;
 
 		public override void OnApplyTemplate()
 		{
 			base.OnApplyTemplate();
 
 			CarImg = GetTemplateChild("CarImg") as Image;
+			LPanImg = GetTemplateChild("LPanImg") as Image;
+			RPanImg = GetTemplateChild("RPanImg") as Image;
 
 			CarImg.Source = SetCarBitmap();
 			SetCarNumTextColorBinding(this);
+
+			LPanImg.Source = SetPanBitmap(LeftPanRaised, LeftPanStyle);
+			RPanImg.Source = SetPanBitmap(RightPanRaised, RightPanStyle);
 		}
 
 		public enum PantographStyle
@@ -463,16 +480,6 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		static readonly Thickness CarBlock_DDMargin = new Thickness(0, 0, 0, -5);
 		static readonly byte[] Transparent = { 0x00, 0x00, 0x00, 0x00 };
 
-		enum CarColorTypes
-		{
-			None,
-			Transparent,
-			EdgeLine,
-			InnerNormal,
-			InnerPower,
-			InnerBrake,
-			White
-		};
 		private WriteableBitmap SetCarBitmap(WriteableBitmap wb = null)
 		{
 			int w = (int)CarBlockWidth;
@@ -633,6 +640,129 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 				{ i, e, n, n, n, n, n, n, n, n },
 				{ e, n, n, n, n, n, n, n, n, n },
 				{ n, n, n, n, n, n, n, n, n, n }
+			};
+		}
+		#endregion
+
+		private WriteableBitmap SetPanBitmap(bool IsPanRaised, PantographStyle ps, WriteableBitmap wb = null)
+		{
+			byte[] RColor = UsefulFuncs.GetPixels(RaisedPanBrush);
+			byte[] LColor = UsefulFuncs.GetPixels(LowerPanBrush);
+
+			int w = IsPanRaised ? PanBitmaps.RAISED_WIDTH : PanBitmaps.LOWER_WIDTH;
+			int h = IsPanRaised ? PanBitmaps.RAISED_HEIGHT : PanBitmaps.LOWER_HEIGHT;
+
+			byte[] pxArr = new byte[w * h * BytesPerPixel];
+			byte[,] idArr = IsPanRaised ? ps switch
+			{
+				PantographStyle.None => null,
+				PantographStyle.Crossed => PanBitmaps.Crossed,
+				PantographStyle.Diamond => PanBitmaps.Diamond,
+				PantographStyle.SingleArm_LeftJoint => PanBitmaps.SArm_LJoint,
+				PantographStyle.SingleArm_RightJoint => PanBitmaps.SArm_RJoint,
+				_ => null
+			} : PanBitmaps.LowerArr;
+
+			if (idArr == null)
+				return null;
+
+			Parallel.For(0, w * h, (i) =>
+					 Array.Copy(idArr[i / w, i % w] switch
+					 {
+						 PanBitmaps.None => Transparent,
+						 PanBitmaps.Lower => LColor,
+						 PanBitmaps.Raised => RColor,
+						 _ => Transparent
+					 }, 0, pxArr, i * BytesPerPixel, BytesPerPixel)
+				 );
+
+			if (wb == null || wb.Width != w || wb.PixelHeight != h)
+				wb = new WriteableBitmap(w + 2, h + 2, 96, 96, PixelFormats.Pbgra32, null);
+
+			wb.Lock();
+			try
+			{
+				wb.WritePixels(new Int32Rect(1, 1, w, h), pxArr, w * BytesPerPixel, 0);
+			}
+			finally
+			{
+				wb.Unlock();
+			}
+
+			return wb;
+		}
+
+		#region PanBitmaps
+		public static class PanBitmaps
+		{
+			public const byte None = n;
+			public const byte Raised = r;
+			public const byte Lower = l;
+
+			const byte n = 0;
+			const byte r = 1;
+			const byte l = 2;
+
+			public const int RAISED_HEIGHT = 9;
+			public const int RAISED_WIDTH = 5;
+			public const int LOWER_HEIGHT = 2;
+			public const int LOWER_WIDTH = 7;
+
+			static public readonly byte[,] Diamond = new byte[RAISED_HEIGHT, RAISED_WIDTH]
+			{
+				{ n, n, r, n, n },
+				{ n, r, n, r, n },
+				{ n, r, n, r, n },
+				{ r, n, n, n, r },
+				{ r, n, n, n, r },
+				{ r, n, n, n, r },
+				{ n, r, n, r, n },
+				{ n, r, n, r, n },
+				{ n, n, r, n, n },
+			};
+
+			static public readonly byte[,] Crossed = new byte[RAISED_HEIGHT, RAISED_WIDTH]
+			{
+				{ n, n, r, n, n },
+				{ n, r, n, r, n },
+				{ r, n, n, n, r },
+				{ r, n, n, n, r },
+				{ n, r, n, r, n },
+				{ n, n, r, n, n },
+				{ n, r, n, r, n },
+				{ r, n, n, n, r },
+				{ r, n, n, n, r }
+			};
+
+			static public readonly byte[,] SArm_LJoint = new byte[RAISED_HEIGHT, RAISED_WIDTH]
+			{
+				{ n, n, n, n, r },
+				{ n, n, n, r, n },
+				{ n, n, r, n, n },
+				{ n, r, n, n, n },
+				{ r, n, n, n, n },
+				{ n, r, n, n, n },
+				{ n, n, r, n, n },
+				{ n, n, n, r, n },
+				{ n, n, n, n, r }
+			};
+			static public readonly byte[,] SArm_RJoint = new byte[RAISED_HEIGHT, RAISED_WIDTH]
+			{
+				{ r, n, n, n, n },
+				{ n, r, n, n, n },
+				{ n, n, r, n, n },
+				{ n, n, n, r, n },
+				{ n, n, n, n, r },
+				{ n, n, n, r, n },
+				{ n, n, r, n, n },
+				{ n, r, n, n, n },
+				{ r, n, n, n, n }
+			};
+
+			static public readonly byte[,] LowerArr = new byte[LOWER_HEIGHT, LOWER_WIDTH]
+			{
+				{ l, l, l, l, l, l, l },
+				{ n, n, n, n, n, n, n }
 			};
 		}
 		#endregion

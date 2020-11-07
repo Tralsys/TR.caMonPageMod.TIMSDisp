@@ -31,26 +31,34 @@
 												Margin="0,0,1,0">
 							<!--Pan / Arrow-->
 							<Grid>
-								<Image x:Name="LeftPanImageCtrl"
-											 Margin="{TemplateBinding LeftPanMargin}"
+								<Border Margin="{TemplateBinding LeftPanMargin}"
 											 VerticalAlignment="Bottom"
 											 HorizontalAlignment="Left"
+												Background="{x:Null}"
+												BorderBrush="{x:Null}">
+									<Image x:Name="LPanImg"
+											 Margin="-1"
+												 Stretch="Uniform"
+												 Height="{Binding Source.Height, RelativeSource={RelativeSource Self}}"
+												 Width="{Binding Source.Width, RelativeSource={RelativeSource Self}}"
 												 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
 												 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
-												 SnapsToDevicePixels="{StaticResource ImageCtrl_SnapsToDevicePixels}"
-	
-											 Height="7"
-											 Width="8"/>
-								<Image x:Name="RightPanImageCtrl"
-											 Margin="{TemplateBinding RightPanMargin}"
+												 SnapsToDevicePixels="{StaticResource ImageCtrl_SnapsToDevicePixels}"/>
+								</Border>
+								<Border Margin="{TemplateBinding RightPanMargin}"
 											 VerticalAlignment="Bottom"
 											 HorizontalAlignment="Right"
+												Background="{x:Null}"
+												BorderBrush="{x:Null}">
+									<Image x:Name="RPanImg"
+											 Margin="-1"
+												 Height="{Binding Source.Height, RelativeSource={RelativeSource Self}}"
+												 Width="{Binding Source.Width, RelativeSource={RelativeSource Self}}"
+												 Stretch="Uniform"
 												 RenderOptions.BitmapScalingMode="{StaticResource ImageCtrl_BitmapScalingMode}"
 												 RenderOptions.EdgeMode="{StaticResource ImageCtrl_EdgeMode}"
-												 SnapsToDevicePixels="{StaticResource ImageCtrl_SnapsToDevicePixels}"
-										 
-											 Height="7"
-											 Width="8"/>
+												 SnapsToDevicePixels="{StaticResource ImageCtrl_SnapsToDevicePixels}"/>
+								</Border>
 							</Grid>
 
 							<!--Car Block-->
