@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -50,6 +53,9 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		public static readonly DependencyProperty LeftPanRaisedProperty = DependencyProperty.Register("LeftPanRaised", typeof(bool), typeof(CarDisp), new PropertyMetadata(true));
 		public static readonly DependencyProperty RightPanRaisedProperty = DependencyProperty.Register("RightPanRaised", typeof(bool), typeof(CarDisp), new PropertyMetadata(true));
 
+		public static readonly DependencyProperty RaisedPanBrushProperty = DependencyProperty.Register("RaisedPanBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.White));
+		public static readonly DependencyProperty LowerPanBrushProperty = DependencyProperty.Register("LowerPanBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.White));
+
 		public static readonly DependencyProperty LeftPanStyleProperty = DependencyProperty.Register("LeftPanStyle", typeof(PantographStyle), typeof(CarDisp), new PropertyMetadata(PantographStyle.SingleArm_LeftJoint));
 		public static readonly DependencyProperty RightPanStyleProperty = DependencyProperty.Register("RightPanStyle", typeof(PantographStyle), typeof(CarDisp), new PropertyMetadata(PantographStyle.SingleArm_RightJoint));
 
@@ -74,22 +80,37 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		#region Car Block
 		public static readonly DependencyProperty CarNumberProperty = DependencyProperty.Register("CarNumber", typeof(int), typeof(CarDisp), new PropertyMetadata(1, CarNumberPropChanged));
 		public static readonly DependencyProperty CarNumberStrProperty = DependencyProperty.Register("CarNumberStr", typeof(string), typeof(CarDisp), new PropertyMetadata("１"));
+		public static readonly DependencyProperty CurrentCarNumberTextColorProperty = DependencyProperty.Register("CurrentCarNumberTextColor", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.White));
 		public static readonly DependencyProperty CarNumberTextColorProperty = DependencyProperty.Register("CarNumberTextColor", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.White));
+		public static readonly DependencyProperty CarNumberPowerTextColorProperty = DependencyProperty.Register("CarNumberPowerTextColor", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Black));
+		public static readonly DependencyProperty CarNumberBrakeTextColorProperty = DependencyProperty.Register("CarNumberBrakeTextColor", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Black));
+		public static readonly DependencyProperty CarNumberRescueTextColorProperty = DependencyProperty.Register("CarNumberRescueTextColor", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Red));
 
-		public static readonly DependencyProperty IsLeftEdgeHEADProperty = DependencyProperty.Register("IsLeftEdgeHEAD", typeof(bool), typeof(CarDisp), new PropertyMetadata(true));
-		public static readonly DependencyProperty IsRightEdgeHEADProperty = DependencyProperty.Register("IsRightEdgeHEAD", typeof(bool), typeof(CarDisp), new PropertyMetadata(true));
+		public static readonly DependencyProperty CarBlockWidthProperty = DependencyProperty.Register("CarBlockWidth", typeof(double), typeof(CarDisp), new PropertyMetadata(40.0, CarBlockReDraw));
+		public static readonly DependencyProperty CarBlockCurrentHeightProperty = DependencyProperty.Register("CarBlockCurrentHeight", typeof(double), typeof(CarDisp), new PropertyMetadata(20.0, CarBlockReDraw));
+		public static readonly DependencyProperty CarBlockNormalHeightProperty = DependencyProperty.Register("CarBlockNormalHeight", typeof(double), typeof(CarDisp), new PropertyMetadata(20.0, CarBlockReDraw));
+		public static readonly DependencyProperty CarBlockDoubleDeckerHeightProperty = DependencyProperty.Register("CarBlockDoubleDeckerHeight", typeof(double), typeof(CarDisp), new PropertyMetadata(30.0, CarBlockReDraw));
 
-		public static readonly DependencyProperty IsLeftEdgeRescueSWTrippedProperty = DependencyProperty.Register("IsLeftEdgeRescueSWTripped", typeof(bool), typeof(CarDisp), new PropertyMetadata(false));
-		public static readonly DependencyProperty IsRightEdgeRescueSWTrippedProperty = DependencyProperty.Register("IsRightEdgeRescueSWTripped", typeof(bool), typeof(CarDisp), new PropertyMetadata(false));
+		public static readonly DependencyProperty IsLeftEdgeHEADProperty = DependencyProperty.Register("IsLeftEdgeHEAD", typeof(bool), typeof(CarDisp), new PropertyMetadata(true, CarBlockReDraw));
+		public static readonly DependencyProperty IsRightEdgeHEADProperty = DependencyProperty.Register("IsRightEdgeHEAD", typeof(bool), typeof(CarDisp), new PropertyMetadata(true, CarBlockReDraw));
+
+		public static readonly DependencyProperty IsLeftEdgeRescueSWTrippedProperty = DependencyProperty.Register("IsLeftEdgeRescueSWTripped", typeof(bool), typeof(CarDisp), new PropertyMetadata(false, CarBlockReDraw));
+		public static readonly DependencyProperty IsRightEdgeRescueSWTrippedProperty = DependencyProperty.Register("IsRightEdgeRescueSWTripped", typeof(bool), typeof(CarDisp), new PropertyMetadata(false, CarBlockReDraw));
 
 		public static readonly DependencyProperty IsDoubleDeckerProperty = DependencyProperty.Register("IsDoubleDecker", typeof(bool), typeof(CarDisp),
 			new PropertyMetadata(false, CarBlockReDraw));
 
-		public static readonly DependencyProperty MotorStateProperty = DependencyProperty.Register("MotorState", typeof(MState), typeof(CarDisp), new PropertyMetadata(MState.Accel));
+		public static readonly DependencyProperty MotorStateProperty = DependencyProperty.Register("MotorState", typeof(MState), typeof(CarDisp),
+			new PropertyMetadata(MState.Accel, (s,e)=>
+			{
+				SetCarNumTextColorBinding(s as CarDisp);
+				CarBlockReDraw(s, e);
+			}));
 
-		public static readonly DependencyProperty CarInnerBrushProperty = DependencyProperty.Register("CarInnerBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Black));
-		public static readonly DependencyProperty CarPowerBrushProperty = DependencyProperty.Register("CarPowerBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Black));
-		public static readonly DependencyProperty CarBrakeBrushProperty = DependencyProperty.Register("CarBrakeBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Black));
+		public static readonly DependencyProperty CarEdgeBrushProperty = DependencyProperty.Register("CarEdgeBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.White, CarBlockReDraw));
+		public static readonly DependencyProperty CarInnerBrushProperty = DependencyProperty.Register("CarInnerBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Black, CarBlockReDraw));
+		public static readonly DependencyProperty CarPowerBrushProperty = DependencyProperty.Register("CarPowerBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Aqua, CarBlockReDraw));
+		public static readonly DependencyProperty CarBrakeBrushProperty = DependencyProperty.Register("CarBrakeBrush", typeof(Brush), typeof(CarDisp), new PropertyMetadata(Brushes.Yellow, CarBlockReDraw));
 
 		public static readonly DependencyProperty CarBlockMarginProperty = DependencyProperty.Register("CarBlockMargin", typeof(Thickness), typeof(CarDisp), new PropertyMetadata(new Thickness(0)));
 
@@ -98,7 +119,12 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			if (d is CarDisp cd)
 			{
 				//CarImgの更新
-				cd.SetCarBitmap(cd.CarImg.Source as WriteableBitmap);
+				if (cd.CarImg != null)
+					cd.CarImg.Source = cd.SetCarBitmap(cd.CarImg.Source as WriteableBitmap);
+
+				cd.CarBlockMargin = cd.IsDoubleDecker ? CarBlock_DDMargin : CarBlock_UsualMargin;
+				string s = cd.IsDoubleDecker ? nameof(CarBlockDoubleDeckerHeight) : nameof(CarBlockNormalHeight);
+				cd.SetBinding(CarBlockCurrentHeightProperty, new Binding(s) { Source = cd });
 			}
 		}
 		private static void CarNumberPropChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -106,19 +132,37 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			int cn = (int)e.NewValue;
 			(d as CarDisp).CarNumberStr = (string)UsefulFuncs.WideNarrowConv(new Char_WideNarrowSetting(cn >= 10), cn.ToString());//10以上(2桁)なら半角, 1桁なら全角
 		}
+		
+		private static void SetCarNumTextColorBinding(in CarDisp cd)
+		{
+			if (cd == null)
+				return;
+
+			string str = cd.MotorState switch
+			{
+				MState.Accel => nameof(CarNumberPowerTextColor),
+				MState.Brake => nameof(CarNumberBrakeTextColor),
+				MState.None => nameof(CarNumberTextColor),
+				_ => nameof(CarNumberTextColor)
+			};
+			cd.SetBinding(CurrentCarNumberTextColorProperty, new Binding(str) { Source = cd });
+		}
 		#endregion
 		#endregion DependencyProperties
 
 
 		static CarDisp() => DefaultStyleKeyProperty.OverrideMetadata(typeof(CarDisp), new FrameworkPropertyMetadata(typeof(CarDisp)));
 
-		Image CarImg;
+		Image CarImg = null;
 
 		public override void OnApplyTemplate()
 		{
 			base.OnApplyTemplate();
 
+			CarImg = GetTemplateChild("CarImg") as Image;
 
+			CarImg.Source = SetCarBitmap();
+			SetCarNumTextColorBinding(this);
 		}
 
 		public enum PantographStyle
@@ -139,27 +183,6 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 
 
 		#region Properties   
-		public int CarNumber
-		{
-			get => (int)GetValue(CarNumberProperty);
-			set => SetValue(CarNumberProperty, value);
-		}
-		public string CarNumberStr
-		{
-			get => (string)GetValue(CarNumberStrProperty);
-			set => SetValue(CarNumberStrProperty, value);
-		}
-
-		public Brush CarNumberTextColor
-		{
-			get => (Brush)GetValue(CarNumberTextColorProperty);
-			set => SetValue(CarNumberTextColorProperty, value);
-		}
-		public Brush CarInnerBrush
-		{
-			get => (Brush)GetValue(CarInnerBrushProperty);
-			set => SetValue(CarInnerBrushProperty, value);
-		}
 
 		#region Door Properties
 		public bool HasDoor
@@ -223,17 +246,6 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		}
 		#endregion
 
-		public bool IsLeftEdgeHEAD
-		{
-			get => (bool)GetValue(IsLeftEdgeHEADProperty);
-			set => SetValue(IsLeftEdgeHEADProperty, value);
-		}
-		public bool IsRightEdgeHEAD
-		{
-			get => (bool)GetValue(IsRightEdgeHEADProperty);
-			set => SetValue(IsRightEdgeHEADProperty, value);
-		}
-
 		#region Pantograph
 		public bool LeftPanRaised
 		{
@@ -255,6 +267,18 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			get => (PantographStyle)GetValue(RightPanStyleProperty);
 			set => SetValue(RightPanStyleProperty, value);
 		}
+
+		public Brush RaisedPanBrush
+		{
+			get => (Brush)GetValue(RaisedPanBrushProperty);
+			set => SetValue(RaisedPanBrushProperty, value);
+		}
+		public Brush LowerPanBrush
+		{
+			get => (Brush)GetValue(LowerPanBrushProperty);
+			set => SetValue(LowerPanBrushProperty, value);
+		}
+
 
 		public Thickness LeftPanMargin
 		{
@@ -313,6 +337,96 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		}
 		#endregion
 
+		#region Car Block
+		public int CarNumber
+		{
+			get => (int)GetValue(CarNumberProperty);
+			set => SetValue(CarNumberProperty, value);
+		}
+		public string CarNumberStr
+		{
+			get => (string)GetValue(CarNumberStrProperty);
+			set => SetValue(CarNumberStrProperty, value);
+		}
+
+		public Brush CurrentCarNumberTextColor
+		{
+			get => (Brush)GetValue(CurrentCarNumberTextColorProperty);
+			set => SetValue(CurrentCarNumberTextColorProperty, value);
+		}
+		public Brush CarNumberTextColor
+		{
+			get => (Brush)GetValue(CarNumberTextColorProperty);
+			set => SetValue(CarNumberTextColorProperty, value);
+		}
+		public Brush CarNumberBrakeTextColor
+		{
+			get => (Brush)GetValue(CarNumberBrakeTextColorProperty);
+			set => SetValue(CarNumberBrakeTextColorProperty, value);
+		}
+		public Brush CarNumberPowerTextColor
+		{
+			get => (Brush)GetValue(CarNumberPowerTextColorProperty);
+			set => SetValue(CarNumberPowerTextColorProperty, value);
+		}
+		public Brush CarNumberRescueTextColor
+		{
+			get => (Brush)GetValue(CarNumberRescueTextColorProperty);
+			set => SetValue(CarNumberRescueTextColorProperty, value);
+		}
+		public Brush CarInnerBrush
+		{
+			get => (Brush)GetValue(CarInnerBrushProperty);
+			set => SetValue(CarInnerBrushProperty, value);
+		}
+		public Brush CarEdgeBrush
+		{
+			get => (Brush)GetValue(CarEdgeBrushProperty);
+			set => SetValue(CarEdgeBrushProperty, value);
+		}
+		public Brush CarPowerBrush
+		{
+			get => (Brush)GetValue(CarPowerBrushProperty);
+			set => SetValue(CarPowerBrushProperty, value);
+		}
+		public Brush CarBrakeBrush
+		{
+			get => (Brush)GetValue(CarBrakeBrushProperty);
+			set => SetValue(CarBrakeBrushProperty, value);
+		}
+
+		public double CarBlockWidth
+		{
+			get => (double)GetValue(CarBlockWidthProperty);
+			set => SetValue(CarBlockWidthProperty, value);
+		}
+		public double CarBlockCurrentHeight
+		{
+			get => (double)GetValue(CarBlockCurrentHeightProperty);
+			set => SetValue(CarBlockCurrentHeightProperty, value);
+		}
+		public double CarBlockNormalHeight
+		{
+			get => (double)GetValue(CarBlockNormalHeightProperty);
+			set => SetValue(CarBlockNormalHeightProperty, value);
+		}
+		public double CarBlockDoubleDeckerHeight
+		{
+			get => (double)GetValue(CarBlockDoubleDeckerHeightProperty);
+			set => SetValue(CarBlockDoubleDeckerHeightProperty, value);
+		}
+
+		public bool IsLeftEdgeHEAD
+		{
+			get => (bool)GetValue(IsLeftEdgeHEADProperty);
+			set => SetValue(IsLeftEdgeHEADProperty, value);
+		}
+		public bool IsRightEdgeHEAD
+		{
+			get => (bool)GetValue(IsRightEdgeHEADProperty);
+			set => SetValue(IsRightEdgeHEADProperty, value);
+		}
+
 		public MState MotorState
 		{
 			get => (MState)GetValue(MotorStateProperty);
@@ -340,13 +454,14 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			get => (Thickness)GetValue(CarBlockMarginProperty);
 			set => SetValue(CarBlockMarginProperty, value);
 		}
+		#endregion
 
 		#endregion Properties
-		
+
 		const int BytesPerPixel = 4;
-		const int CarHeight_BASE = 27;
-		const int CarHeight_Normal = 20;
-		const int CarMarginY_Normal = 2;
+		static readonly Thickness CarBlock_UsualMargin = new Thickness(0);
+		static readonly Thickness CarBlock_DDMargin = new Thickness(0, 0, 0, -5);
+		static readonly byte[] Transparent = { 0x00, 0x00, 0x00, 0x00 };
 
 		enum CarColorTypes
 		{
@@ -360,17 +475,166 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		};
 		private WriteableBitmap SetCarBitmap(WriteableBitmap wb = null)
 		{
-			int w = (int)(Width - 1);
-			CarColorTypes[] ccta = new CarColorTypes[CarHeight_BASE * w];
+			int w = (int)CarBlockWidth;
+			int h = (int)(IsDoubleDecker ? CarBlockDoubleDeckerHeight : CarBlockNormalHeight);
 
-			Parallel.For(0, ccta.Length, (i) => ccta[i] = CarColorTypes.Transparent);//色の初期化
+			byte[,] ColTypes = new byte[h, w];
+			#region 事前準備 描画内容の計算
 
+			//最初に描画エリアいっぱいいっぱいに車体描画
+			Parallel.For(0, h, (y) =>
+			{
+				byte? toDraw = ((y == 0) || (y == (h - 1))) ? (byte?)CarBitmaps.Edge : null;//上端と下端は常にEdge
+				for (int x = 0; x < w; x++)
+					ColTypes[y, x] = toDraw ?? (((x == 0) || (x == (w - 1))) ? CarBitmaps.Edge : CarBitmaps.Inner);//上端下端でなければ, Edge
+			});
+
+			//次にダブルデッカーオプション適用
 			if (IsDoubleDecker)
 			{
+				//左上
+				CarBitmaps.SetPixels(CarBitmaps.DD_LU, CarBitmaps.DD_U_HEIGHT, CarBitmaps.DD_U_WIDTH, ref ColTypes, 0, 0);
+
+				//右上
+				CarBitmaps.SetPixels(CarBitmaps.DD_RU, CarBitmaps.DD_U_HEIGHT, CarBitmaps.DD_U_WIDTH, ref ColTypes, w - CarBitmaps.DD_U_WIDTH, 0);
+
+				//左下
+				CarBitmaps.SetPixels(CarBitmaps.DD_LL, CarBitmaps.DD_L_HEIGHT, CarBitmaps.DD_L_WIDTH, ref ColTypes, 0, h - CarBitmaps.DD_L_HEIGHT);
+
+				//右下
+				CarBitmaps.SetPixels(CarBitmaps.DD_RL, CarBitmaps.DD_L_HEIGHT, CarBitmaps.DD_L_WIDTH, ref ColTypes, w - CarBitmaps.DD_L_WIDTH, h - CarBitmaps.DD_L_HEIGHT);
 
 			}
 
-			return null;
+			//最後にHEADオプション適用
+			if (IsLeftEdgeHEAD)
+				CarBitmaps.SetPixels(CarBitmaps.HEAD_LEFT, CarBitmaps.HEAD_HEIGHT, CarBitmaps.HEAD_WIDTH, ref ColTypes, 0, 0);
+			if (IsRightEdgeHEAD)
+				CarBitmaps.SetPixels(CarBitmaps.HEAD_RIGHT, CarBitmaps.HEAD_HEIGHT, CarBitmaps.HEAD_WIDTH, ref ColTypes, w - CarBitmaps.HEAD_WIDTH, 0);
+			#endregion 事前準備 描画内容の計算
+
+			#region 事前準備 描画色の取得
+			byte[] Inner = MotorState switch
+			{
+				MState.None => UsefulFuncs.GetPixels(CarInnerBrush),
+				MState.Accel => UsefulFuncs.GetPixels(CarPowerBrush),
+				MState.Brake => UsefulFuncs.GetPixels(CarBrakeBrush),
+				_ => Transparent
+			};
+			byte[] Edge = UsefulFuncs.GetPixels(CarEdgeBrush);
+			#endregion 事前準備 描画色の取得
+
+			#region 描画内容配列の計算
+			byte[] pxArr = new byte[w * h * BytesPerPixel];
+
+			Parallel.For(0, h * w, (i) =>
+					Array.Copy(
+						ColTypes[i / w, i % w] switch
+						{
+							CarBitmaps.None => Transparent,
+							CarBitmaps.Inner => Inner,
+							CarBitmaps.Edge => Edge,
+							_ => Transparent
+						},
+						0, pxArr, i * BytesPerPixel, BytesPerPixel)
+					);
+
+			#endregion 描画内容配列の計算
+
+			#region WriteableBitmapへの描画
+			if (wb == null || (wb.PixelWidth != (w + 2) || wb.PixelHeight != (h + 2)))//描画先が存在しないか, あるいは描画領域が要求サイズと異なる場合
+				wb = new WriteableBitmap(w + 2, h + 2, 96, 96, PixelFormats.Pbgra32, null);//再生成を行う.
+
+
+			wb.Lock();
+			try
+			{
+				wb.WritePixels(new Int32Rect(1, 1, w, h), pxArr, w * BytesPerPixel, 0);
+			}
+			finally
+			{
+				wb.Unlock();
+			}
+			#endregion
+			return wb;
 		}
+
+		#region Car Bitmaps
+		static public class CarBitmaps
+		{
+			public const byte None = n;
+			public const byte Edge = e;
+			public const byte Inner = i;
+			public const byte n = 0;
+			public const byte e = 1;
+			public const byte i = 2;
+
+			#region Array Size
+			public const int HEAD_HEIGHT = 5;
+			public const int HEAD_WIDTH = 12;
+
+			public const int DD_U_HEIGHT = 2;
+			public const int DD_U_WIDTH = 2;
+
+			public const int DD_L_HEIGHT = 4;
+			public const int DD_L_WIDTH = 10;
+			#endregion Array Size
+
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			static public byte GetPixelType(in byte[,] ba, in int X, in int Y) => ba[Y, X];
+
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			static public void SetPixels(in byte[,] srcArr, in int SrcHeight, in int SrcWidth,  ref byte[,] dstArr, in int DstPosX, in int DstPosY)
+			{
+				for (int y = 0; y < SrcHeight; y++)
+					for (int x = 0; x < SrcWidth; x++)
+						dstArr[y + DstPosY, x + DstPosX] = srcArr[y, x];
+			}
+
+			static public byte[,] HEAD_LEFT = new byte[HEAD_HEIGHT, HEAD_WIDTH]
+			{
+				{ n, n, n, n, n, n, n, n, n, n, n, n },
+				{ n, n, n, n, n, n, n, n, n, e, e, e },
+				{ n, n, n, n, n, n, e, e, e, i, i, i },
+				{ n, n, n, e, e, e, i, i, i, i, i, i },
+				{ e, e, e, i, i, i, i, i, i, i, i, i }
+			};
+
+			static public byte[,] HEAD_RIGHT = new byte[HEAD_HEIGHT, HEAD_WIDTH]
+			{
+				{ n, n, n, n, n, n, n, n, n, n, n, n },
+				{ e, e, e, n, n, n, n, n, n, n, n, n },
+				{ i, i, i, e, e, e, n, n, n, n, n, n },
+				{ i, i, i, i, i, i, e, e, e, n, n, n },
+				{ i, i, i, i, i, i, i, i, i, e, e, e }
+			};
+
+			static public byte[,] DD_LU = new byte[DD_U_HEIGHT, DD_U_WIDTH]
+			{
+				{ n, n },
+				{ n, e }
+			};
+			static public byte[,] DD_RU = new byte[DD_U_HEIGHT, DD_U_WIDTH]
+			{
+				{ n, n },
+				{ e, n }
+			};
+
+			static public byte[,] DD_LL = new byte[DD_L_HEIGHT, DD_L_WIDTH]
+			{
+				{ e, e, e, e, e, e, e, e, i, i },
+				{ n, n, n, n, n, n, n, n, e, i },
+				{ n, n, n, n, n, n, n, n, n, e },
+				{ n, n, n, n, n, n, n, n, n, n }
+			};
+			static public byte[,] DD_RL = new byte[DD_L_HEIGHT, DD_L_WIDTH]
+			{
+				{ i, i, e, e, e, e, e, e, e, e },
+				{ i, e, n, n, n, n, n, n, n, n },
+				{ e, n, n, n, n, n, n, n, n, n },
+				{ n, n, n, n, n, n, n, n, n, n }
+			};
+		}
+		#endregion
 	}
 }
