@@ -11,31 +11,52 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type local:D01AATimetable1Row}">
-					<Grid Height="40" Width="800" HorizontalAlignment="Left" VerticalAlignment="Top">
+					<Grid Height="60" Width="800" HorizontalAlignment="Left" VerticalAlignment="Top">
 						<!--#region RunTime-->
-						<TextBlock Text="MM"
-											 Margin="9,20,0,0"
-											 Width="18"
-											 Height="18"
-											 Padding="0"
-											 VerticalAlignment="Top"
-											 HorizontalAlignment="Left"
-											 FontFamily="{StaticResource TIMSFontFamily}"
-											 FontSize="{StaticResource TIMSFontSizeX1}"/>
-						<TextBlock Text="SS"
-											 Margin="27,20,0,0"
-											 Width="10"
-											 Height="10"
-											 Padding="0"
-											 VerticalAlignment="Top"
-											 HorizontalAlignment="Left"
-											 FontFamily="{StaticResource TIMSFontFamily}"
-											 FontSize="10"/>
+						<Grid Visibility="{TemplateBinding IsRuntimeVisible, Converter={StaticResource BoolToVisibility}}"
+									HorizontalAlignment="Left"
+									VerticalAlignment="Top"
+									Margin="9,0,0,0"
+									Height="18"
+									Width="28">
+							<TextBlock Text="{TemplateBinding RuntimeMM, Converter={StaticResource IntToString}}"
+												 Foreground="{TemplateBinding TextColor}"
+												 Margin="0"
+												 Width="18"
+												 Height="18"
+												 Padding="0"
+												 VerticalAlignment="Top"
+												 HorizontalAlignment="Left"
+												 TextAlignment="Right"
+												 FontFamily="{StaticResource TIMSFontFamily}"
+												 FontSize="{StaticResource TIMSFontSizeX1}"/>
+							<TextBlock Text="{TemplateBinding RuntimeSS, Converter={StaticResource IntToString}}"
+												 Visibility="{TemplateBinding RuntimeSS, Converter={StaticResource CollapsedWhenInt0}}"
+												 Foreground="{TemplateBinding TextColor}"
+												 Margin="18,0,0,0"
+												 Width="10"
+												 Height="10"
+												 Padding="0"
+												 VerticalAlignment="Top"
+												 HorizontalAlignment="Left"
+												 FontFamily="{StaticResource TIMSFontFamily}"
+												 FontSize="10"/>
+						</Grid>
 						<!--#endregion-->
 						
 						<!--#region StaName-->
-						<TextBlock Text="駅名表示"
-											 Margin="90,0,0,0"
+						<TextBlock Text="{TemplateBinding StaName}"
+											 Foreground="{TemplateBinding TextColor}"
+											 Margin="{TemplateBinding StaNameMargin}"
+											 HorizontalAlignment="Left"
+											 VerticalAlignment="Top"
+											 RenderTransform="{StaticResource ScaleX2}"
+											 FontFamily="{StaticResource TIMSFontFamily}"
+											 FontSize="{StaticResource TIMSFontSizeX1}"/>
+						<TextBlock Text="「　　　　」"
+											 Foreground="{TemplateBinding TextColor}"
+											 Visibility="{TemplateBinding IsThisStaOpStop, Converter={StaticResource BoolToVisibility}}"
+											 Margin="81,20,0,0"
 											 HorizontalAlignment="Left"
 											 VerticalAlignment="Top"
 											 RenderTransform="{StaticResource ScaleX2}"
@@ -44,8 +65,10 @@
 						<!--#endregion-->
 						
 						<!--#region Arrive / Departure Time-->
-						<Grid Margin="460,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-							<TextBlock Text="２３"
+						<Grid Margin="280,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{TemplateBinding IsArrTimeVisible, Converter={StaticResource BoolToVisibility}}">
+							<TextBlock Text="{TemplateBinding ArrTimeHH, Converter={StaticResource IntToWideStringP2}}"
+												 Foreground="{TemplateBinding TextColor}"
+												 Visibility="{TemplateBinding IsArrTimeHHVisible, Converter={StaticResource BoolToVisibility}}"
 											 Margin="0,0,0,0"
 											 Width="36"
 											 TextAlignment="Center"
@@ -56,18 +79,22 @@
 											 RenderTransform="{StaticResource ScaleX2}"/>
 							<!-- 280+72=352 |-7 w8 7-| 360-->
 							<Border Background="{x:Null}" BorderBrush="{x:Null}"
+											Visibility="{TemplateBinding IsArrTimeSepVisible, Converter={StaticResource BoolToVisibility}}"
 										Margin="65,0,0,0"
 										Height="18"
 										Width="22"
 										VerticalAlignment="Top"
 										HorizontalAlignment="Left">
-								<TextBlock Text=":"
+								<TextBlock Text="{TemplateBinding ArrTimeSep}"
+												 Foreground="{TemplateBinding TextColor}"
 												 HorizontalAlignment="Center"
 												 VerticalAlignment="Top"
 												 FontSize="{StaticResource TIMSFontSizeX1}"
 												 FontFamily="{StaticResource TIMSFontFamily}"/>
 							</Border>
-							<TextBlock Text="５９"
+							<TextBlock Text="{TemplateBinding ArrTimeMM, Converter={StaticResource IntToWideStringD2}}"
+												 Foreground="{TemplateBinding TextColor}"
+												 Visibility="{TemplateBinding IsArrTimeMMVisible, Converter={StaticResource BoolToVisibility}}"
 											 Margin="80,0,0,0"
 											 Width="36"
 											 TextAlignment="Center"
@@ -76,17 +103,25 @@
 											 FontSize="{StaticResource TIMSFontSizeX1}"
 											 FontFamily="{StaticResource TIMSFontFamily}"
 											 RenderTransform="{StaticResource ScaleX2}"/>
-							<TextBlock Text="60"
-											 Margin="152,0,0,0"
-											 Width="10"
-											 TextAlignment="Right"
-											 HorizontalAlignment="Left"
-											 VerticalAlignment="Top"
-											 FontSize="10"
-											 FontFamily="{StaticResource TIMSFontFamily}"/>
+							<Border BorderBrush="{x:Null}" Background="{x:Null}"
+											Margin="152,0,0,0"
+											Width="10"
+											Visibility="{TemplateBinding IsArrTimeSSVisible, Converter={StaticResource BoolToVisibility}}"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Top">
+								<TextBlock Text="{TemplateBinding ArrTimeSS, Converter={StaticResource IntToString}}"
+													 Foreground="{TemplateBinding TextColor}"
+													 Visibility="{TemplateBinding ArrTimeSS, Converter={StaticResource CollapsedWhenInt0}}"
+													 TextAlignment="Right"
+													 FontSize="10"
+													 FontFamily="{StaticResource TIMSFontFamily}"/>
+							</Border>
 						</Grid>
-						<Grid Margin="280,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-							<TextBlock Text="２３"
+
+						<Grid Margin="460,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{TemplateBinding IsDepTimeVisible, Converter={StaticResource BoolToVisibility}}">
+							<TextBlock Text="{TemplateBinding DepTimeHH, Converter={StaticResource IntToWideStringP2}}"
+												 Foreground="{TemplateBinding TextColor}"
+												 Visibility="{TemplateBinding IsDepTimeHHVisible, Converter={StaticResource BoolToVisibility}}"
 											 Margin="0,0,0,0"
 											 Width="36"
 											 TextAlignment="Center"
@@ -97,18 +132,22 @@
 											 RenderTransform="{StaticResource ScaleX2}"/>
 							<!-- 280+72=352 |-7 w8 7-| 360-->
 							<Border Background="{x:Null}" BorderBrush="{x:Null}"
+											Visibility="{TemplateBinding IsDepTimeSepVisible, Converter={StaticResource BoolToVisibility}}"
 										Margin="65,0,0,0"
 										Height="18"
 										Width="22"
 										VerticalAlignment="Top"
 										HorizontalAlignment="Left">
-								<TextBlock Text=":"
+								<TextBlock Text="{TemplateBinding DepTimeSep}"
+												 Foreground="{TemplateBinding TextColor}"
 												 HorizontalAlignment="Center"
 												 VerticalAlignment="Top"
 												 FontSize="{StaticResource TIMSFontSizeX1}"
 												 FontFamily="{StaticResource TIMSFontFamily}"/>
 							</Border>
-							<TextBlock Text="５９"
+							<TextBlock Text="{TemplateBinding DepTimeMM, Converter={StaticResource IntToWideStringD2}}"
+												 Foreground="{TemplateBinding TextColor}"
+												 Visibility="{TemplateBinding IsDepTimeMMVisible, Converter={StaticResource BoolToVisibility}}"
 											 Margin="80,0,0,0"
 											 Width="36"
 											 TextAlignment="Center"
@@ -117,20 +156,26 @@
 											 FontSize="{StaticResource TIMSFontSizeX1}"
 											 FontFamily="{StaticResource TIMSFontFamily}"
 											 RenderTransform="{StaticResource ScaleX2}"/>
-							<TextBlock Text="60"
-											 Margin="152,0,0,0"
-											 Width="10"
-											 TextAlignment="Right"
-											 HorizontalAlignment="Left"
-											 VerticalAlignment="Top"
-											 FontSize="10"
-											 FontFamily="{StaticResource TIMSFontFamily}"/>
+							<Border BorderBrush="{x:Null}" Background="{x:Null}"
+											Margin="152,0,0,0"
+											Width="10"
+											Visibility="{TemplateBinding IsDepTimeSSVisible, Converter={StaticResource BoolToVisibility}}"
+											HorizontalAlignment="Left"
+											VerticalAlignment="Top">
+								<TextBlock Text="{TemplateBinding DepTimeSS, Converter={StaticResource IntToString}}"
+													 Foreground="{TemplateBinding TextColor}"
+													 Visibility="{TemplateBinding DepTimeSS, Converter={StaticResource CollapsedWhenInt0}}"
+													 TextAlignment="Right"
+													 FontSize="10"
+													 FontFamily="{StaticResource TIMSFontFamily}"/>
+							</Border>
 						</Grid>
 						<!--#endregion-->
 						
 						<!--#region  Track Number-->
-						<TextBlock Text="番線表示"
-											 Margin="648,0,0,0"
+						<TextBlock Text="{TemplateBinding TrackNum}"
+												 Foreground="{TemplateBinding TextColor}"
+											 Margin="648,20,0,0"
 											 HorizontalAlignment="Left"
 											 VerticalAlignment="Top"
 											 FontFamily="{StaticResource TIMSFontFamily}"
@@ -138,18 +183,23 @@
 						<!--#endregion-->
 						
 						<!--#region Limit-->
-						<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="746,0,0,0">
-							<TextBlock Text="100"
+						<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="746,20,0,0">
+							<TextBlock Text="{TemplateBinding RunInLimit, Converter={StaticResource IntToStringP3}}"
+												 Foreground="{TemplateBinding TextColor}"
+												 Visibility="{TemplateBinding IsRunInLimitEnabled, Converter={StaticResource BoolToVisibility}}"
 												 Height="20"
 											 HorizontalAlignment="Left"
 											 VerticalAlignment="Top"
 											 FontFamily="{StaticResource TIMSFontFamily}"
 											 FontSize="{StaticResource TIMSFontSizeX1}"/>
-							<StackPanel Orientation="Horizontal" Height="20">
+							<StackPanel Orientation="Horizontal" Height="20"
+												 Visibility="{TemplateBinding IsRunOutLimitEnabled, Converter={StaticResource BoolToVisibility}}">
 								<TextBlock Text="/"
+												 Foreground="{TemplateBinding TextColor}"
 											 FontFamily="{StaticResource TIMSFontFamily}"
 											 FontSize="{StaticResource TIMSFontSizeX1}"/>
-								<TextBlock Text=" 20"
+								<TextBlock Text="{TemplateBinding RunOutLimit, Converter={StaticResource IntToStringP3}}"
+												 Foreground="{TemplateBinding TextColor}"
 											 FontFamily="{StaticResource TIMSFontFamily}"
 											 FontSize="{StaticResource TIMSFontSizeX1}"/>
 							</StackPanel>
