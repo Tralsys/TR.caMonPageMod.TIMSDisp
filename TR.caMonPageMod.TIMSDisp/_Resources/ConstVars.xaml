@@ -27,8 +27,17 @@
 
 	<uf:BoolToVisibility x:Key="BoolToVisibility"/>
 	<uf:IsDoorClosedToString x:Key="IsDoorClosedToString"/>
-	<uf:DoublePlus2 x:Key="DoublePlus2"/>
-	<uf:DoubleMinus1 x:Key="DoubleMinus1"/>
+	<uf:IntToString x:Key="IntToString" Format="D" Padding="0"/>
+	<uf:IntToString x:Key="IntToStringD2" Format="D2" Padding="0"/>
+	<uf:IntToString x:Key="IntToStringP3" Format="D" Padding="3"/>
+	<uf:IntToWideString x:Key="IntToWideString"/>
+	<uf:IntToWideString x:Key="IntToWideStringP2" Padding="2"/>
+	<uf:IntToWideString x:Key="IntToWideStringD2" Format="D2"/>
+	<uf:CollapsedWhenIntN x:Key="CollapsedWhenInt0" CollapsedWhen="0"/>
+
+	<uf:DoublePlusN x:Key="DoublePlus2" ValueToPlus="2"/>
+	<uf:DoubleMinusN x:Key="DoubleMinus1" ValueToMinus="1"/>
+	
 	<Style TargetType="{x:Type Image}">
 		<Setter Property="RenderOptions.BitmapScalingMode" Value="NearestNeighbor"/>
 		<Setter Property="RenderOptions.EdgeMode" Value="Aliased"/>

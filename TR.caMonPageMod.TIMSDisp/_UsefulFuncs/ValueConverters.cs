@@ -6,7 +6,7 @@ using System.Windows.Data;
 namespace TR.caMonPageMod.TIMSDisp._UsefulFuncs
 {
 	//ref : https://blogs.itmedia.co.jp/mohno/2013/12/xaml15-c9fe.html
-
+	#region Simple Convert
 	public class BoolToVisibility : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -34,20 +34,54 @@ namespace TR.caMonPageMod.TIMSDisp._UsefulFuncs
 				_ => false
 			};
 	}
-	public class DoublePlus2 : IValueConverter
+
+	public class IntToString : IValueConverter
 	{
+		public string Format { get; set; } = "D";
+		public int Padding { get; set; } = 0;
+		public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+			=> ((int)value).ToString(Format).PadLeft(Padding);
+
+		public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+			=> string.IsNullOrWhiteSpace(value as string) ? 0 : int.Parse(value as string);
+	}
+
+	public class IntToWideString : IntToString
+	{
+		static private Char_WideNarrowSetting cwns = new Char_WideNarrowSetting();
+		public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+			=> UsefulFuncs.WideNarrowConv(cwns, base.Convert(value, targetType, parameter, culture));
+	}
+
+	public class CollapsedWhenIntN : IValueConverter
+	{
+		public int CollapsedWhen { get; set; } = 0;
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-			=> (double)(value ?? 0.0) + 2;
+			=> (int)value == CollapsedWhen ? Visibility.Collapsed : Visibility.Visible;
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-			=> (double)(value ?? 2.0) - 2;
+			=> throw new NotImplementedException();
+		
 	}
-	public class DoubleMinus1 : IValueConverter
+	#endregion
+	#region Value Plus/Minus
+	public class DoublePlusN : IValueConverter
 	{
+		public double ValueToPlus { get; set; } = 0;
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-			=> (double)(value ?? 1.0) - 1;
+			=> (double)(value ?? 0.0) + ValueToPlus;
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-			=> (double)(value ?? 0.0) + 1;
+			=> (double)(value ?? ValueToPlus) - ValueToPlus;
 	}
+	public class DoubleMinusN : IValueConverter
+	{
+		public double ValueToMinus { get; set; } = 0;
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+			=> (double)(value ?? ValueToMinus) - ValueToMinus;
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+			=> (double)(value ?? 0.0) + ValueToMinus;
+	}
+	#endregion Value Plus/Minus
 }
