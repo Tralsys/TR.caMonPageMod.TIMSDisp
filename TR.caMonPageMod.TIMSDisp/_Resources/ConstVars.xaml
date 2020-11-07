@@ -2,6 +2,12 @@
 										xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 										xmlns:uf="clr-namespace:TR.caMonPageMod.TIMSDisp._UsefulFuncs"
 										xmlns:System="clr-namespace:System;assembly=mscorlib">
+	<!--
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/ConstVars.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+	-->
+
 	<System:Double x:Key="TIMSFontSizeX1">16</System:Double>
 	<FontFamily x:Key="TIMSFontFamily">JF Dot jiskan16s</FontFamily>
 
@@ -15,8 +21,9 @@
 	<BitmapScalingMode x:Key="ImageCtrl_BitmapScalingMode">NearestNeighbor</BitmapScalingMode>
 	<EdgeMode x:Key="ImageCtrl_EdgeMode">Aliased</EdgeMode>
 	<System:Boolean x:Key="ImageCtrl_SnapsToDevicePixels">True</System:Boolean>
-	
-	
+
+	<ScaleTransform x:Key="ScaleX2" ScaleX="2" ScaleY="1"/>
+
 
 	<uf:BoolToVisibility x:Key="BoolToVisibility"/>
 	<uf:IsDoorClosedToString x:Key="IsDoorClosedToString"/>
