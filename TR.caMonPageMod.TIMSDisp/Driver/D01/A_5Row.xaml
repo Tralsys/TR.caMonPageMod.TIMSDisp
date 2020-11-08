@@ -112,8 +112,72 @@
 		</Grid>
 
 		<Grid Grid.Row="1" Background="Transparent">
+			<TextBlock Text="時分"
+								 Margin="18, 4, 0,0"
+								 HorizontalAlignment="Left"
+								 VerticalAlignment="Top"
+								 Foreground="{StaticResource ConstantStrBrush}"
+								 FontFamily="{StaticResource TIMSFontFamily}"
+								 FontSize="{StaticResource TIMSFontSizeX1}"/>
+			<TextBlock Text="停車場名"
+								 Margin="122, 4, 0,0"
+								 HorizontalAlignment="Left"
+								 VerticalAlignment="Top"
+								 Foreground="{StaticResource ConstantStrBrush}"
+								 FontFamily="{StaticResource TIMSFontFamily}"
+								 FontSize="{StaticResource TIMSFontSizeX1}"/>
+
+			<Border Background="{x:Null}"
+							BorderBrush="{x:Null}"
+							Margin="525,4,0,0"
+							Width="22"
+							Padding="0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top">
+				<TextBlock Text="発"
+									 Padding="0"
+									 HorizontalAlignment="Center"
+									 VerticalAlignment="Top"
+									 Foreground="{StaticResource ConstantStrBrush}"
+									 FontFamily="{StaticResource TIMSFontFamily}"
+									 FontSize="{StaticResource TIMSFontSizeX1}"/>
+			</Border>
+			<Border Background="{x:Null}"
+							BorderBrush="{x:Null}"
+							Margin="345,4,0,0"
+							Width="22"
+							Padding="0"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Top">
+				<TextBlock Text="着"
+									 Padding="0"
+									 HorizontalAlignment="Center"
+									 VerticalAlignment="Top"
+									 Foreground="{StaticResource ConstantStrBrush}"
+									 FontFamily="{StaticResource TIMSFontFamily}"
+									 FontSize="{StaticResource TIMSFontSizeX1}"/>
+			</Border>
+
+			<TextBlock Text="番線"
+								 Margin="648, 4, 0,0"
+								 HorizontalAlignment="Left"
+								 VerticalAlignment="Top"
+								 Foreground="{StaticResource ConstantStrBrush}"
+								 FontFamily="{StaticResource TIMSFontFamily}"
+								 FontSize="{StaticResource TIMSFontSizeX1}"/>
+			<TextBlock Text="制限"
+								 Margin="728, 4, 0,0"
+								 HorizontalAlignment="Left"
+								 VerticalAlignment="Top"
+								 Foreground="{StaticResource ConstantStrBrush}"
+								 FontFamily="{StaticResource TIMSFontFamily}"
+								 FontSize="{StaticResource TIMSFontSizeX1}"/>
+
 			<Grid Margin="0,10,0,0">
-				<cc:D01AATimetable1Row Margin="0,0,0,0" StaName="東京" IsThisStaOpStop="True" TextColor="Red"
+				<cc:D01AATimetable1Row Margin="0,0,0,0"
+															 StaName="東京"
+															 IsRuntimeVisible="False"
+															 IsThisStaOpStop="True" TextColor="Red"
 															 RunInLimit="3" RunOutLimit="900"/>
 				<cc:D01AATimetable1Row Margin="0,40,0,0" StaName="名古屋" IsThisStaOpStop="True"
 															 ArrTimeHH="12" RuntimeMM="12" RuntimeSS="34"/>
@@ -121,7 +185,9 @@
 															 TrackNum="試験" IsRunInLimitEnabled="False"/>
 				<cc:D01AATimetable1Row Margin="0,120,0,0" StaName="関西空港" IsThisStaOpStop="True" TextColor="Lime"
 															 ArrTimeSS="12" DepTimeMM="99"/>
-				<cc:D01AATimetable1Row Margin="0,160,0,0" StaName="鹿児島中央" IsThisStaOpStop="True" TextColor="Aqua"
+				<cc:D01AATimetable1Row Margin="0,160,0,0" StaName="鹿児島中央" IsThisStaOpStop="True"
+															 IsRunOutLimitEnabled="False"
+															 TextColor="Aqua"
 															 DepTimeSep="="/>
 
 			</Grid>
