@@ -211,6 +211,93 @@
 									 HorizontalAlignment="Left"
 									 VerticalAlignment="Top"/>
 
+		<Grid Grid.Row="2"
+					Margin="90,65,0,0"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top">
+			<TextBlock Text="次停車駅"
+								 HorizontalAlignment="Left"
+								 VerticalAlignment="Top"
+								 Foreground="{StaticResource ConstantStrBrush}"
+								 FontFamily="{StaticResource TIMSFontFamily}"
+								 FontSize="{StaticResource TIMSFontSizeX1}"/>
+
+			<cc:BlinkTB Text="那覇空港"
+									
+									IsBlinking="True"
+									
+									UsualBackground="{x:Null}"
+									UsualTextColor="White"
+									FlippedBackground="{x:Null}"
+									FlippedTextColor="{x:Null}"
+									
+									Margin="90,0,0,0"
+									HorizontalAlignment="Left"
+									VerticalAlignment="Top"
+									RenderTransform="{StaticResource ScaleX2}"/>
+
+			<Grid Margin="280,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding IsArrTimeVisible, Converter={StaticResource BoolToVisibility}}">
+				<TextBlock Text="{Binding ArrTimeHH, Converter={StaticResource IntToWideStringP2}}"
+									 Foreground="{Binding TextColor}"
+									 Visibility="{Binding IsArrTimeHHVisible, Converter={StaticResource BoolToVisibility}}"
+									 Margin="0,0,0,0"
+									 Width="36"
+									 TextAlignment="Center"
+									 HorizontalAlignment="Left"
+									 VerticalAlignment="Top"
+									 FontSize="{StaticResource TIMSFontSizeX1}"
+									 FontFamily="{StaticResource TIMSFontFamily}"
+									 RenderTransform="{StaticResource ScaleX2}"/>
+				<!-- 280+72=352 |-7 w8 7-| 360-->
+				<Border Background="{x:Null}" BorderBrush="{x:Null}"
+								Visibility="{Binding IsArrTimeSepVisible, Converter={StaticResource BoolToVisibility}}"
+								Margin="65,0,0,0"
+								Height="18"
+								Width="22"
+								VerticalAlignment="Top"
+								HorizontalAlignment="Left">
+					<TextBlock Text="{Binding ArrTimeSep}"
+										 Foreground="{Binding TextColor}"
+										 HorizontalAlignment="Center"
+										 VerticalAlignment="Top"
+										 FontSize="{StaticResource TIMSFontSizeX1}"
+										 FontFamily="{StaticResource TIMSFontFamily}"/>
+				</Border>
+				<TextBlock Text="{Binding ArrTimeMM, Converter={StaticResource IntToWideStringD2}}"
+									 Foreground="{Binding TextColor}"
+									 Visibility="{Binding IsArrTimeMMVisible, Converter={StaticResource BoolToVisibility}}"
+									 Margin="80,0,0,0"
+									 Width="36"
+									 TextAlignment="Center"
+									 HorizontalAlignment="Left"
+									 VerticalAlignment="Top"
+									 FontSize="{StaticResource TIMSFontSizeX1}"
+									 FontFamily="{StaticResource TIMSFontFamily}"
+									 RenderTransform="{StaticResource ScaleX2}"/>
+				<Border BorderBrush="{x:Null}" Background="{x:Null}"
+								Margin="152,0,0,0"
+								Width="10"
+								Visibility="{Binding IsArrTimeSSVisible, Converter={StaticResource BoolToVisibility}}"
+								HorizontalAlignment="Left"
+								VerticalAlignment="Top">
+					<TextBlock Text="{Binding ArrTimeSS, Converter={StaticResource IntToString}}"
+										 Foreground="{Binding TextColor}"
+										 Visibility="{Binding ArrTimeSS, Converter={StaticResource CollapsedWhenInt0}}"
+										 TextAlignment="Right"
+										 FontSize="10"
+										 FontFamily="{StaticResource TIMSFontFamily}"/>
+				</Border>
+			</Grid>
+
+			<TextBlock Text="３番線"
+								 Margin="460,0,0,0"
+								 HorizontalAlignment="Left"
+								 VerticalAlignment="Top"
+								 Foreground="{StaticResource ConstantStrBrush}"
+								 FontFamily="{StaticResource TIMSFontFamily}"
+								 FontSize="{StaticResource TIMSFontSizeX1}"/>
+		</Grid>
+
 		<Grid Grid.Row="3">
 
 			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
