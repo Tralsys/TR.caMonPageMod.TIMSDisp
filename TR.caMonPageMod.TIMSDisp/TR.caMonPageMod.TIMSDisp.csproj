@@ -10,6 +10,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Tralsys/TR.caMonPageMod.TIMSDisp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Tralsys/TR.caMonPageMod.TIMSDisp</RepositoryUrl>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

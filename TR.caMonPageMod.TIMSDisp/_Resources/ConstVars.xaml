@@ -29,12 +29,12 @@
 
 	<uf:BoolToVisibility x:Key="BoolToVisibility"/>
 	<uf:IsDoorClosedToString x:Key="IsDoorClosedToString"/>
-	<uf:IntToString x:Key="IntToString" Format="D" Padding="0"/>
-	<uf:IntToString x:Key="IntToStringD2" Format="D2" Padding="0"/>
-	<uf:IntToString x:Key="IntToStringD3" Format="D3" Padding="0"/>
-	<uf:IntToString x:Key="IntToStringP3" Format="D" Padding="3"/>
+	<uf:IntToString x:Key="IntToString" Format="D" PaddingL="0"/>
+	<uf:IntToString x:Key="IntToStringD2" Format="D2" PaddingL="0"/>
+	<uf:IntToString x:Key="IntToStringD3" Format="D3" PaddingL="0"/>
+	<uf:IntToString x:Key="IntToStringP3" Format="D" PaddingL="3"/>
 	<uf:IntToWideString x:Key="IntToWideString"/>
-	<uf:IntToWideString x:Key="IntToWideStringP2" Padding="2"/>
+	<uf:IntToWideString x:Key="IntToWideStringP2" PaddingL="2"/>
 	<uf:IntToWideString x:Key="IntToWideStringD2" Format="D2"/>
 
 	<uf:DoubleToString x:Key="DoubleToString3p3" Format="000.000"/>

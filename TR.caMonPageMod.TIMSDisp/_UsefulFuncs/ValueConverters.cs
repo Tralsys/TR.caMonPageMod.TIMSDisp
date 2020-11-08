@@ -1,5 +1,7 @@
 ﻿using System;
+using System.CodeDom;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 
@@ -35,35 +37,77 @@ namespace TR.caMonPageMod.TIMSDisp._UsefulFuncs
 			};
 	}
 
-	public class IntToString : IValueConverter
+	public class ValueToString<T> : IValueConverter where T : struct
 	{
-		public string Format { get; set; } = "D";
-		public int Padding { get; set; } = 0;
+		public string Format { get; set; } = string.Empty;
+		public int PaddingL { get; set; } = 0;
+		public int PaddingR { get; set; } = 0;
+
+		protected Func<object, string, string> toString { get; } = null;
+		protected Func<string, object> parse { get; } = null;
+		public ValueToString()
+		{
+			//ref : https://qiita.com/Zuishin/items/61fc8807d027d5cea329
+			//ref : https://docs.microsoft.com/ja-jp/dotnet/csharp/language-reference/operators/switch-expression
+			toString = default(T) switch
+			{
+				int => (v, f) => ((int)v).ToString(f),
+				uint => (v, f) => ((uint)v).ToString(f),
+
+				short => (v, f) => ((short)v).ToString(f),
+				ushort => (v, f) => ((ushort)v).ToString(f),
+
+				long => (v, f) => ((long)v).ToString(f),
+				ulong => (v, f) => ((ulong)v).ToString(f),
+
+				byte => (v, f) => ((byte)v).ToString(f),
+
+				float => (v, f) => ((float)v).ToString(f),
+				double => (v, f) => ((double)v).ToString(f),
+				decimal => (v, f) => ((decimal)v).ToString(f),
+
+				_ => throw new NotSupportedException("The Type \"" + typeof(T).ToString() + "\" is not supported")
+			};
+
+			parse = default(T) switch
+			{
+				int => (s) => int.Parse(s),
+				uint => (s) => uint.Parse(s),
+
+				short => (s) => short.Parse(s),
+				ushort => (s) => ushort.Parse(s),
+
+				long => (s) => long.Parse(s),
+				ulong => (s) => ulong.Parse(s),
+
+				byte => (s) => byte.Parse(s),
+
+				float => (s) => float.Parse(s),
+				double => (s) => double.Parse(s),
+				decimal => (s) => decimal.Parse(s),
+
+				_ => throw new NotSupportedException("The Type \"" + typeof(T).ToString() + "\" is not supported")
+			};
+
+
+		}
 		public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-			=> ((int)value).ToString(Format).PadLeft(Padding);
+			=> toString?.Invoke(value, Format).PadLeft(PaddingL).PadRight(PaddingR);//左に空白を開けてから右に空白を開ける
 
 		public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-			=> string.IsNullOrWhiteSpace(value as string) ? 0 : int.Parse(value as string);
+			=> parse?.Invoke(value as string);
 	}
 
-	public class IntToWideString : IntToString
+	public class IntToString : ValueToString<int> { }
+
+	public class IntToWideString : ValueToString<int>
 	{
 		static private Char_WideNarrowSetting cwns = new Char_WideNarrowSetting();
 		public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 			=> UsefulFuncs.WideNarrowConv(cwns, base.Convert(value, targetType, parameter, culture));
 	}
 
-	public class DoubleToString : IValueConverter
-	{
-		public string Format { get; set; } = "F";
-		public int Padding { get; set; } = 0;
-		public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-			=> ((double)value).ToString(Format).PadLeft(Padding);
-
-		public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-			=> string.IsNullOrWhiteSpace(value as string) ? 0 : double.Parse(value as string);
-
-	}
+	public class DoubleToString : ValueToString<double> { }
 
 	public class CollapsedWhenIntN : IValueConverter
 	{
@@ -76,6 +120,7 @@ namespace TR.caMonPageMod.TIMSDisp._UsefulFuncs
 		
 	}
 	#endregion
+
 	#region Value Plus/Minus
 	public class DoublePlusN : IValueConverter
 	{
