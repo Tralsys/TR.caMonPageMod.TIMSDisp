@@ -20,6 +20,8 @@
 
 	<BitmapScalingMode x:Key="ImageCtrl_BitmapScalingMode">NearestNeighbor</BitmapScalingMode>
 	<EdgeMode x:Key="ImageCtrl_EdgeMode">Aliased</EdgeMode>
+	<BitmapScalingMode x:Key="MyBitmapScalingMode">NearestNeighbor</BitmapScalingMode>
+	<EdgeMode x:Key="MyEdgeMode">Aliased</EdgeMode>
 	<System:Boolean x:Key="ImageCtrl_SnapsToDevicePixels">True</System:Boolean>
 
 	<ScaleTransform x:Key="ScaleX2" ScaleX="2" ScaleY="1"/>
@@ -29,6 +31,7 @@
 	<uf:IsDoorClosedToString x:Key="IsDoorClosedToString"/>
 	<uf:IntToString x:Key="IntToString" Format="D" Padding="0"/>
 	<uf:IntToString x:Key="IntToStringD2" Format="D2" Padding="0"/>
+	<uf:IntToString x:Key="IntToStringD3" Format="D3" Padding="0"/>
 	<uf:IntToString x:Key="IntToStringP3" Format="D" Padding="3"/>
 	<uf:IntToWideString x:Key="IntToWideString"/>
 	<uf:IntToWideString x:Key="IntToWideStringP2" Padding="2"/>
