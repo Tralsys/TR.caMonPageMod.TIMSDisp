@@ -9,18 +9,25 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type local:JokoNotice}">
-					<Grid Background="Yellow" MinHeight="48">
+					<Grid Background="Yellow"
+								Visibility="{TemplateBinding IsJokoEnabled, Converter={StaticResource BoolToVisibility}}"
+								MinHeight="48"
+								MinWidth="350"
+								RenderOptions.BitmapScalingMode="{StaticResource MyBitmapScalingMode}"
+								RenderOptions.EdgeMode="{StaticResource MyEdgeMode}">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="2"/>
 							<RowDefinition Height="*"/>
 							<RowDefinition Height="2"/>
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="1*"/>
-							<ColumnDefinition Width="4*"/>
-							<ColumnDefinition Width="2*"/>
+							<ColumnDefinition Width="2*"/><!--Require : 2 w-->
+							<ColumnDefinition Width="11*"/><!--Require : 11w-->
+							<ColumnDefinition Width="6*"/><!--Require : 6w-->
 						</Grid.ColumnDefinitions>
+						
 						<local:BlinkTB Text="徐行"
+													 Visibility="Visible"
 													 Grid.Column="0"
 													 Grid.Row="1"
 													 Margin="0"
@@ -45,10 +52,13 @@
 						<Grid Background="Black" Grid.Column="1" Grid.Row="1">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="*"/>
+								<RowDefinition Height="2"/>
 								<RowDefinition Height="*"/>
 							</Grid.RowDefinitions>
 
-							<Grid Grid.Row="0" Margin="1,2,1,0" VerticalAlignment="Center">
+							<Grid Grid.Row="0"
+										Margin="0"
+										VerticalAlignment="Center">
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*"/>
 									<!--Padding-->
@@ -66,7 +76,7 @@
 									<!--Padding-->
 								</Grid.ColumnDefinitions>
 
-								<TextBlock Text="000.000"
+								<TextBlock Text="{TemplateBinding Joko1StartDistance, Converter={StaticResource DoubleToString3p3}}"
 													 Grid.Column="1"
 													 Foreground="{StaticResource VariableStrBrush}"
 													 FontFamily="{StaticResource TIMSFontFamily}"
@@ -85,7 +95,7 @@
 													 FontFamily="{StaticResource TIMSFontFamily}"
 													 FontSize="{StaticResource TIMSFontSizeX1}"/>
 
-								<TextBlock Text="000.000"
+								<TextBlock Text="{TemplateBinding Joko1EndDistance, Converter={StaticResource DoubleToString3p3}}"
 													 Grid.Column="4"
 													 Foreground="{StaticResource VariableStrBrush}"
 													 FontFamily="{StaticResource TIMSFontFamily}"
@@ -97,7 +107,10 @@
 													 FontSize="{StaticResource TIMSFontSizeX1}"/>
 
 							</Grid>
-							<Grid Grid.Row="1" Margin="1,0,1,2" VerticalAlignment="Center">
+							<Grid Grid.Row="2"
+								Visibility="{TemplateBinding IsJoko2Enabled, Converter={StaticResource BoolToVisibility}}"
+										Margin="0"
+										VerticalAlignment="Center">
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*"/><!--Padding-->
 									<ColumnDefinition Width="auto"/><!--Src Pos-->
@@ -108,7 +121,7 @@
 									<ColumnDefinition Width="*"/><!--Padding-->
 								</Grid.ColumnDefinitions>
 
-								<TextBlock Text="000.000"
+								<TextBlock Text="{TemplateBinding Joko2StartDistance, Converter={StaticResource DoubleToString3p3}}"
 													 Grid.Column="1"
 													 Foreground="{StaticResource VariableStrBrush}"
 													 FontFamily="{StaticResource TIMSFontFamily}"
@@ -127,7 +140,7 @@
 													 FontFamily="{StaticResource TIMSFontFamily}"
 													 FontSize="{StaticResource TIMSFontSizeX1}"/>
 
-								<TextBlock Text="000.000"
+								<TextBlock Text="{TemplateBinding Joko2EndDistance, Converter={StaticResource DoubleToString3p3}}"
 													 Grid.Column="4"
 													 Foreground="{StaticResource VariableStrBrush}"
 													 FontFamily="{StaticResource TIMSFontFamily}"
@@ -143,52 +156,64 @@
 						<!--#endregion-->
 						
 						<!--#region Limit Speed-->
-						<Grid Grid.Row="1" Grid.Column="2">
+						<Grid Grid.Row="1" Grid.Column="2" Margin="0">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="*"/>
+								<RowDefinition Height="2"/>
 								<RowDefinition Height="*"/>
 							</Grid.RowDefinitions>
-							<local:BlinkTB Grid.Row="1"
-														 Margin="0,1,0,0"
-														 IsBlinking="True"
-													 Height="{Binding Path=RowDefinitions[0].ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
-													 Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
-													 UsualBackground="Yellow"
-													 UsualTextColor="Black"
-													 
-													 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
-													 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"
-														 Text="{x:Null}"/>
 							<local:BlinkTB Grid.Row="0"
-														 Margin="0,0,0,1"
+														 Margin="0"
 														 IsBlinking="True"
-													 Height="{Binding Path=RowDefinitions[0].ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
-													 Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
-													 UsualBackground="Yellow"
-													 UsualTextColor="Black"
-													 
-													 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
-													 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"
+														 Height="{Binding Path=RowDefinitions[0].ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
+														 Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
+														 UsualBackground="Yellow"
+														 UsualTextColor="Black"
+
+														 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
+														 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"
 														 Text="{x:Null}"/>
-							<Grid Grid.Row="1" Margin="1,1,1,2" VerticalAlignment="Center">
+							<local:BlinkTB Grid.Row="2"
+														 Visibility="{TemplateBinding IsJoko2Enabled, Converter={StaticResource BoolToVisibility}}"
+														 Margin="0"
+														 IsBlinking="True"
+														 Height="{Binding Path=RowDefinitions[2].ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
+														 Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
+														 UsualBackground="Yellow"
+														 UsualTextColor="Black"
+													 
+														 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
+														 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"
+														 Text="{x:Null}"/>
+							<Grid Grid.Row="0" Margin="0" VerticalAlignment="Center">
 								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*"/><!--Padding-->
-									<ColumnDefinition Width="auto"/><!--"制限"-->
-									<ColumnDefinition Width="2*"/><!--Padding-->
-									<ColumnDefinition Width="auto"/><!--Limit Speed-->
-									<ColumnDefinition Width="auto"/><!--km/h-->
-									<ColumnDefinition Width="2*"/><!--Padding-->
+									<ColumnDefinition Width="*"/>
+									<!--Padding-->
+									<ColumnDefinition Width="auto"/>
+									<!--"制限"-->
+									<ColumnDefinition Width="2*"/>
+									<!--Padding-->
+									<ColumnDefinition Width="auto"/>
+									<!--Limit Speed-->
+									<ColumnDefinition Width="auto"/>
+									<!--km/h-->
+									<ColumnDefinition Width="2*"/>
+									<!--Padding-->
 								</Grid.ColumnDefinitions>
 								<local:BlinkTB Grid.Column="1"
 															 IsBlinking="True"
-															 Text="制限"
+															 Text="制限 "
+															 FontSize="{StaticResource TIMSFontSizeX1}"
+															 FontFamily="{StaticResource TIMSFontFamily}"
 															 UsualBackground="Yellow"
 															 UsualTextColor="Black"
 															 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
 															 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"/>
 								<local:BlinkTB Grid.Column="3"
 															 IsBlinking="True"
-															 Text="999"
+															 Text="{TemplateBinding Joko1LimitSpeed, Converter={StaticResource IntToStringD3}}"
+															 FontSize="{StaticResource TIMSFontSizeX1}"
+															 FontFamily="{StaticResource TIMSFontFamily}"
 															 UsualBackground="Yellow"
 															 UsualTextColor="Black"
 															 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
@@ -196,13 +221,18 @@
 								<local:BlinkTB Grid.Column="4"
 															 IsBlinking="True"
 															 Text="km/h"
+															 FontSize="{StaticResource TIMSFontSizeX1}"
+															 FontFamily="{StaticResource TIMSFontFamily}"
 															 UsualBackground="Yellow"
 															 UsualTextColor="Black"
 															 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
 															 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"/>
 
 							</Grid>
-							<Grid Grid.Row="0" Margin="1,2,1,1" VerticalAlignment="Center">
+							<Grid Grid.Row="2"
+										Visibility="{TemplateBinding IsJoko2Enabled, Converter={StaticResource BoolToVisibility}}"
+										Margin="0"
+										VerticalAlignment="Center">
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*"/><!--Padding-->
 									<ColumnDefinition Width="auto"/><!--"制限"-->
@@ -213,14 +243,18 @@
 								</Grid.ColumnDefinitions>
 								<local:BlinkTB Grid.Column="1"
 															 IsBlinking="True"
-															 Text="制限"
+															 Text="制限 "
+															 FontSize="{StaticResource TIMSFontSizeX1}"
+															 FontFamily="{StaticResource TIMSFontFamily}"
 															 UsualBackground="Yellow"
 															 UsualTextColor="Black"
 															 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
 															 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"/>
 								<local:BlinkTB Grid.Column="3"
 															 IsBlinking="True"
-															 Text="999"
+															 Text="{TemplateBinding Joko2LimitSpeed, Converter={StaticResource IntToStringD3}}"
+															 FontSize="{StaticResource TIMSFontSizeX1}"
+															 FontFamily="{StaticResource TIMSFontFamily}"
 															 UsualBackground="Yellow"
 															 UsualTextColor="Black"
 															 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
@@ -228,6 +262,8 @@
 								<local:BlinkTB Grid.Column="4"
 															 IsBlinking="True"
 															 Text="km/h"
+															 FontSize="{StaticResource TIMSFontSizeX1}"
+															 FontFamily="{StaticResource TIMSFontFamily}"
 															 UsualBackground="Yellow"
 															 UsualTextColor="Black"
 															 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
