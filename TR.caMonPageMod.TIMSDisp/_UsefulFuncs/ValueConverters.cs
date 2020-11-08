@@ -53,6 +53,18 @@ namespace TR.caMonPageMod.TIMSDisp._UsefulFuncs
 			=> UsefulFuncs.WideNarrowConv(cwns, base.Convert(value, targetType, parameter, culture));
 	}
 
+	public class DoubleToString
+	{
+		public string Format { get; set; } = "F";
+		public int Padding { get; set; } = 0;
+		public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+			=> ((double)value).ToString(Format).PadLeft(Padding);
+
+		public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+			=> string.IsNullOrWhiteSpace(value as string) ? 0 : double.Parse(value as string);
+
+	}
+
 	public class CollapsedWhenIntN : IValueConverter
 	{
 		public int CollapsedWhen { get; set; } = 0;

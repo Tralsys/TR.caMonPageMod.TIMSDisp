@@ -33,6 +33,9 @@
 	<uf:IntToWideString x:Key="IntToWideString"/>
 	<uf:IntToWideString x:Key="IntToWideStringP2" Padding="2"/>
 	<uf:IntToWideString x:Key="IntToWideStringD2" Format="D2"/>
+
+	<uf:DoubleToString x:Key="DoubleToString3p3" Format="000.000"/>
+
 	<uf:CollapsedWhenIntN x:Key="CollapsedWhenInt0" CollapsedWhen="0"/>
 
 	<uf:DoublePlusN x:Key="DoublePlus2" ValueToPlus="2"/>
