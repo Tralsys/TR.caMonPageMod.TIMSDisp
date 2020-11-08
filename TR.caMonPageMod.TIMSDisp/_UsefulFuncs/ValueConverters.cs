@@ -53,7 +53,7 @@ namespace TR.caMonPageMod.TIMSDisp._UsefulFuncs
 			=> UsefulFuncs.WideNarrowConv(cwns, base.Convert(value, targetType, parameter, culture));
 	}
 
-	public class DoubleToString
+	public class DoubleToString : IValueConverter
 	{
 		public string Format { get; set; } = "F";
 		public int Padding { get; set; } = 0;
