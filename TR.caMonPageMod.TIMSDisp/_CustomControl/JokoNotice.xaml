@@ -97,7 +97,7 @@
 													 FontSize="{StaticResource TIMSFontSizeX1}"/>
 
 							</Grid>
-							<Grid Grid.Row="1" Margin="1,2,1,0" VerticalAlignment="Center">
+							<Grid Grid.Row="1" Margin="1,0,1,2" VerticalAlignment="Center">
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*"/><!--Padding-->
 									<ColumnDefinition Width="auto"/><!--Src Pos-->
