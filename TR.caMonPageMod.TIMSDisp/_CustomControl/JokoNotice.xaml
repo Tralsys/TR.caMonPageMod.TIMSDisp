@@ -1,0 +1,246 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+										xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+										xmlns:local="clr-namespace:TR.caMonPageMod.TIMSDisp._CustomControl">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/ConstVars.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+	
+	<Style TargetType="{x:Type local:JokoNotice}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:JokoNotice}">
+					<Grid Background="Yellow" MinHeight="48">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="2"/>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="2"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="1*"/>
+							<ColumnDefinition Width="4*"/>
+							<ColumnDefinition Width="2*"/>
+						</Grid.ColumnDefinitions>
+						<local:BlinkTB Text="徐行"
+													 Grid.Column="0"
+													 Grid.Row="1"
+													 Margin="0"
+													 HorizontalAlignment="Center"
+													 VerticalAlignment="Center"
+													 HorizontalContentAlignment="Center"
+													 VerticalContentAlignment="Center"
+													 Height="{Binding Path=RowDefinitions[1].ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
+													 Width="{Binding Path=ColumnDefinitions[0].ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
+													 
+													 IsBlinking="True"
+													 
+													 UsualBackground="Yellow"
+													 UsualTextColor="Black"
+													 
+													 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
+													 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"
+													 FontFamily="{StaticResource TIMSFontFamily}"
+													 FontSize="{StaticResource TIMSFontSizeX1}"/>
+						
+						<!--#region Zone-->
+						<Grid Background="Black" Grid.Column="1" Grid.Row="1">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+
+							<Grid Grid.Row="0" Margin="1,2,1,0" VerticalAlignment="Center">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<!--Padding-->
+									<ColumnDefinition Width="auto"/>
+									<!--Src Pos-->
+									<ColumnDefinition Width="auto"/>
+									<!--km-->
+									<ColumnDefinition Width="6*"/>
+									<!--Padding-->
+									<ColumnDefinition Width="auto"/>
+									<!--Dst Pos-->
+									<ColumnDefinition Width="auto"/>
+									<!--Dst Pos-->
+									<ColumnDefinition Width="*"/>
+									<!--Padding-->
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Text="000.000"
+													 Grid.Column="1"
+													 Foreground="{StaticResource VariableStrBrush}"
+													 FontFamily="{StaticResource TIMSFontFamily}"
+													 FontSize="{StaticResource TIMSFontSizeX1}"/>
+								<TextBlock Text=" km"
+													 Grid.Column="2"
+													 Foreground="{StaticResource VariableStrBrush}"
+													 FontFamily="{StaticResource TIMSFontFamily}"
+													 FontSize="{StaticResource TIMSFontSizeX1}"/>
+
+
+								<TextBlock Grid.Column="3"
+													 Text="&#x301C;"
+													 HorizontalAlignment="Center"
+													 Foreground="{StaticResource VariableStrBrush}"
+													 FontFamily="{StaticResource TIMSFontFamily}"
+													 FontSize="{StaticResource TIMSFontSizeX1}"/>
+
+								<TextBlock Text="000.000"
+													 Grid.Column="4"
+													 Foreground="{StaticResource VariableStrBrush}"
+													 FontFamily="{StaticResource TIMSFontFamily}"
+													 FontSize="{StaticResource TIMSFontSizeX1}"/>
+								<TextBlock Text=" km"
+													 Grid.Column="5"
+													 Foreground="{StaticResource VariableStrBrush}"
+													 FontFamily="{StaticResource TIMSFontFamily}"
+													 FontSize="{StaticResource TIMSFontSizeX1}"/>
+
+							</Grid>
+							<Grid Grid.Row="1" Margin="1,2,1,0" VerticalAlignment="Center">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/><!--Padding-->
+									<ColumnDefinition Width="auto"/><!--Src Pos-->
+									<ColumnDefinition Width="auto"/><!--km-->
+									<ColumnDefinition Width="6*"/><!--Padding-->
+									<ColumnDefinition Width="auto"/><!--Dst Pos-->
+									<ColumnDefinition Width="auto"/><!--Dst Pos-->
+									<ColumnDefinition Width="*"/><!--Padding-->
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Text="000.000"
+													 Grid.Column="1"
+													 Foreground="{StaticResource VariableStrBrush}"
+													 FontFamily="{StaticResource TIMSFontFamily}"
+													 FontSize="{StaticResource TIMSFontSizeX1}"/>
+								<TextBlock Text=" km"
+													 Grid.Column="2"
+													 Foreground="{StaticResource VariableStrBrush}"
+													 FontFamily="{StaticResource TIMSFontFamily}"
+													 FontSize="{StaticResource TIMSFontSizeX1}"/>
+								
+
+								<TextBlock Grid.Column="3"
+													 Text="&#x301C;"
+													 HorizontalAlignment="Center"
+													 Foreground="{StaticResource VariableStrBrush}"
+													 FontFamily="{StaticResource TIMSFontFamily}"
+													 FontSize="{StaticResource TIMSFontSizeX1}"/>
+
+								<TextBlock Text="000.000"
+													 Grid.Column="4"
+													 Foreground="{StaticResource VariableStrBrush}"
+													 FontFamily="{StaticResource TIMSFontFamily}"
+													 FontSize="{StaticResource TIMSFontSizeX1}"/>
+								<TextBlock Text=" km"
+													 Grid.Column="5"
+													 Foreground="{StaticResource VariableStrBrush}"
+													 FontFamily="{StaticResource TIMSFontFamily}"
+													 FontSize="{StaticResource TIMSFontSizeX1}"/>
+
+							</Grid>
+						</Grid>
+						<!--#endregion-->
+						
+						<!--#region Limit Speed-->
+						<Grid Grid.Row="1" Grid.Column="2">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<local:BlinkTB Grid.Row="1"
+														 Margin="0,1,0,0"
+														 IsBlinking="True"
+													 Height="{Binding Path=RowDefinitions[0].ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
+													 Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
+													 UsualBackground="Yellow"
+													 UsualTextColor="Black"
+													 
+													 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
+													 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"
+														 Text="{x:Null}"/>
+							<local:BlinkTB Grid.Row="0"
+														 Margin="0,0,0,1"
+														 IsBlinking="True"
+													 Height="{Binding Path=RowDefinitions[0].ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
+													 Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}}"
+													 UsualBackground="Yellow"
+													 UsualTextColor="Black"
+													 
+													 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
+													 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"
+														 Text="{x:Null}"/>
+							<Grid Grid.Row="1" Margin="1,1,1,2" VerticalAlignment="Center">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/><!--Padding-->
+									<ColumnDefinition Width="auto"/><!--"制限"-->
+									<ColumnDefinition Width="2*"/><!--Padding-->
+									<ColumnDefinition Width="auto"/><!--Limit Speed-->
+									<ColumnDefinition Width="auto"/><!--km/h-->
+									<ColumnDefinition Width="2*"/><!--Padding-->
+								</Grid.ColumnDefinitions>
+								<local:BlinkTB Grid.Column="1"
+															 IsBlinking="True"
+															 Text="制限"
+															 UsualBackground="Yellow"
+															 UsualTextColor="Black"
+															 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
+															 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"/>
+								<local:BlinkTB Grid.Column="3"
+															 IsBlinking="True"
+															 Text="999"
+															 UsualBackground="Yellow"
+															 UsualTextColor="Black"
+															 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
+															 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"/>
+								<local:BlinkTB Grid.Column="4"
+															 IsBlinking="True"
+															 Text="km/h"
+															 UsualBackground="Yellow"
+															 UsualTextColor="Black"
+															 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
+															 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"/>
+
+							</Grid>
+							<Grid Grid.Row="0" Margin="1,2,1,1" VerticalAlignment="Center">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/><!--Padding-->
+									<ColumnDefinition Width="auto"/><!--"制限"-->
+									<ColumnDefinition Width="2*"/><!--Padding-->
+									<ColumnDefinition Width="auto"/><!--Limit Speed-->
+									<ColumnDefinition Width="auto"/><!--km/h-->
+									<ColumnDefinition Width="2*"/><!--Padding-->
+								</Grid.ColumnDefinitions>
+								<local:BlinkTB Grid.Column="1"
+															 IsBlinking="True"
+															 Text="制限"
+															 UsualBackground="Yellow"
+															 UsualTextColor="Black"
+															 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
+															 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"/>
+								<local:BlinkTB Grid.Column="3"
+															 IsBlinking="True"
+															 Text="999"
+															 UsualBackground="Yellow"
+															 UsualTextColor="Black"
+															 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
+															 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"/>
+								<local:BlinkTB Grid.Column="4"
+															 IsBlinking="True"
+															 Text="km/h"
+															 UsualBackground="Yellow"
+															 UsualTextColor="Black"
+															 FlippedBackground="{Binding RelativeSource={RelativeSource Self}, Path=UsualTextColor}"
+															 FlippedTextColor="{Binding RelativeSource={RelativeSource Self}, Path=UsualBackground}"/>
+
+							</Grid>
+						</Grid> 
+						<!--#endregion-->
+
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>
