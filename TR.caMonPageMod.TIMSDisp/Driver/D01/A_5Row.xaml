@@ -192,7 +192,25 @@
 
 			</Grid>
 		</Grid>
-		
+
+		<cc:JokoNotice Grid.Row="2"
+									 
+									 IsJokoEnabled="True"
+									 Joko1StartDistance="12.34"
+									 Joko1EndDistance="92.134"
+									 Joko1LimitSpeed="10"
+									 
+									 IsJoko2Enabled="True"
+									 Joko2StartDistance="123.456"
+									 Joko2EndDistance="-127.0"
+									 Joko2LimitSpeed="987"
+									 
+									 Margin="24,4,0,0"
+									 Width="350"
+									 Height="56"
+									 HorizontalAlignment="Left"
+									 VerticalAlignment="Top"/>
+
 		<Grid Grid.Row="3">
 
 			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
