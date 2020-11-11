@@ -40,6 +40,7 @@
 	<uf:DoubleToString x:Key="DoubleToString3p3" Format="000.000"/>
 
 	<uf:CollapsedWhenIntN x:Key="CollapsedWhenInt0" CollapsedWhen="0"/>
+	<uf:CollapsedWhenNULL x:Key="CollapsedWhenNULL"/>
 
 	<uf:DoublePlusN x:Key="DoublePlus2" ValueToPlus="2"/>
 	<uf:DoubleMinusN x:Key="DoubleMinus1" ValueToMinus="1"/>
