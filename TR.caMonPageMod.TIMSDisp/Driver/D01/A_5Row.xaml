@@ -4,6 +4,7 @@
 			xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			xmlns:cc="clr-namespace:TR.caMonPageMod.TIMSDisp._CustomControl"
+			xmlns:local="clr-namespace:TR.caMonPageMod.TIMSDisp.Driver.D01"
 			xmlns:System="clr-namespace:System;assembly=mscorlib"
 			mc:Ignorable="d" 
 			Title="A_5Row">
@@ -112,6 +113,7 @@
 		</Grid>
 
 		<Grid Grid.Row="1" Background="Transparent">
+			<!--#region Header-->
 			<TextBlock Text="時分"
 								 Margin="18, 4, 0,0"
 								 HorizontalAlignment="Left"
@@ -172,24 +174,214 @@
 								 Foreground="{StaticResource ConstantStrBrush}"
 								 FontFamily="{StaticResource TIMSFontFamily}"
 								 FontSize="{StaticResource TIMSFontSizeX1}"/>
-
+<!--#endregion Header-->
+			
 			<Grid Margin="0,10,0,0">
-				<cc:D01AATimetable1Row Margin="0,0,0,0"
-															 StaName="東京"
-															 IsRuntimeVisible="False"
-															 IsThisStaOpStop="True" TextColor="Red"
-															 RunInLimit="3" RunOutLimit="900"/>
-				<cc:D01AATimetable1Row Margin="0,40,0,0" StaName="名古屋" IsThisStaOpStop="True"
-															 ArrTimeHH="12" RuntimeMM="12" RuntimeSS="34"/>
-				<cc:D01AATimetable1Row Margin="0,80,0,0" StaName="津" IsThisStaOpStop="True" TextColor="Yellow"
-															 TrackNum="試験" IsRunInLimitEnabled="False"/>
-				<cc:D01AATimetable1Row Margin="0,120,0,0" StaName="関西空港" IsThisStaOpStop="True" TextColor="Lime"
-															 ArrTimeSS="12" DepTimeMM="99"/>
-				<cc:D01AATimetable1Row Margin="0,160,0,0" StaName="鹿児島中央" IsThisStaOpStop="True"
-															 IsRunOutLimitEnabled="False"
-															 TextColor="Aqua"
-															 DepTimeSep="="/>
+				<Border Margin="0,0,0,0"
+								Visibility="{Binding Row0, Converter={StaticResource CollapsedWhenNULL}}">
+					<cc:D01AATimetable1Row DataContext="{Binding Row0}"
+																 
+																 TextColor="{Binding TextColor}"
+																 
+																 IsRuntimeVisible="{Binding IsRuntimeVisible}"
+																 RuntimeMM="{Binding RuntimeMM}"
+																 RuntimeSS="{Binding RuntimeSS}"
+															 
+																 StaName="{Binding StationName}"
+																 IsThisStaOpStop="{Binding IsOpStop}"
+															 
+																 IsArrTimeVisible="{Binding ArrTime.IsVisible}"
+																 IsArrTimeHHVisible="{Binding ArrTime.IsHHVisible}"
+																 ArrTimeHH="{Binding ArrTime.HH}"
+																 IsArrTimeSepVisible="{Binding ArrTime.IsSeparatorVisible}"
+																 ArrTimeSep="{Binding ArrTime.Separator}"
+																 IsArrTimeMMVisible="{Binding ArrTime.IsMMVisible}"
+																 ArrTimeMM="{Binding ArrTime.MM}"
+																 IsArrTimeSSVisible="{Binding ArrTime.IsSSVisible}"
+																 ArrTimeSS="{Binding ArrTime.SS}"
+																 
+																 IsDepTimeVisible="{Binding DepTime.IsVisible}"
+																 IsDepTimeHHVisible="{Binding DepTime.IsHHVisible}"
+																 DepTimeHH="{Binding DepTime.HH}"
+																 IsDepTimeSepVisible="{Binding DepTime.IsSeparatorVisible}"
+																 DepTimeSep="{Binding DepTime.Separator}"
+																 IsDepTimeMMVisible="{Binding DepTime.IsMMVisible}"
+																 DepTimeMM="{Binding DepTime.MM}"
+																 IsDepTimeSSVisible="{Binding DepTime.IsSSVisible}"
+																 DepTimeSS="{Binding DepTime.SS}"
+																 
+																 TrackNum="{Binding TrackNumber}"
+																 
+																 IsRunInLimitEnabled="{Binding IsRunInLimitVisible}"
+																 RunInLimit="{Binding RunInLimit}"
+																 IsRunOutLimitEnabled="{Binding IsRunOutLimitVisible}"
+																 RunOutLimit="{Binding RunOutLimit}"/>
 
+				</Border>
+				<Border Margin="0,40,0,0"
+								Visibility="{Binding Row1, Converter={StaticResource CollapsedWhenNULL}}">
+					<cc:D01AATimetable1Row DataContext="{Binding Row1}"
+																 
+																 TextColor="{Binding TextColor}"
+																 
+																 IsRuntimeVisible="{Binding IsRuntimeVisible}"
+																 RuntimeMM="{Binding RuntimeMM}"
+																 RuntimeSS="{Binding RuntimeSS}"
+															 
+																 StaName="{Binding StationName}"
+																 IsThisStaOpStop="{Binding IsOpStop}"
+															 
+																 IsArrTimeVisible="{Binding ArrTime.IsVisible}"
+																 IsArrTimeHHVisible="{Binding ArrTime.IsHHVisible}"
+																 ArrTimeHH="{Binding ArrTime.HH}"
+																 IsArrTimeSepVisible="{Binding ArrTime.IsSeparatorVisible}"
+																 ArrTimeSep="{Binding ArrTime.Separator}"
+																 IsArrTimeMMVisible="{Binding ArrTime.IsMMVisible}"
+																 ArrTimeMM="{Binding ArrTime.MM}"
+																 IsArrTimeSSVisible="{Binding ArrTime.IsSSVisible}"
+																 ArrTimeSS="{Binding ArrTime.SS}"
+																 
+																 IsDepTimeVisible="{Binding DepTime.IsVisible}"
+																 IsDepTimeHHVisible="{Binding DepTime.IsHHVisible}"
+																 DepTimeHH="{Binding DepTime.HH}"
+																 IsDepTimeSepVisible="{Binding DepTime.IsSeparatorVisible}"
+																 DepTimeSep="{Binding DepTime.Separator}"
+																 IsDepTimeMMVisible="{Binding DepTime.IsMMVisible}"
+																 DepTimeMM="{Binding DepTime.MM}"
+																 IsDepTimeSSVisible="{Binding DepTime.IsSSVisible}"
+																 DepTimeSS="{Binding DepTime.SS}"
+																 
+																 TrackNum="{Binding TrackNumber}"
+																 
+																 IsRunInLimitEnabled="{Binding IsRunInLimitVisible}"
+																 RunInLimit="{Binding RunInLimit}"
+																 IsRunOutLimitEnabled="{Binding IsRunOutLimitVisible}"
+																 RunOutLimit="{Binding RunOutLimit}"/>
+
+				</Border>
+				<Border Margin="0,80,0,0"
+								Visibility="{Binding Row1, Converter={StaticResource CollapsedWhenNULL}}">
+					<cc:D01AATimetable1Row DataContext="{Binding Row1}"
+																 
+																 TextColor="{Binding TextColor}"
+																 
+																 IsRuntimeVisible="{Binding IsRuntimeVisible}"
+																 RuntimeMM="{Binding RuntimeMM}"
+																 RuntimeSS="{Binding RuntimeSS}"
+															 
+																 StaName="{Binding StationName}"
+																 IsThisStaOpStop="{Binding IsOpStop}"
+															 
+																 IsArrTimeVisible="{Binding ArrTime.IsVisible}"
+																 IsArrTimeHHVisible="{Binding ArrTime.IsHHVisible}"
+																 ArrTimeHH="{Binding ArrTime.HH}"
+																 IsArrTimeSepVisible="{Binding ArrTime.IsSeparatorVisible}"
+																 ArrTimeSep="{Binding ArrTime.Separator}"
+																 IsArrTimeMMVisible="{Binding ArrTime.IsMMVisible}"
+																 ArrTimeMM="{Binding ArrTime.MM}"
+																 IsArrTimeSSVisible="{Binding ArrTime.IsSSVisible}"
+																 ArrTimeSS="{Binding ArrTime.SS}"
+																 
+																 IsDepTimeVisible="{Binding DepTime.IsVisible}"
+																 IsDepTimeHHVisible="{Binding DepTime.IsHHVisible}"
+																 DepTimeHH="{Binding DepTime.HH}"
+																 IsDepTimeSepVisible="{Binding DepTime.IsSeparatorVisible}"
+																 DepTimeSep="{Binding DepTime.Separator}"
+																 IsDepTimeMMVisible="{Binding DepTime.IsMMVisible}"
+																 DepTimeMM="{Binding DepTime.MM}"
+																 IsDepTimeSSVisible="{Binding DepTime.IsSSVisible}"
+																 DepTimeSS="{Binding DepTime.SS}"
+																 
+																 TrackNum="{Binding TrackNumber}"
+																 
+																 IsRunInLimitEnabled="{Binding IsRunInLimitVisible}"
+																 RunInLimit="{Binding RunInLimit}"
+																 IsRunOutLimitEnabled="{Binding IsRunOutLimitVisible}"
+																 RunOutLimit="{Binding RunOutLimit}"/>
+
+				</Border>
+				<Border Margin="0,120,0,0"
+								Visibility="{Binding Row3, Converter={StaticResource CollapsedWhenNULL}}">
+					<cc:D01AATimetable1Row DataContext="{Binding Row3}"
+																 
+																 TextColor="{Binding TextColor}"
+																 
+																 IsRuntimeVisible="{Binding IsRuntimeVisible}"
+																 RuntimeMM="{Binding RuntimeMM}"
+																 RuntimeSS="{Binding RuntimeSS}"
+															 
+																 StaName="{Binding StationName}"
+																 IsThisStaOpStop="{Binding IsOpStop}"
+															 
+																 IsArrTimeVisible="{Binding ArrTime.IsVisible}"
+																 IsArrTimeHHVisible="{Binding ArrTime.IsHHVisible}"
+																 ArrTimeHH="{Binding ArrTime.HH}"
+																 IsArrTimeSepVisible="{Binding ArrTime.IsSeparatorVisible}"
+																 ArrTimeSep="{Binding ArrTime.Separator}"
+																 IsArrTimeMMVisible="{Binding ArrTime.IsMMVisible}"
+																 ArrTimeMM="{Binding ArrTime.MM}"
+																 IsArrTimeSSVisible="{Binding ArrTime.IsSSVisible}"
+																 ArrTimeSS="{Binding ArrTime.SS}"
+																 
+																 IsDepTimeVisible="{Binding DepTime.IsVisible}"
+																 IsDepTimeHHVisible="{Binding DepTime.IsHHVisible}"
+																 DepTimeHH="{Binding DepTime.HH}"
+																 IsDepTimeSepVisible="{Binding DepTime.IsSeparatorVisible}"
+																 DepTimeSep="{Binding DepTime.Separator}"
+																 IsDepTimeMMVisible="{Binding DepTime.IsMMVisible}"
+																 DepTimeMM="{Binding DepTime.MM}"
+																 IsDepTimeSSVisible="{Binding DepTime.IsSSVisible}"
+																 DepTimeSS="{Binding DepTime.SS}"
+																 
+																 TrackNum="{Binding TrackNumber}"
+																 
+																 IsRunInLimitEnabled="{Binding IsRunInLimitVisible}"
+																 RunInLimit="{Binding RunInLimit}"
+																 IsRunOutLimitEnabled="{Binding IsRunOutLimitVisible}"
+																 RunOutLimit="{Binding RunOutLimit}"/>
+
+				</Border>
+				<Border Margin="0,160,0,0"
+								Visibility="{Binding Row4, Converter={StaticResource CollapsedWhenNULL}}">
+					<cc:D01AATimetable1Row DataContext="{Binding Row4}"
+																 
+																 TextColor="{Binding TextColor}"
+																 
+																 IsRuntimeVisible="{Binding IsRuntimeVisible}"
+																 RuntimeMM="{Binding RuntimeMM}"
+																 RuntimeSS="{Binding RuntimeSS}"
+															 
+																 StaName="{Binding StationName}"
+																 IsThisStaOpStop="{Binding IsOpStop}"
+															 
+																 IsArrTimeVisible="{Binding ArrTime.IsVisible}"
+																 IsArrTimeHHVisible="{Binding ArrTime.IsHHVisible}"
+																 ArrTimeHH="{Binding ArrTime.HH}"
+																 IsArrTimeSepVisible="{Binding ArrTime.IsSeparatorVisible}"
+																 ArrTimeSep="{Binding ArrTime.Separator}"
+																 IsArrTimeMMVisible="{Binding ArrTime.IsMMVisible}"
+																 ArrTimeMM="{Binding ArrTime.MM}"
+																 IsArrTimeSSVisible="{Binding ArrTime.IsSSVisible}"
+																 ArrTimeSS="{Binding ArrTime.SS}"
+																 
+																 IsDepTimeVisible="{Binding DepTime.IsVisible}"
+																 IsDepTimeHHVisible="{Binding DepTime.IsHHVisible}"
+																 DepTimeHH="{Binding DepTime.HH}"
+																 IsDepTimeSepVisible="{Binding DepTime.IsSeparatorVisible}"
+																 DepTimeSep="{Binding DepTime.Separator}"
+																 IsDepTimeMMVisible="{Binding DepTime.IsMMVisible}"
+																 DepTimeMM="{Binding DepTime.MM}"
+																 IsDepTimeSSVisible="{Binding DepTime.IsSSVisible}"
+																 DepTimeSS="{Binding DepTime.SS}"
+																 
+																 TrackNum="{Binding TrackNumber}"
+																 
+																 IsRunInLimitEnabled="{Binding IsRunInLimitVisible}"
+																 RunInLimit="{Binding RunInLimit}"
+																 IsRunOutLimitEnabled="{Binding IsRunOutLimitVisible}"
+																 RunOutLimit="{Binding RunOutLimit}"/>
+
+				</Border>
 			</Grid>
 		</Grid>
 
@@ -222,9 +414,13 @@
 								 FontFamily="{StaticResource TIMSFontFamily}"
 								 FontSize="{StaticResource TIMSFontSizeX1}"/>
 
-			<cc:BlinkTB Text="那覇空港"
+			<!--可変領域-->
+			<Grid Margin="0"
+						Background="{x:Null}"
+						Visibility="{Binding NextStop, Converter={StaticResource CollapsedWhenNULL}}">
+				<cc:BlinkTB Text="{Binding NextStop.StationName}"
 									
-									IsBlinking="True"
+									IsBlinking="{Binding IsNextStopComing}"
 									
 									UsualBackground="{x:Null}"
 									UsualTextColor="White"
@@ -236,10 +432,11 @@
 									VerticalAlignment="Top"
 									RenderTransform="{StaticResource ScaleX2}"/>
 
-			<Grid Margin="280,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding IsArrTimeVisible, Converter={StaticResource BoolToVisibility}}">
-				<TextBlock Text="{Binding ArrTimeHH, Converter={StaticResource IntToWideStringP2}}"
-									 Foreground="{Binding TextColor}"
-									 Visibility="{Binding IsArrTimeHHVisible, Converter={StaticResource BoolToVisibility}}"
+				<Grid Margin="280,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+						Visibility="{Binding NextStop.ArrTime.IsVisible, Converter={StaticResource BoolToVisibility}}">
+					<TextBlock Text="{Binding NextStop.ArrTime.HH, Converter={StaticResource IntToWideStringP2}}"
+									 Foreground="{Binding NextStop.TextColor}"
+									 Visibility="{Binding NextStop.ArrTime.IsHHVisible, Converter={StaticResource BoolToVisibility}}"
 									 Margin="0,0,0,0"
 									 Width="36"
 									 TextAlignment="Center"
@@ -248,24 +445,24 @@
 									 FontSize="{StaticResource TIMSFontSizeX1}"
 									 FontFamily="{StaticResource TIMSFontFamily}"
 									 RenderTransform="{StaticResource ScaleX2}"/>
-				<!-- 280+72=352 |-7 w8 7-| 360-->
-				<Border Background="{x:Null}" BorderBrush="{x:Null}"
-								Visibility="{Binding IsArrTimeSepVisible, Converter={StaticResource BoolToVisibility}}"
+					<!-- 280+72=352 |-7 w8 7-| 360-->
+					<Border Background="{x:Null}" BorderBrush="{x:Null}"
+								Visibility="{Binding NextStop.ArrTime.IsSeparatorVisible, Converter={StaticResource BoolToVisibility}}"
 								Margin="65,0,0,0"
 								Height="18"
 								Width="22"
 								VerticalAlignment="Top"
 								HorizontalAlignment="Left">
-					<TextBlock Text="{Binding ArrTimeSep}"
-										 Foreground="{Binding TextColor}"
+						<TextBlock Text="{Binding NextStop.ArrTime.Separator}"
+										 Foreground="{Binding NextStop.TextColor}"
 										 HorizontalAlignment="Center"
 										 VerticalAlignment="Top"
 										 FontSize="{StaticResource TIMSFontSizeX1}"
 										 FontFamily="{StaticResource TIMSFontFamily}"/>
-				</Border>
-				<TextBlock Text="{Binding ArrTimeMM, Converter={StaticResource IntToWideStringD2}}"
-									 Foreground="{Binding TextColor}"
-									 Visibility="{Binding IsArrTimeMMVisible, Converter={StaticResource BoolToVisibility}}"
+					</Border>
+					<TextBlock Text="{Binding NextStop.ArrTime.MM, Converter={StaticResource IntToWideStringD2}}"
+									 Foreground="{Binding NextStop.TextColor}"
+									 Visibility="{Binding NextStop.ArrTime.IsMMVisible, Converter={StaticResource BoolToVisibility}}"
 									 Margin="80,0,0,0"
 									 Width="36"
 									 TextAlignment="Center"
@@ -274,28 +471,30 @@
 									 FontSize="{StaticResource TIMSFontSizeX1}"
 									 FontFamily="{StaticResource TIMSFontFamily}"
 									 RenderTransform="{StaticResource ScaleX2}"/>
-				<Border BorderBrush="{x:Null}" Background="{x:Null}"
+					<Border BorderBrush="{x:Null}" Background="{x:Null}"
 								Margin="152,0,0,0"
 								Width="10"
-								Visibility="{Binding IsArrTimeSSVisible, Converter={StaticResource BoolToVisibility}}"
+								Visibility="{Binding NextStop.ArrTime.IsSSVisible, Converter={StaticResource BoolToVisibility}}"
 								HorizontalAlignment="Left"
 								VerticalAlignment="Top">
-					<TextBlock Text="{Binding ArrTimeSS, Converter={StaticResource IntToString}}"
-										 Foreground="{Binding TextColor}"
-										 Visibility="{Binding ArrTimeSS, Converter={StaticResource CollapsedWhenInt0}}"
+						<TextBlock Text="{Binding NextStop.ArrTime.SS, Converter={StaticResource IntToString}}"
+										 Foreground="{Binding NextStop.TextColor}"
+										 Visibility="{Binding NextStop.ArrTime.IsSSVisible, Converter={StaticResource BoolToVisibility}}"
 										 TextAlignment="Right"
 										 FontSize="10"
 										 FontFamily="{StaticResource TIMSFontFamily}"/>
-				</Border>
-			</Grid>
+					</Border>
+				</Grid>
 
-			<TextBlock Text="３番線"
+				<TextBlock Text="{Binding NextStop.TrackNumber}"
 								 Margin="460,0,0,0"
 								 HorizontalAlignment="Left"
 								 VerticalAlignment="Top"
-								 Foreground="{StaticResource ConstantStrBrush}"
+									 Visibility="{Binding NextStop.IsTrackNumberVisible, Converter={StaticResource BoolToVisibility}}"
+								 Foreground="{Binding NextStop.TextColor}"
 								 FontFamily="{StaticResource TIMSFontFamily}"
 								 FontSize="{StaticResource TIMSFontSizeX1}"/>
+			</Grid>
 		</Grid>
 
 		<Grid Grid.Row="3">
