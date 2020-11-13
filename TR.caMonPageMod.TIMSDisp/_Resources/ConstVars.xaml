@@ -27,6 +27,8 @@
 	<ScaleTransform x:Key="ScaleX2" ScaleX="2" ScaleY="1"/>
 
 
+	<uf:IsNULL x:Key="IsNULL"/>
+	<uf:IsNotNULL x:Key="IsNotNULL"/>
 	<uf:BoolToVisibility x:Key="BoolToVisibility"/>
 	<uf:IsDoorClosedToString x:Key="IsDoorClosedToString"/>
 	<uf:IntToString x:Key="IntToString" Format="D" PaddingL="0"/>

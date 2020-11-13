@@ -1,7 +1,5 @@
 ﻿using System;
-using System.CodeDom;
 using System.Globalization;
-using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 
@@ -9,6 +7,23 @@ namespace TR.caMonPageMod.TIMSDisp._UsefulFuncs
 {
 	//ref : https://blogs.itmedia.co.jp/mohno/2013/12/xaml15-c9fe.html
 	#region Simple Convert
+	public class IsNULL : IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+			=> value is null;
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+			=>throw new NotImplementedException();
+	}
+	public class IsNotNULL : IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+			=> value is not null;
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+			=>throw new NotImplementedException();
+	}
+
 	public class BoolToVisibility : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
