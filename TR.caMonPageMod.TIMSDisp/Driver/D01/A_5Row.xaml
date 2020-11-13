@@ -32,6 +32,7 @@
 		
 		<Grid Grid.Row="0">
 			<cc:PageIDName PageID="D01AA" PageName="運転情報"/>
+			
 			<TextBlock Text="列車番号"
 								 Margin="90,24,0,0"
 								 HorizontalAlignment="Left"
@@ -40,17 +41,19 @@
 								 FontFamily="{StaticResource TIMSFontFamily}"
 								 Foreground="{StaticResource ConstantStrBrush}"/>
 			<cc:TrainNumberDisplay Margin="180,24,0,0"
+														 Visibility="{Binding TrainNumber, Converter={StaticResource CollapsedWhenNULL}}"
 														 HorizontalAlignment="Left"
 														 VerticalAlignment="Top"
-														 TNPrefix="推回"
-														 TrainNumber="8010"
-														 TNSuffix="MH">
+														 TNPrefix="{Binding TrainNumber.Prefix}"
+														 TrainNumber="{Binding TrainNumber.Number}"
+														 TNSuffix="{Binding TrainNumber.Suffix}">
 				<cc:TrainNumberDisplay.RenderTransform>
 					<ScaleTransform ScaleX="2"/>
 				</cc:TrainNumberDisplay.RenderTransform>
 			</cc:TrainNumberDisplay>
 
 			<cc:BlinkTB Text="設定完了"
+									Visibility="{Binding IsPTrainNumSetDone, Converter={StaticResource BoolToVisibility}}"
 									UsualTextColor="Black"
 									UsualBackground="Aqua"
 									Margin="0,4,12,0"
@@ -62,6 +65,7 @@
 									Height="20"
 									Width="90"/>
 			<cc:BlinkTB Text="通過設定"
+									Visibility="{Binding IsPassSettingSetDone, Converter={StaticResource BoolToVisibility}}"
 									UsualTextColor="Black"
 									UsualBackground="Yellow"
 									Margin="0,24,12,0"
@@ -84,9 +88,10 @@
 			<cc:TrainNumberDisplay Margin="0,4,180,0"
 														 HorizontalAlignment="Right"
 														 VerticalAlignment="Top"
-														 TNPrefix="通回"
-														 TrainNumber="8010"
-														 TNSuffix="MH"/>
+														 Visibility="{Binding PTrainNumber, Converter={StaticResource CollapsedWhenNULL}}"
+														 TNPrefix="{Binding PTrainNumber.Prefix}"
+														 TrainNumber="{Binding PTrainNumber.Number}"
+														 TNSuffix="{Binding PTrainNumber.Suffix}"/>
 
 			<TextBlock Text="無線"
 								 Margin="0,24,270,0"
@@ -95,7 +100,7 @@
 								 FontSize="{StaticResource TIMSFontSizeX1}"
 								 FontFamily="{StaticResource TIMSFontFamily}"
 								 Foreground="{StaticResource ConstantStrBrush}"/>
-			<TextBlock Text="A9"
+			<TextBlock Text="{Binding RadioCH}"
 								 Margin="0,24,225,0"
 								 HorizontalAlignment="Right"
 								 TextAlignment="Right"
@@ -387,15 +392,15 @@
 
 		<cc:JokoNotice Grid.Row="2"
 									 
-									 IsJokoEnabled="True"
-									 Joko1StartDistance="12.34"
-									 Joko1EndDistance="92.134"
-									 Joko1LimitSpeed="10"
+									 IsJokoEnabled="{Binding Joko1, Converter={StaticResource IsNotNULL}}"
+									 Joko1StartDistance="{Binding Joko1.StartDistance}"
+									 Joko1EndDistance="{Binding Joko1.EndDistance}"
+									 Joko1LimitSpeed="{Binding Joko1.LimitSpeed}"
 									 
-									 IsJoko2Enabled="True"
-									 Joko2StartDistance="123.456"
-									 Joko2EndDistance="-127.0"
-									 Joko2LimitSpeed="987"
+									 IsJoko2Enabled="{Binding Joko2, Converter={StaticResource IsNotNULL}}"
+									 Joko2StartDistance="{Binding Joko2.StartDistance}"
+									 Joko2EndDistance="{Binding Joko2.EndDistance}"
+									 Joko2LimitSpeed="{Binding Joko2.LimitSpeed}"
 									 
 									 Margin="24,4,0,0"
 									 Width="350"
