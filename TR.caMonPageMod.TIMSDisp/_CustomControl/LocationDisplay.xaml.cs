@@ -21,10 +21,12 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		private static void LocationChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			var t = d as LocationDisplay;
-			int n1 = (int)e.NewValue;
-			int o1 = (int)e.OldValue;
-			int n0 = (int)(((double)e.NewValue - n1) * 10);
-			int o0 = (int)(((double)e.OldValue - o1) * 10);
+			double nv = (double)e.NewValue;
+			double ov = (double)e.OldValue;
+			int n1 = (int)nv;
+			int o1 = (int)ov;
+			int n0 = (int)((nv - n1) * 10);
+			int o0 = (int)((ov - o1) * 10);
 
 			if (n1 != o1)
 				t.IntegerPart = n1.ToString();
