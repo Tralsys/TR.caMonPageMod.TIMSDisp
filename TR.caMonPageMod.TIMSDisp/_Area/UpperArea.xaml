@@ -36,8 +36,11 @@
 			<ColumnDefinition Width="58"/>
 		</Grid.ColumnDefinitions>
 		<!--#region ツウコクジョウホウ 表示部-->
-		<Grid Grid.Column="0">
+		<Grid Grid.Column="0"
+					DataContext="{Binding RadioData}"
+					Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource CollapsedWhenNULL}}">
 			<Image x:Name="TsukokuStr"
+						 Visibility="{Binding IsTsukokuEnabled, Converter={StaticResource BoolToVisibility}}"
 						 Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/TJMChars/tsukoku.png"
 						 Margin="8,0,0,0"
 						 Height="8"
@@ -45,13 +48,15 @@
 						 HorizontalAlignment="Left"
 						 VerticalAlignment="Top"/>
 			<Image x:Name="JohoStr"
+						 Visibility="{Binding IsJohoEnabled, Converter={StaticResource BoolToVisibility}}"
 						 Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/TJMChars/joho.png"
 						 Margin="56,0,0,0"
 						 Height="8"
 						 Width="48"
 						 HorizontalAlignment="Left"
 						 VerticalAlignment="Top"/>
-			<cc:MyImage x:Name="MonitoringStr"
+			<Image x:Name="MonitoringStr"
+						 Visibility="{Binding IsMonitoringEnabled, Converter={StaticResource BoolToVisibility}}"
 						 Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/Images/TJMChars/monitoring.png"
 						 Margin="120,0,0,0"
 						 Height="8"
@@ -67,50 +72,54 @@
 				</Grid.ColumnDefinitions>
 
 				<cc:TIMSButton ButtonText="通告"
-											 x:Name="TsukokuBtn"
 											 Grid.Column="0"
+											 DataContext="{Binding TsukokuBtn}"
+											 Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource CollapsedWhenNULL}}"
+
+											 UsualBackground="{Binding UsualBackground}"
+											 UsualTextColor="{Binding UsualTextColor}"
 											 
-											 UsualBackground="Aqua"
-											 UsualTextColor="Black"
-											 
-											 FlippedBackground="Black"
-											 FlippedTextColor="Aqua"
+											 FlippedBackground="{Binding UsualTextColor, RelativeSource={RelativeSource Self}}"
+											 FlippedTextColor="{Binding UsualBackground, RelativeSource={RelativeSource Self}}"
 											 HorizontalAlignment="Center"
 											 Height="{StaticResource SqBtn_WH}"
 											 Width="{StaticResource SqBtn_WH}"/>
 				<cc:TIMSButton ButtonText="規制&#xa;一覧"
-											 x:Name="KiseiIchiranBtn"
 											 Grid.Column="1"
+											 DataContext="{Binding KiseiBtn}"
+											 Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource CollapsedWhenNULL}}"
+
+											 UsualBackground="{Binding UsualBackground}"
+											 UsualTextColor="{Binding UsualTextColor}"
 											 
-											 UsualBackground="Aqua"
-											 UsualTextColor="Black"
-											 
-											 FlippedBackground="Black"
-											 FlippedTextColor="Aqua"
+											 FlippedBackground="{Binding UsualTextColor, RelativeSource={RelativeSource Self}}"
+											 FlippedTextColor="{Binding UsualBackground, RelativeSource={RelativeSource Self}}"
 											 HorizontalAlignment="Center"
 											 Height="{StaticResource SqBtn_WH}"
 											 Width="{StaticResource SqBtn_WH}"/>
 				<cc:TIMSButton ButtonText="指令&#xa;情報"
-											 x:Name="ShireiJohoBtn"
 											 Grid.Column="2"
+											 DataContext="{Binding ShireiBtn}"
+											 Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource CollapsedWhenNULL}}"
+
+											 UsualBackground="{Binding UsualBackground}"
+											 UsualTextColor="{Binding UsualTextColor}"
 											 
-											 UsualBackground="Aqua"
-											 UsualTextColor="Black"
-											 
-											 FlippedBackground="Black"
-											 FlippedTextColor="Aqua"
+											 FlippedBackground="{Binding UsualTextColor, RelativeSource={RelativeSource Self}}"
+											 FlippedTextColor="{Binding UsualBackground, RelativeSource={RelativeSource Self}}"
 											 HorizontalAlignment="Center"
 											 Height="{StaticResource SqBtn_WH}"
 											 Width="{StaticResource SqBtn_WH}"/>
 				<cc:TIMSButton ButtonText="運行&#xa;情報"
-											 x:Name="UnkoJohoBtn"
 											 Grid.Column="3"
+											 DataContext="{Binding UnkoBtn}"
+											 Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource CollapsedWhenNULL}}"
+
+											 UsualBackground="{Binding UsualBackground}"
+											 UsualTextColor="{Binding UsualTextColor}"
 											 
-											 UsualBackground="Aqua"
-											 UsualTextColor="Black"
-											 
-											 FlippedBackground="Black"
-											 FlippedTextColor="Aqua"
+											 FlippedBackground="{Binding UsualTextColor, RelativeSource={RelativeSource Self}}"
+											 FlippedTextColor="{Binding UsualBackground, RelativeSource={RelativeSource Self}}"
 											 HorizontalAlignment="Center"
 											 Height="{StaticResource SqBtn_WH}"
 											 Width="{StaticResource SqBtn_WH}"/>
@@ -119,14 +128,18 @@
 		<!--#endregion ツウコクジョウホウ 表示部-->
 		
 		<!--#region 時刻/速度/キロ程表示部-->
-		<Grid Grid.Column="2">
+		<Grid Grid.Column="2"
+					DataContext="{Binding TSLData}"
+					Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource CollapsedWhenNULL}}">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-			<cc:TimeDisplay x:Name="TimeDisplayCtrl"
-											Grid.Row="0"
+			<cc:TimeDisplay Grid.Row="0"
+											HH="{Binding HH, Converter={StaticResource IntToString}}"
+											MM="{Binding MM, Converter={StaticResource IntToStringD2}}"
+											SS="{Binding SS, Converter={StaticResource IntToStringD2}}"
 											Margin="1"
 											VerticalAlignment="Top"
 											HorizontalAlignment="Right"/>
@@ -136,7 +149,7 @@
 									HorizontalAlignment="Right"
 									Margin="1">
 				<TextBlock x:Name="SpeedTB"
-									 Text="１２３"
+									 Text="{Binding Speed, Converter={StaticResource IntToWideString}}"
 									 Foreground="White"
 									 FontFamily="{StaticResource TIMSFontFamily}"
 									 FontSize="{StaticResource TIMSFontSizeX1}"/>
@@ -146,7 +159,8 @@
 									 FontSize="{StaticResource TIMSFontSizeX1}"/>
 			</StackPanel>
 			<cc:LocationDisplay x:Name="LocationDisplayCtrl"
-													IsEnabled="False"
+													IsEnabled="{Binding IsLocationEnabled}"
+													Location="{Binding Location}"
 													Grid.Row="2"
 													Margin="1"
 													VerticalAlignment="Top"
@@ -155,20 +169,24 @@
 		<!--#endregion 時刻/速度/キロ程表示部-->
 		
 		<Grid Grid.Column="4">
-			<cc:TIMSButton x:Name="KoshoHasseiBtn"
-										 ButtonText="故障&#xa;発生"
+			<cc:TIMSButton ButtonText="故障&#xa;発生"
 										 Margin="{StaticResource KoshoHasseiBtn_Margin}"
 										 
+										 Visibility="{Binding IsKoshoHasseiVisible, Converter={StaticResource BoolToVisibility}}"
+										 IsBlinking="{Binding IsKoshoHasseiBlinking}"
+
 										 UsualBackground="Red"
 										 UsualTextColor="White"
-										 
+
 										 Height="{StaticResource SqBtn_WH}"
 										 Width="{StaticResource SqBtn_WH}"
 										 HorizontalAlignment="Left"/>
-			<cc:TIMSButton x:Name="KikiJohoBtn"
-										 ButtonText="機器&#xa;情報"
+			<cc:TIMSButton ButtonText="機器&#xa;情報"
 										 Margin="{StaticResource KikiJohoBtn_Margin}"
-										 
+
+										 Visibility="{Binding IsKikiJohoVisible, Converter={StaticResource BoolToVisibility}}"
+										 IsBlinking="{Binding IsKikiJohoBlinking}"
+
 										 UsualBackground="Aqua"
 										 UsualTextColor="Black"
 										 
@@ -176,15 +194,18 @@
 										 Width="{StaticResource SqBtn_WH}"
 										 HorizontalAlignment="Left"/>
 
-			<Grid Margin="{StaticResource MsgArea_Margin}">
+			<Grid Margin="{StaticResource MsgArea_Margin}"
+						DataContext="{Binding NoticeData}"
+						Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource CollapsedWhenNULL}}">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="{StaticResource MsgArea_RH}"/>
 					<RowDefinition Height="*"/>
 					<RowDefinition Height="{StaticResource MsgArea_RH}"/>
 				</Grid.RowDefinitions>
 				<Grid Grid.Row="0" Background="{StaticResource MsgArea_BG}">
-					<cc:BlinkTB x:Name="Kaiho_TB"
-											Text="開放"
+					<cc:BlinkTB Text="開放"
+											Visibility="{Binding IsKaihoBlinking, Converter={StaticResource BoolToVisibility}}"
+											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											Margin="0,0,0,0"
@@ -193,8 +214,9 @@
 											UsualTextColor="Black"
 											FlippedBackground="{x:Null}"
 											FlippedTextColor="Yellow"/>
-					<cc:BlinkTB x:Name="Chusha_TB"
-											Text="駐車"
+					<cc:BlinkTB Text="駐車"
+											Visibility="{Binding IsChushaBlinking, Converter={StaticResource BoolToVisibility}}"
+											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											Margin="42,0,0,0"
@@ -203,8 +225,9 @@
 											UsualTextColor="Black"
 											FlippedBackground="{x:Null}"
 											FlippedTextColor="Yellow"/>
-					<cc:BlinkTB x:Name="IdoKinshi_TB"
-											Text="移動禁止"
+					<cc:BlinkTB Text="移動禁止"
+											Visibility="{Binding IsIdoKinshiBlinking, Converter={StaticResource BoolToVisibility}}"
+											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											Margin="84,0,0,0"
@@ -216,8 +239,9 @@
 
 				</Grid>
 				<Grid Grid.Row="2" Background="{StaticResource MsgArea_BG}">
-					<cc:BlinkTB x:Name="AirSec_TB"
-											Text=" A･S"
+					<cc:BlinkTB Text=" A･S"
+											Visibility="{Binding IsASBlinking, Converter={StaticResource BoolToVisibility}}"
+											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											HorizontalAlignment="Right"
@@ -228,8 +252,9 @@
 											FlippedBackground="{x:Null}"
 											FlippedTextColor="Yellow"/>
 
-					<cc:BlinkTB x:Name="ACDCSec_TB"
-											Text="交直切換"
+					<cc:BlinkTB Text="交直切換"
+											Visibility="{Binding IsKoChokuBlinking, Converter={StaticResource BoolToVisibility}}"
+											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											HorizontalAlignment="Right"
@@ -240,8 +265,9 @@
 											FlippedBackground="{x:Null}"
 											FlippedTextColor="Yellow"/>
 
-					<cc:BlinkTB x:Name="ACACSec_TB"
-											Text="交　交"
+					<cc:BlinkTB Text="交　交"
+											Visibility="{Binding IsKoKoBlinking, Converter={StaticResource BoolToVisibility}}"
+											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											HorizontalAlignment="Right"
@@ -254,19 +280,21 @@
 				</Grid>
 			</Grid>
 
-			<cc:TIMSButton x:Name="PassengerEmergencyBtn"
-										 ButtonText="非常&#xa;通報"
+			<cc:TIMSButton ButtonText="非常&#xa;通報"
 										 Margin="0,4,2,0"
-										 
+
+										 Visibility="{Binding IsHijoTsuhoVisible, Converter={StaticResource BoolToVisibility}}"
+										 IsBlinking="{Binding IsHijoTsuhoBlinking}"
+
 										 UsualBackground="Yellow"
 										 UsualTextColor="Black"
-										 
+
 										 Height="{StaticResource SqBtn_WH}"
 										 Width="{StaticResource SqBtn_WH}"
 										 HorizontalAlignment="Right"/>
 		</Grid>
-		<cc:TIMSButton x:Name="ShokiSentakuBtn"
-									 ButtonText="初期&#xa;選択"
+		<cc:TIMSButton ButtonText="初期&#xa;選択"
+									 Visibility="{Binding IsShokiSentakuVisible, Converter={StaticResource BoolToVisibility}}"
 									 Grid.Column="5"
 									 Margin="0,4,0,0"
 									 Height="{StaticResource SqBtn_WH}"
