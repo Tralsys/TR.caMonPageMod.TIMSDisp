@@ -5,16 +5,18 @@ using System.Windows.Media;
 
 using Microsoft.VisualBasic;
 
+using TR.caMonPageMod.TIMSDisp._UsefulFuncs;
+
 namespace TR.caMonPageMod.TIMSDisp._CustomControl
 {
 	public class TimeDisplay : Control
 	{
 		public static readonly DependencyProperty IsHankakuProperty = DependencyProperty.Register("IsHankaku", typeof(bool), typeof(TimeDisplay), new PropertyMetadata(false));
 		
-		public static readonly DependencyProperty HHProperty = DependencyProperty.Register("HH", typeof(string), typeof(TimeDisplay), new PropertyMetadata("１２", null, WideNarrowConv));
-		public static readonly DependencyProperty MMProperty = DependencyProperty.Register("MM", typeof(string), typeof(TimeDisplay), new PropertyMetadata("３４", null, WideNarrowConv));
-		public static readonly DependencyProperty SSProperty = DependencyProperty.Register("SS", typeof(string), typeof(TimeDisplay), new PropertyMetadata("５６", null, WideNarrowConv));
-		public static readonly DependencyProperty SeparatorProperty = DependencyProperty.Register("Separator", typeof(string), typeof(TimeDisplay), new PropertyMetadata("：", null, WideNarrowConv));
+		public static readonly DependencyProperty HHProperty = DependencyProperty.Register("HH", typeof(string), typeof(TimeDisplay), new PropertyMetadata("１２", null, UsefulFuncs.WideNarrowConv));
+		public static readonly DependencyProperty MMProperty = DependencyProperty.Register("MM", typeof(string), typeof(TimeDisplay), new PropertyMetadata("３４", null, UsefulFuncs.WideNarrowConv));
+		public static readonly DependencyProperty SSProperty = DependencyProperty.Register("SS", typeof(string), typeof(TimeDisplay), new PropertyMetadata("５６", null, UsefulFuncs.WideNarrowConv));
+		public static readonly DependencyProperty SeparatorProperty = DependencyProperty.Register("Separator", typeof(string), typeof(TimeDisplay), new PropertyMetadata("：", null, UsefulFuncs.WideNarrowConv));
 
 		public static readonly DependencyProperty TimeProperty = DependencyProperty.Register("Time", typeof(TimeSpan), typeof(TimeDisplay), new PropertyMetadata(new TimeSpan(12, 34, 56), TimeChangedCallback));
 
@@ -34,9 +36,6 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 
 		public static readonly DependencyProperty VariableTextBrushProperty = DependencyProperty.Register("VariableTextBrush", typeof(Brush), typeof(TimeDisplay), new PropertyMetadata(Brushes.White));
 		public static readonly DependencyProperty ConstantTextBrushProperty = DependencyProperty.Register("ConstantTextBrush", typeof(Brush), typeof(TimeDisplay), new PropertyMetadata(Brushes.Lime));
-
-		private static object WideNarrowConv(DependencyObject d, object baseValue)
-			=> Strings.StrConv(baseValue as string, (d as TimeDisplay).IsHankaku ? VbStrConv.Narrow : VbStrConv.Wide, 0x411);
 
 
 		static TimeDisplay() => DefaultStyleKeyProperty.OverrideMetadata(typeof(TimeDisplay), new FrameworkPropertyMetadata(typeof(TimeDisplay)));
