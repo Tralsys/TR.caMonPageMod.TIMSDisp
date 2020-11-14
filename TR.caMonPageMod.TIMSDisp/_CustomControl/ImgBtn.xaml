@@ -39,6 +39,7 @@
 										Background="{Binding UsualBackground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ImgBtn}}}"/>
 
 						<Image x:Name="img"
+									 Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Converter={StaticResource BoolToVisibility}}"
 									 Height="{TemplateBinding ImgHeight}" Width="{TemplateBinding ImgWidth}"/>
 
 					</Grid>
