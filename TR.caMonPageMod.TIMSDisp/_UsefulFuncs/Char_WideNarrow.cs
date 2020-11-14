@@ -10,16 +10,18 @@ namespace TR.caMonPageMod.TIMSDisp._UsefulFuncs
 	{
 		public static object WideNarrowConv(DependencyObject d, object baseValue)
 		{
-			if (d is IChar_WideNarrow wn && baseValue is string s)
+
+			if (baseValue is string s)
 				try {
-					return Strings.StrConv(s, wn.IsHankaku ? VbStrConv.Narrow : VbStrConv.Wide, 0x411);
+					bool IsHankaku = (d as IChar_WideNarrow)?.IsHankaku ?? false;//通常は全角に変換
+					return Strings.StrConv(s, IsHankaku ? VbStrConv.Narrow : VbStrConv.Wide, 0x411);
 				}catch(Exception e)
 				{
 					Debug.WriteLine("Str:{0}\n{1}", s, e);
 					throw;
 				}
 			else
-				throw new ArgumentException("Entered DependencyObject is not IChar_WideNarrow, or baseValue is not string");
+				throw new ArgumentException("Entered baseValue is not string");
 		}
 
 	}
