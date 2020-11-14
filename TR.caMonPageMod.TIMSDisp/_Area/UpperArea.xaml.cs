@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 
 using TR.caMonPageMod.TIMSDisp._BindClasses;
 
@@ -37,8 +38,22 @@ namespace TR.caMonPageMod.TIMSDisp._Area
 			InitializeComponent();
 
 			DataContext = toB;
+
+			FrontPage.DT400Tick += FrontPage_DT400Tick;
 		}
 
+		private void FrontPage_DT400Tick(object sender, EventArgs e)
+		{
+			TimeSpan ts = TimeSpan.FromMilliseconds(caMon.SharedFuncs.SML.BIDSSMemData.StateData.T);
+			toB.TSLData.HH = ts.Hours;
+			toB.TSLData.MM = ts.Minutes;
+			toB.TSLData.SS = ts.Seconds;
 
+			toB.TSLData.Speed = (int)caMon.SharedFuncs.SML.BIDSSMemData.StateData.V;
+
+			toB.TSLData.IsLocationEnabled = caMon.SharedFuncs.SML.BIDSSMemData.IsEnabled;
+
+			toB.TSLData.Location = caMon.SharedFuncs.SML.BIDSSMemData.StateData.Z / 1000;//m -> km
+		}
 	}
 }
