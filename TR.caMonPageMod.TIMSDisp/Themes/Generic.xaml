@@ -10,6 +10,7 @@
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/BlinkTB.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/CarDisp.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/D01AATimetable1Row.xaml"/>
+		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/D10Ax_ListView1Row.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/ImgBtn.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/JokoNotice.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/LocationDisplay.xaml"/>
@@ -19,5 +20,4 @@
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/TIMSButton.xaml"/>
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_CustomControl/TrainNumberDisplay.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
-
 </ResourceDictionary>
