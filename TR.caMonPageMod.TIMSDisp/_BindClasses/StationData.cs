@@ -1,19 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 using System.Windows.Media;
 
+using TR.caMonPageMod.TIMSDisp._Interfaces;
 using TR.caMonPageMod.TIMSDisp._Resources;
 
 namespace TR.caMonPageMod.TIMSDisp._BindClasses
 {
-	public interface IStationName
+	public class TimeData : INotifyPropertyChanged, ITimeData
 	{
-		public string StationName { get; set; }
-	}
-	public class TimeData : INotifyPropertyChanged
-	{
+		public TimeData(ITimeData td = null)
+		{
+			if (td == null)
+				return;
+			IsVisible = td.IsVisible;
+			HH = td.HH;
+			MM = td.MM;
+			SS = td.SS;
+			IsHHVisible = td.IsHHVisible;
+			IsMMVisible = td.IsMMVisible;
+			IsSSVisible = td.IsSSVisible;
+			Separator = td.Separator;
+			IsSeparatorVisible = td.IsSeparatorVisible;
+		}
+
 		public event PropertyChangedEventHandler PropertyChanged;
 		private void OnPropertyChanged(string s) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(s));
 
@@ -142,16 +151,15 @@ namespace TR.caMonPageMod.TIMSDisp._BindClasses
 				OnPropertyChanged(nameof(IsSeparatorVisible));
 			}
 		}
-
-
-
-
 	}
 
-	public class StationData : INotifyPropertyChanged, IStationName
+	public class StationData : INotifyPropertyChanged, IStationData
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 		private void OnPropertyChanged(string s) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(s));
+		
+		public double Location { get; set; }
+
 
 		private Brush __TextColor = ConstVars.STATION_DEFAULT_TEXTCOLOR;
 		public Brush TextColor
@@ -244,24 +252,24 @@ namespace TR.caMonPageMod.TIMSDisp._BindClasses
 
 		#region ArrTime
 		private TimeData __ArrTime = new TimeData();
-		public TimeData ArrTime
+		public ITimeData ArrTime
 		{
 			get => __ArrTime;
 			set
 			{
-				__ArrTime = value;
+				__ArrTime = new TimeData(value);
 				OnPropertyChanged(nameof(ArrTime));
 			}
 		}
 		#endregion
 		#region DepTime
 		private TimeData __DepTime = new TimeData();
-		public TimeData DepTime
+		public ITimeData DepTime
 		{
 			get => __DepTime;
 			set
 			{
-				__DepTime = value;
+				__DepTime = new TimeData(value);
 				OnPropertyChanged(nameof(DepTime));
 			}
 		}
