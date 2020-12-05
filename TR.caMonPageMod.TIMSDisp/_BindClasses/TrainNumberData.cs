@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
 
+using TR.caMonPageMod.TIMSDisp._Interfaces;
+
 namespace TR.caMonPageMod.TIMSDisp._BindClasses
 {
-	public class TrainNumberData : INotifyPropertyChanged
+	public class TrainNumberData : INotifyPropertyChanged, ITrainNumberData
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 		private void OnPropertyChanged(string s) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(s));

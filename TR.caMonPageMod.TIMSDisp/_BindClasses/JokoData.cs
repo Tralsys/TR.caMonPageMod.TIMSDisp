@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
 
+using TR.caMonPageMod.TIMSDisp._Interfaces;
+
 namespace TR.caMonPageMod.TIMSDisp._BindClasses
 {
-	public class JokoData : INotifyPropertyChanged
+	public class JokoData : INotifyPropertyChanged, IJokoData
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 		private void OnPropertyChanged(string s) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(s));
@@ -48,7 +50,5 @@ namespace TR.caMonPageMod.TIMSDisp._BindClasses
 				OnPropertyChanged(nameof(LimitSpeed));
 			}
 		}
-
-
 	}
 }
