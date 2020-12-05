@@ -41,6 +41,7 @@
 										Background="{Binding UsualBackground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}}"/>
 
 						<TextBlock x:Name="TB" Margin="{TemplateBinding Padding}" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False"
+											 Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Converter={StaticResource BoolToVisibility}}"
 											 TextWrapping="Wrap"
 											 Foreground="{Binding UsualTextColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}}"
 											 Text="{Binding ButtonText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}}"/>

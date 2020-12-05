@@ -3,11 +3,114 @@
 			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			xmlns:cc="clr-namespace:TR.caMonPageMod.TIMSDisp._CustomControl" xmlns:System="clr-namespace:System;assembly=mscorlib"
 			mc:Ignorable="d" 
 			Title="MessageArea">
+	<Page.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/ConstVars.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+
+			<System:Double x:Key="TB_Height">20</System:Double>
+		</ResourceDictionary>
+	</Page.Resources>
+
 
 	<Grid Height="24" Width="800">
 		<Rectangle Width="800" Height="1" Margin="0" Fill="#FF00FF00" VerticalAlignment="Top"/>
 
+		<Grid Margin="0,4,0,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="54"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="54"/>
+			</Grid.ColumnDefinitions>
+<!--#region Left-->
+			<Grid Grid.Column="0"
+						Visibility="{Binding Left, Converter={StaticResource CollapsedWhenNULL}}">
+				<cc:BlinkTB HorizontalAlignment="Stretch"
+										Height="{StaticResource TB_Height}"
+
+										Visibility="{Binding Left.IsFullWidth, Converter={StaticResource BoolToVisibility}}"
+
+										UsualTextColor="{Binding Left.UsualTextColor}"
+										UsualBackground="{Binding Left.UsualBackground}"
+										IsBlinking="{Binding Left.IsBlinking}"
+
+										FlippedTextColor="{Binding UsualBackground, RelativeSource={RelativeSource Self}}"
+										FlippedBackground="{Binding UsualTextColor, RelativeSource={RelativeSource Self}}"/>
+
+				<cc:BlinkTB VerticalContentAlignment="Center"
+										Height="{StaticResource TB_Height}"
+
+										Visibility="{Binding Left.Message, Converter={StaticResource CollapsedWhenNULL}}"
+										Text="{Binding Left.Message}"
+										UsualTextColor="{Binding Left.UsualTextColor}"
+										UsualBackground="{Binding Left.UsualBackground}"
+										IsBlinking="{Binding Left.IsBlinking}"
+
+										FlippedTextColor="{Binding UsualBackground, RelativeSource={RelativeSource Self}}"
+										FlippedBackground="{Binding UsualTextColor, RelativeSource={RelativeSource Self}}"/>
+
+				<cc:BlinkTB VerticalContentAlignment="Center"
+										HorizontalAlignment="Right"
+										Height="{StaticResource TB_Height}"
+
+										Visibility="{Binding Left.RightEdgeMessage, Converter={StaticResource CollapsedWhenNULL}}"
+										Text="{Binding Left.RightEdgeMessage}"
+										UsualTextColor="{Binding Left.UsualTextColor}"
+										UsualBackground="{Binding Left.UsualBackground}"
+										IsBlinking="{Binding Left.IsBlinking}"
+
+										FlippedTextColor="{Binding UsualBackground, RelativeSource={RelativeSource Self}}"
+										FlippedBackground="{Binding UsualTextColor, RelativeSource={RelativeSource Self}}"/>
+			</Grid>
+<!--#endregion Left-->
+
+<!--#region Right-->
+			<Grid Grid.Column="2"
+						Visibility="{Binding Right, Converter={StaticResource CollapsedWhenNULL}}">
+				<cc:BlinkTB HorizontalAlignment="Stretch"
+										Height="{StaticResource TB_Height}"
+
+										Visibility="{Binding Right.IsFullWidth, Converter={StaticResource BoolToVisibility}}"
+
+										UsualTextColor="{Binding Right.UsualTextColor}"
+										UsualBackground="{Binding Right.UsualBackground}"
+										IsBlinking="{Binding Right.IsBlinking}"
+
+										FlippedTextColor="{Binding UsualBackground, RelativeSource={RelativeSource Self}}"
+										FlippedBackground="{Binding UsualTextColor, RelativeSource={RelativeSource Self}}"/>
+
+				<cc:BlinkTB VerticalContentAlignment="Center"
+										Height="{StaticResource TB_Height}"
+
+										Visibility="{Binding Right.Message, Converter={StaticResource CollapsedWhenNULL}}"
+										Text="{Binding Right.Message}"
+										UsualTextColor="{Binding Right.UsualTextColor}"
+										UsualBackground="{Binding Right.UsualBackground}"
+										IsBlinking="{Binding Right.IsBlinking}"
+
+										FlippedTextColor="{Binding UsualBackground, RelativeSource={RelativeSource Self}}"
+										FlippedBackground="{Binding UsualTextColor, RelativeSource={RelativeSource Self}}"/>
+
+				<cc:BlinkTB VerticalContentAlignment="Center"
+										HorizontalAlignment="Right"
+										Height="{StaticResource TB_Height}"
+
+										Visibility="{Binding Right.RightEdgeMessage, Converter={StaticResource CollapsedWhenNULL}}"
+										Text="{Binding Right.RightEdgeMessage}"
+										UsualTextColor="{Binding Right.UsualTextColor}"
+										UsualBackground="{Binding Right.UsualBackground}"
+										IsBlinking="{Binding Right.IsBlinking}"
+
+										FlippedTextColor="{Binding UsualBackground, RelativeSource={RelativeSource Self}}"
+										FlippedBackground="{Binding UsualTextColor, RelativeSource={RelativeSource Self}}"/>
+			</Grid>
+<!--#endregion Right-->
+
+		</Grid>
 	</Grid>
 </Page>

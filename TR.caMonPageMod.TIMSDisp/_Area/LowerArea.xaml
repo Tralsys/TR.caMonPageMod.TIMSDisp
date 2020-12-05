@@ -8,37 +8,72 @@
 			mc:Ignorable="d" 
 			Title="LowerArea">
 	<Page.Resources>
-		<FontFamily x:Key="Font">JF Dot jiskan16s</FontFamily>
-		<System:Double x:Key="LBtn_W">96</System:Double>
-		<System:Double x:Key="LBtn_H">64</System:Double>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/ConstVars.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
 
-		<System:Double x:Key="MsgArea_H">20</System:Double>
-		<GridLength x:Key="MsgArea_RH">20</GridLength>
-		<Brush x:Key="MsgArea_BG">Black</Brush>
-		<Thickness x:Key="MsgArea_TBPadding">1</Thickness>
+			<System:Double x:Key="LBtn_W">96</System:Double>
+			<System:Double x:Key="LBtn_H">64</System:Double>
 
-		<System:Double x:Key="SPBLBtn_W">36</System:Double>
-		<System:Double x:Key="SPBLBtn_H">72</System:Double>
+			<System:Double x:Key="MsgArea_H">20</System:Double>
+			<GridLength x:Key="MsgArea_RH">20</GridLength>
+			<Brush x:Key="MsgArea_BG">Black</Brush>
+			<Thickness x:Key="MsgArea_TBPadding">1</Thickness>
 
+			<System:Double x:Key="SPBLBtn_W">36</System:Double>
+			<System:Double x:Key="SPBLBtn_H">72</System:Double>
+		</ResourceDictionary>
 	</Page.Resources>
 	<Grid>
 		<Grid Height="80" Width="800">
 			<Rectangle Width="800" Height="1" Margin="0" Fill="#FF00FF00" VerticalAlignment="Top"/>
 
-			<cc:TIMSButton ButtonText="{Binding L1BText}" Pushed="OnL1Pushed" Margin="10,5"
-										 Height="{StaticResource LBtn_H}"
-										 Width="{StaticResource LBtn_W}"/>
-			<cc:TIMSButton ButtonText="{Binding L2BText}" Pushed="OnL2Pushed" Margin="110,5"
-										 Height="{StaticResource LBtn_H}"
-										 Width="{StaticResource LBtn_W}"/>
-			<cc:TIMSButton ButtonText="{Binding L3BText}" Pushed="OnL3Pushed" Margin="210,5"
-										 Height="{StaticResource LBtn_H}"
-										 Width="{StaticResource LBtn_W}"/>
-			<cc:TIMSButton ButtonText="{Binding L4BText}" Pushed="OnL4Pushed" Margin="310,5"
-										 Height="{StaticResource LBtn_H}"
-										 Width="{StaticResource LBtn_W}"/>
+			<Grid DataContext="{Binding ButtonData}" Margin="10,5" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<cc:TIMSButton ButtonText="{Binding L1BText}"
+											 IsEnabled="{Binding IsL1BEnabled}"
+											 Visibility="{Binding L1BText, Converter={StaticResource CollapsedWhenNULL}}"
+											 
+											 Grid.Column="0"
+											 Pushed="OnL1Pushed"
+											 
+											 Height="{StaticResource LBtn_H}"
+											 Width="{StaticResource LBtn_W}"/>
+				<cc:TIMSButton ButtonText="{Binding L2BText}"
+											 IsEnabled="{Binding IsL2BEnabled}"
+											 Visibility="{Binding L2BText, Converter={StaticResource CollapsedWhenNULL}}"
 
-			<Grid Margin="416,6,100,0" Height="70">
+											 Grid.Column="1"
+											 Pushed="OnL2Pushed"
+
+											 Height="{StaticResource LBtn_H}"
+											 Width="{StaticResource LBtn_W}"/>
+				<cc:TIMSButton ButtonText="{Binding L3BText}"
+											 IsEnabled="{Binding IsL3BEnabled}"
+											 Visibility="{Binding L3BText, Converter={StaticResource CollapsedWhenNULL}}"
+
+											 Grid.Column="2"
+											 Pushed="OnL3Pushed"
+
+											 Height="{StaticResource LBtn_H}"
+											 Width="{StaticResource LBtn_W}"/>
+				<cc:TIMSButton ButtonText="{Binding L4BText}"
+											 IsEnabled="{Binding IsL4BEnabled}"
+											 Visibility="{Binding L4BText, Converter={StaticResource CollapsedWhenNULL}}"
+
+											 Grid.Column="3"
+											 Pushed="OnL4Pushed"
+
+											 Height="{StaticResource LBtn_H}"
+											 Width="{StaticResource LBtn_W}"/>
+			</Grid>
+			<Grid Margin="416,6,100,0" Height="70" DataContext="{Binding NoticeData}">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="{StaticResource MsgArea_RH}"/>
 					<RowDefinition Height="*"/>
@@ -47,8 +82,9 @@
 					<RowDefinition Height="{StaticResource MsgArea_RH}"/>
 				</Grid.RowDefinitions>
 				<Grid Grid.Row="0" Background="{StaticResource MsgArea_BG}">
-					<cc:BlinkTB x:Name="Kuten_TB"
-											Text="空転"
+					<cc:BlinkTB Text="空転"
+											Visibility="{Binding IsKutenBlinking, Converter={StaticResource BoolToVisibility}}"
+											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											Margin="0,0,0,0"
@@ -57,8 +93,9 @@
 											UsualTextColor="Black"
 											FlippedBackground="{x:Null}"
 											FlippedTextColor="Aqua"/>
-					<cc:BlinkTB x:Name="Kasso_TB"
-											Text="滑走"
+					<cc:BlinkTB Text="滑走"
+											Visibility="{Binding IsKassoBlinking, Converter={StaticResource BoolToVisibility}}"
+											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											Margin="42,0,0,0"
@@ -67,8 +104,9 @@
 											UsualTextColor="Black"
 											FlippedBackground="{x:Null}"
 											FlippedTextColor="Aqua"/>
-					<cc:BlinkTB x:Name="OVD_TB"
-											Text=" OVD"
+					<cc:BlinkTB Text=" OVD"
+											Visibility="{Binding IsOVDBlinking, Converter={StaticResource BoolToVisibility}}"
+											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											Margin="84,0,0,0"
@@ -77,8 +115,9 @@
 											UsualTextColor="Black"
 											FlippedBackground="{x:Null}"
 											FlippedTextColor="Yellow"/>
-					<cc:BlinkTB x:Name="SeigyoIjo_TB"
-											Text="制御異常"
+					<cc:BlinkTB Text="制御異常"
+											Visibility="{Binding IsSeigyoIjoBlinking, Converter={StaticResource BoolToVisibility}}"
+											IsBlinking="True"
 											Height="{StaticResource MsgArea_H}"
 											VerticalContentAlignment="Bottom"
 											Margin="126,0,0,0"

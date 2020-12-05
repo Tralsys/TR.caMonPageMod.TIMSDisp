@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Windows.Controls;
 
+using TR.caMonPageMod.TIMSDisp._BindClasses;
+
 namespace TR.caMonPageMod.TIMSDisp._Area
 {
 	/// <summary>
@@ -16,9 +18,28 @@ namespace TR.caMonPageMod.TIMSDisp._Area
 		{
 			InitializeComponent();
 
-			DataContext = bs;
+			toB.ButtonData = new LowerArea_Btn()
+			{
+				L1BText = "運転士\nメニュー",
+				IsL1BEnabled = true,
+				L2BText = "運転情報\n画面",
+				IsL2BEnabled = true,
+				L3BText = "応急マニ\nュアル",
+				IsL3BEnabled = false,
+				L4BText = null,
+				IsL4BEnabled = false,
+			};
+			toB.NoticeData = new LowerArea_NoticeData()
+			{
+				IsKassoBlinking = false,
+				IsKutenBlinking = false,
+				IsOVDBlinking = false,
+				IsSeigyoIjoBlinking = false
+			};
+
+			DataContext = toB;
 		}
-		ButtonSetting bs = new ButtonSetting();
+		LowerArea_toBind toB = new LowerArea_toBind();
 		private void OnL1Pushed(object sender, EventArgs e)
 		{
 
@@ -46,61 +67,30 @@ namespace TR.caMonPageMod.TIMSDisp._Area
 
 		}
 
-		public class ButtonSetting : INotifyPropertyChanged
+		public class LowerArea_toBind : INotifyPropertyChanged
 		{
 			public event PropertyChangedEventHandler PropertyChanged;
 			private void OnPropertyChanged(string s) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(s));
 
-			private string __L1BText = "L1B";
-			public string L1BText
+			private LowerArea_Btn __ButtonData = null;
+			public LowerArea_Btn ButtonData
 			{
-				get => __L1BText;
+				get => __ButtonData;
 				set
 				{
-					if (L1BText == value)
-						return;
-
-					__L1BText = value;
-					OnPropertyChanged(nameof(L1BText));
+					__ButtonData = value;
+					OnPropertyChanged(nameof(ButtonData));
 				}
 			}
-			private string __L2BText = "L2B";
-			public string L2BText
+
+			private LowerArea_NoticeData __NoticeData = null;
+			public LowerArea_NoticeData NoticeData
 			{
-				get => __L2BText;
+				get => __NoticeData;
 				set
 				{
-					if (L2BText == value)
-						return;
-
-					__L2BText = value;
-					OnPropertyChanged(nameof(L2BText));
-				}
-			}
-			private string __L3BText = "L3B";
-			public string L3BText
-			{
-				get => __L3BText;
-				set
-				{
-					if (L3BText == value)
-						return;
-
-					__L3BText = value;
-					OnPropertyChanged(nameof(L3BText));
-				}
-			}
-			private string __L4BText = "L4B";
-			public string L4BText
-			{
-				get => __L4BText;
-				set
-				{
-					if (L4BText == value)
-						return;
-
-					__L4BText = value;
-					OnPropertyChanged(nameof(L4BText));
+					__NoticeData = value;
+					OnPropertyChanged(nameof(NoticeData));
 				}
 			}
 		}

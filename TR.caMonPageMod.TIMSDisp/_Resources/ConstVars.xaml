@@ -27,6 +27,8 @@
 	<ScaleTransform x:Key="ScaleX2" ScaleX="2" ScaleY="1"/>
 
 
+	<uf:IsNULL x:Key="IsNULL"/>
+	<uf:IsNotNULL x:Key="IsNotNULL"/>
 	<uf:BoolToVisibility x:Key="BoolToVisibility"/>
 	<uf:IsDoorClosedToString x:Key="IsDoorClosedToString"/>
 	<uf:IntToString x:Key="IntToString" Format="D" PaddingL="0"/>
@@ -40,6 +42,7 @@
 	<uf:DoubleToString x:Key="DoubleToString3p3" Format="000.000"/>
 
 	<uf:CollapsedWhenIntN x:Key="CollapsedWhenInt0" CollapsedWhen="0"/>
+	<uf:CollapsedWhenNULL x:Key="CollapsedWhenNULL"/>
 
 	<uf:DoublePlusN x:Key="DoublePlus2" ValueToPlus="2"/>
 	<uf:DoubleMinusN x:Key="DoubleMinus1" ValueToMinus="1"/>
