@@ -44,7 +44,7 @@ namespace TR.caMonPageMod.TIMSDisp._UsefulFuncs
 			};
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-			=> value as string switch
+			=> (value as string) switch
 			{
 				"開" => false,
 				"閉" => true,
