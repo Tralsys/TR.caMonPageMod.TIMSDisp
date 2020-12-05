@@ -83,7 +83,6 @@
     <Folder Include="Start\" />
     <Folder Include="Alert\" />
     <Folder Include="Conductor\" />
-    <Folder Include="_Manager\" />
   </ItemGroup>
 
   <ItemGroup>
