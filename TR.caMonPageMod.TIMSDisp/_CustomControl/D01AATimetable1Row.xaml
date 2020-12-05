@@ -47,7 +47,7 @@
 						<!--#region StaName-->
 						<TextBlock Text="{TemplateBinding StaName}"
 											 Foreground="{TemplateBinding TextColor}"
-											 Margin="{TemplateBinding StaNameMargin}"
+											 Margin="90,20,0,0"
 											 HorizontalAlignment="Left"
 											 VerticalAlignment="Top"
 											 RenderTransform="{StaticResource ScaleX2}"
@@ -56,7 +56,7 @@
 						<TextBlock Text="「　　　　」"
 											 Foreground="{TemplateBinding TextColor}"
 											 Visibility="{TemplateBinding IsThisStaOpStop, Converter={StaticResource BoolToVisibility}}"
-											 Margin="81,20,0,0"
+											 Margin="58,20,0,0"
 											 HorizontalAlignment="Left"
 											 VerticalAlignment="Top"
 											 RenderTransform="{StaticResource ScaleX2}"

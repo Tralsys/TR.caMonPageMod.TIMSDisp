@@ -1,9 +1,6 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-
-using TR.caMonPageMod.TIMSDisp._UsefulFuncs;
 
 namespace TR.caMonPageMod.TIMSDisp._CustomControl
 {
@@ -63,21 +60,11 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			set => SetValue(StaNameProperty, value);
 		}
 
-		static public readonly DependencyProperty IsThisStaOpStopProperty = DependencyProperty.Register(nameof(IsThisStaOpStop), typeof(bool), typeof(D01AATimetable1Row),
-			new PropertyMetadata(false, (s, e) => (s as D01AATimetable1Row).StaNameMargin = ((bool)e.NewValue) ? StaNameOpStopMargin : StaNameUsualMargin));
+		static public readonly DependencyProperty IsThisStaOpStopProperty = DependencyProperty.Register(nameof(IsThisStaOpStop), typeof(bool), typeof(D01AATimetable1Row), new PropertyMetadata(false));
 		public bool IsThisStaOpStop
 		{
 			get => (bool)GetValue(IsThisStaOpStopProperty);
 			set => SetValue(IsThisStaOpStopProperty, value);
-		}
-
-		static private readonly Thickness StaNameUsualMargin = new Thickness(90, 20, 0, 0);
-		static private readonly Thickness StaNameOpStopMargin = new Thickness(108, 20, 0, 0);
-		static public readonly DependencyProperty StaNameMarginProperty = DependencyProperty.Register(nameof(StaNameMargin), typeof(Thickness), typeof(D01AATimetable1Row), new PropertyMetadata(StaNameUsualMargin));
-		public Thickness StaNameMargin
-		{
-			get => (Thickness)GetValue(StaNameMarginProperty);
-			private set => SetValue(StaNameMarginProperty, value);
 		}
 		#endregion
 

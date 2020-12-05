@@ -179,7 +179,7 @@
 															 IsRuntimeVisible="False"
 															 IsThisStaOpStop="True" TextColor="Red"
 															 RunInLimit="3" RunOutLimit="900"/>
-				<cc:D01AATimetable1Row Margin="0,40,0,0" StaName="名古屋" IsThisStaOpStop="True"
+				<cc:D01AATimetable1Row Margin="0,40,0,0" StaName="名古屋" IsThisStaOpStop="False"
 															 ArrTimeHH="12" RuntimeMM="12" RuntimeSS="34"/>
 				<cc:D01AATimetable1Row Margin="0,80,0,0" StaName="津" IsThisStaOpStop="True" TextColor="Yellow"
 															 TrackNum="試験" IsRunInLimitEnabled="False"/>
