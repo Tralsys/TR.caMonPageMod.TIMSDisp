@@ -9,6 +9,7 @@ namespace TR.caMonPageMod.TIMSDisp._Interfaces
 		public Brush TextColor { get; set; }
 
 		public bool IsOpStop { get; set; }
+		public bool IsPass { get; set; }
 
 		public string StationName { get; set; }
 
@@ -35,5 +36,25 @@ namespace TR.caMonPageMod.TIMSDisp._Interfaces
 		public bool IsRunOutLimitVisible { get; set; }
 		#endregion
 
+	}
+
+	public class PureStationData : IStationData
+	{
+		public double Location { get; set; }
+		public Brush TextColor { get; set; }
+		public bool IsOpStop { get; set; }
+		public bool IsPass { get; set; }
+		public string StationName { get; set; }
+		public bool IsRuntimeVisible { get; set; }
+		public int RuntimeMM { get; set; }
+		public int RuntimeSS { get; set; }
+		public ITimeData ArrTime { get; set; }
+		public ITimeData DepTime { get; set; }
+		public string TrackNumber { get; set; }
+		public bool IsTrackNumberVisible { get; set; }
+		public int RunInLimit { get; set; }
+		public bool IsRunInLimitVisible { get; set; }
+		public int RunOutLimit { get; set; }
+		public bool IsRunOutLimitVisible { get; set; }
 	}
 }

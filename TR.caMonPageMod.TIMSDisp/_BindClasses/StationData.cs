@@ -188,6 +188,19 @@ namespace TR.caMonPageMod.TIMSDisp._BindClasses
 				OnPropertyChanged(nameof(IsOpStop));
 			}
 		}
+		private bool __IsPass;
+		public bool IsPass
+		{
+			get => __IsPass;
+			set
+			{
+				if (IsPass == value)
+					return;
+
+				__IsPass = value;
+				OnPropertyChanged(nameof(IsPass));
+			}
+		}
 
 
 		#region Runtime
