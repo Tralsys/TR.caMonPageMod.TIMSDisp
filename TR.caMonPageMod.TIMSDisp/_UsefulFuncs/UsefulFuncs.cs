@@ -32,5 +32,14 @@ namespace TR.caMonPageMod.TIMSDisp._UsefulFuncs
 
 			return arr;
 		}
+
+		static public bool StringToBool(in string s)
+		{
+			bool ret;
+			if (bool.TryParse(s, out ret))//True / False
+				return ret;
+			else
+				return s == "1";// 1:True, 0:False
+		}
 	}
 }
