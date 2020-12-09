@@ -17,7 +17,9 @@ namespace TR.caMonPageMod.TIMSDisp._Interfaces
 		public string WorkName { get; set; }
 
 		/// <summary>改正日(?)</summary>
-		public string ReleaseDate { get; set; }
+		public string ReleaseYear { get; set; }
+		public string ReleaseMonth { get; set; }
+		public string ReleaseDay { get; set; }
 
 
 		public List<ITrainData> TrainData { get; set; }

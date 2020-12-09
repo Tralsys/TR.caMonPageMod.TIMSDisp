@@ -38,7 +38,9 @@ namespace TR.caMonPageMod.TIMSDisp._DataClasses
 		public string UniqueID { get; set; }
 		public string OfficeName { get; set; }
 		public string WorkName { get; set; }
-		public string ReleaseDate { get; set; }
+		public string ReleaseYear { get; set; }
+		public string ReleaseMonth { get; set; }
+		public string ReleaseDay { get; set; }
 		public List<ITrainData> TrainData { get; set; }
 		#endregion Properties
 	}
