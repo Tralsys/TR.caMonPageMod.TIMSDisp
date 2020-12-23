@@ -137,7 +137,16 @@ namespace TR.caMonPageMod.TIMSDisp._UsefulFuncs
 	public class CollapsedWhenNULL : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-			=> value == null ? Visibility.Collapsed : Visibility.Visible;
+			=> value is null ? Visibility.Collapsed : Visibility.Visible;
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+			=> throw new NotImplementedException();
+		
+	}
+	public class CollapsedWhenNotNULL : IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+			=> value is not null ? Visibility.Collapsed : Visibility.Visible;
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 			=> throw new NotImplementedException();
