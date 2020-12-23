@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
+using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
 namespace TR.caMonPageMod.TIMSDisp._CustomControl
 {
-	public class ImgBtn : Control
+	public class ImgBtn : TIMSButton
 	{
 		public static readonly DependencyProperty DirectoryProperty = DependencyProperty.Register("Directory", typeof(string), typeof(ImgBtn), new PropertyMetadata("BL"));
 
@@ -39,6 +37,10 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 						return cv;
 				}));
 
+		public static readonly DependencyProperty IsValueChangeToPositiveDirectionProperty = DependencyProperty.Register("IsValueChangeToPositiveDirection", typeof(bool), typeof(ImgBtn), new PropertyMetadata(false));
+
+		/// <summary>CurrentValueChangedCallback</summary>
+		/// <param name="e"></param>
 		public void CVChangedCallback(DependencyPropertyChangedEventArgs e)
 		{
 			int v = (int)e.NewValue;
@@ -50,50 +52,30 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			__CurrentValueChanged?.Invoke(this, new ValueChangedEventArgs<int>((int)e.OldValue, v));
 		}
 
-		public static readonly DependencyProperty UsualBackgroundProperty = DependencyProperty.Register("UsualBackground", typeof(Brush), typeof(ImgBtn), new PropertyMetadata(Brushes.Blue));
-		public static readonly DependencyProperty PushedBackgroundProperty = DependencyProperty.Register("PushedBackground", typeof(Brush), typeof(ImgBtn), new PropertyMetadata(Brushes.Yellow));
-		public static readonly DependencyProperty FlippedBackgroundProperty = DependencyProperty.Register("FlippedBackground", typeof(Brush), typeof(ImgBtn), new PropertyMetadata(Brushes.White));
-
-		public static readonly DependencyProperty IsBlinkingProperty = DependencyProperty.Register("IsBlinking", typeof(bool), typeof(ImgBtn), new PropertyMetadata(false));
-
 		static ImgBtn() => DefaultStyleKeyProperty.OverrideMetadata(typeof(ImgBtn), new FrameworkPropertyMetadata(typeof(ImgBtn)));
 		
 		public ImgBtn()
 		{
 			FrontPage.DT400Tick += (s, e) =>
 			{
-				if (InnerBorder == null || img == null)
+				if (img == null)
 					return;
 
 				if (!IsEnabled || !IsBlinking)
 				{
 					//無効状態か, Blinkしないなら, Blink処理からの表示内容指定は行わない.
 					CurrentBI = null;
-					CurrentBrush = null;
 
 					return;
 				}
 
 				FlippedImg ??= GetImgSource(CurrentValue, FlippedSuffix);//Blink開始次第, 必要に応じてFlippedImgへのパスを取得する.
 
-				if (FrontPage.DT400_TFLoop)
-				{
-					CurrentBrush = FlippedBackground;
-					CurrentBI = FlippedImg;
-				}
-				else
-				{
-					CurrentBrush = UsualBackground;
-					CurrentBI = UsualImg;
-				}
+				CurrentBI = FrontPage.DT400_TFLoop ? FlippedImg : UsualImg;
 
 				if (!IsPushed)
-				{
-					InnerBorder.Background = CurrentBrush;
 					img.Source = CurrentBI;
-				}
 			};
-
 		}
 		#region Constant Setting Values
 		const string BaseGrid_Name = "BaseGrid";
@@ -110,101 +92,46 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		#endregion
 
 		#region Elements
-		private Grid BaseGrid;
-		private Border BaseBorder;
-		private RotateTransform BtnLight1;
-		private RotateTransform BtnLight2;
-		private Border LightBorder;
-		private Border InnerBorder;
-		private Image img;
+		private Image img = new Image();
 		#endregion
 
 		private BitmapImage GetImgSource(in int value, in string suffix)
 			=> new BitmapImage(new Uri(new StringBuilder(IMG_SOURCE_PATH).Append(Directory).Append('/').Append(value).Append(suffix).ToString()));
 
-		BitmapImage CurrentBI = null;
+		BitmapImage CurrentBI = null;//Current Blinking Image
 		BitmapImage UsualImg = null;
 		BitmapImage PushedImg = null;
 		BitmapImage FlippedImg = null;
-		Brush CurrentBrush = null;
 
 		public override void OnApplyTemplate()
 		{
 			base.OnApplyTemplate();
 
-			if (BaseGrid != null)
-			{
-				//ref : https://www.atmarkit.co.jp/ait/articles/1601/06/news027.html
-
-				BaseGrid.MouseDown -= BaseGrid_MouseDown;
-				BaseGrid.MouseUp -= BaseGrid_MouseUp;
-			}
-
-			BaseGrid = GetTemplateChild(BaseGrid_Name) as Grid;
-			BaseBorder = GetTemplateChild(BaseBorder_Name) as Border;
-			BtnLight1 = GetTemplateChild(BtnLight1_Name) as RotateTransform;
-			BtnLight2 = GetTemplateChild(BtnLight2_Name) as RotateTransform;
-			LightBorder = GetTemplateChild(LightBorder_Name) as Border;
-			InnerBorder = GetTemplateChild(InnerBorder_Name) as Border;
-			img = GetTemplateChild("img") as Image;
-
-			__Pushed += ImgBtn___Pushed;
-			__Released += ImgBtn___Released;
-
-			IsEnabledChanged += (s, e) => img.Visibility = IsEnabled ? Visibility.Visible : Visibility.Collapsed;
-
 			UsualImg = GetImgSource(CurrentValue, UsualSuffix);
-			img.Source = UsualImg;
 
-			if (BaseGrid != null)
+			//img = GetTemplateChild("img") as Image;
+			if (img is not null)
 			{
-				BaseGrid.MouseDown += BaseGrid_MouseDown;
-				BaseGrid.MouseUp += BaseGrid_MouseUp;
+				Content = img;
+				img.SetBinding(Image.VisibilityProperty, new Binding(nameof(IsEnabled)) { Source = this, Converter = new _UsefulFuncs.BoolToVisibility() });
+				img.SetBinding(Image.HeightProperty, new Binding(nameof(ImgHeight)) { Source = this });
+				img.SetBinding(Image.WidthProperty, new Binding(nameof(ImgWidth)) { Source = this });
+				img.Source = UsualImg;
 			}
 
+			IsPushedPropertyChanged += Btn_base_IsPushedPropertyChanged;
 		}
 
-		private bool IsPushed = false;
-
-		private void ImgBtn___Pushed(object sender, EventArgs e)
+		private void Btn_base_IsPushedPropertyChanged(object sender, ValueChangedEventArgs<bool> e)
 		{
-			CurrentValue--;
-
-			IsPushed = true;
-			
-			BaseBorder.Background = Brushes.Black;
-			InnerBorder.Background = PushedBackground;
-
-			img.Source = PushedImg;
-
-			LightBorder.Margin = LightBorder_Margin_Pushed;
-			BtnLight1.Angle = BtnLight2.Angle = 180;
-
-			CommonMethods.ButtonPushed();
-		}
-		private void ImgBtn___Released(object sender, EventArgs e)
-		{
-			IsPushed = false;
-
-			BaseBorder.Background = UsualBackground;
-
-			img.Source = CurrentBI ?? UsualImg;//Blink処理からの表示内容指定がなければ, UsualImgを表示.
-			InnerBorder.Background = CurrentBrush ?? UsualBackground;//Blink処理からの表示内容指定がなければ, UsualBackgroundを表示.
-
-			LightBorder.Margin = LightBorder_Margin_Usual;
-
-			BtnLight1.Angle = BtnLight2.Angle = 0;
-		}
-
-		private void BaseGrid_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (IsEnabled)
-				__Pushed?.Invoke(this, null);
-		}
-		private void BaseGrid_MouseUp(object sender, MouseButtonEventArgs e)
-		{
-			if (IsEnabled)
-				__Released?.Invoke(this, null);
+			img.Source = (bool)e.NewValue ? PushedImg : (CurrentBI ?? UsualImg);
+			if (e.NewValue)
+			{
+				if (IsValueChangeToPositiveDirection)
+					CurrentValue++;
+				else
+					CurrentValue--;
+			}
 		}
 
 		#region Properties
@@ -256,37 +183,17 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			get => (int)GetValue(CurrentValueProperty);
 			set => SetValue(CurrentValueProperty, value);
 		}
-		public Brush UsualBackground
-		{
-			get => (Brush)GetValue(UsualBackgroundProperty);
-			set => SetValue(UsualBackgroundProperty, value);
-		}
-		public Brush PushedBackground
-		{
-			get => (Brush)GetValue(PushedBackgroundProperty);
-			set => SetValue(PushedBackgroundProperty, value);
-		}
-		public Brush FlippedBackground
-		{
-			get => (Brush)GetValue(FlippedBackgroundProperty);
-			set => SetValue(FlippedBackgroundProperty, value);
-		}
 
-		public bool IsBlinking
+		public bool IsValueChangeToPositiveDirection
 		{
-			get => (bool)GetValue(IsBlinkingProperty);
-			set => SetValue(IsBlinkingProperty, value);
+			get => (bool)GetValue(IsValueChangeToPositiveDirectionProperty);
+			set => SetValue(IsValueChangeToPositiveDirectionProperty, value);
 		}
 		#endregion
 
 		#region Events
 		private event EventHandler<ValueChangedEventArgs<int>> __CurrentValueChanged;
 		public event EventHandler<ValueChangedEventArgs<int>> CurrentValueChanged { add => __CurrentValueChanged += value; remove => __CurrentValueChanged -= value; }
-
-		private event EventHandler __Pushed;
-		public event EventHandler Pushed { add => __Pushed += value; remove => __Pushed -= value; }
-		private event EventHandler __Released;
-		public event EventHandler Released { add => __Released += value; remove => __Released -= value; }
 		#endregion
 	}
 }
