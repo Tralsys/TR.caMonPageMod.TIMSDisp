@@ -9,8 +9,91 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type local:D10Ax_ListView1Row}">
-					<Grid>
-						
+					<Grid Height="60" Width="800" Margin="{TemplateBinding Margin}" Background="Black">
+						<Border Margin="80,0,0,0"
+										HorizontalAlignment="Left"
+										VerticalAlignment="Top"
+										Height="36"
+										Width="180">
+							<TextBlock Text="始発駅名"
+												 Foreground="White"
+												 FontSize="{StaticResource TIMSFontSizeX2}"
+												 FontFamily="{StaticResource TIMSFontFamily}"
+												 VerticalAlignment="Bottom"
+												 HorizontalAlignment="Left"/>
+						</Border>
+
+						<StackPanel Orientation="Horizontal" Margin="135,40,0,0"
+												HorizontalAlignment="Left"
+												VerticalAlignment="Top"
+												Width="114">
+							<TextBlock Text="００"
+												 Foreground="White"
+												 FontSize="{StaticResource TIMSFontSizeX1}"
+												 FontFamily="{StaticResource TIMSFontFamily}"/>
+							<TextBlock Text="："
+												 Foreground="White"
+												 FontSize="{StaticResource TIMSFontSizeX1}"
+												 FontFamily="{StaticResource TIMSFontFamily}"/>
+							<TextBlock Text="００"
+												 Foreground="White"
+												 FontSize="{StaticResource TIMSFontSizeX1}"
+												 FontFamily="{StaticResource TIMSFontFamily}"/>
+							<TextBlock Text="００"
+												 Foreground="White"
+												 VerticalAlignment="Bottom"
+												 FontSize="12"
+												 FontFamily="{StaticResource TIMSFontFamily}"/>
+						</StackPanel>
+
+						<Border Margin="555,0,0,0"
+										HorizontalAlignment="Left"
+										VerticalAlignment="Top"
+										Height="36"
+										Width="180">
+							<TextBlock Text="始発駅名"
+												 Foreground="White"
+												 FontSize="{StaticResource TIMSFontSizeX2}"
+												 FontFamily="{StaticResource TIMSFontFamily}"
+												 VerticalAlignment="Bottom"
+												 HorizontalAlignment="Left"/>
+						</Border>
+
+						<StackPanel Orientation="Horizontal" Margin="600,40,0,0"
+												HorizontalAlignment="Left"
+												VerticalAlignment="Top"
+												Width="114">
+							<TextBlock Text="００"
+												 Foreground="White"
+												 FontSize="{StaticResource TIMSFontSizeX1}"
+												 FontFamily="{StaticResource TIMSFontFamily}"/>
+							<TextBlock Text="："
+												 Foreground="White"
+												 FontSize="{StaticResource TIMSFontSizeX1}"
+												 FontFamily="{StaticResource TIMSFontFamily}"/>
+							<TextBlock Text="００"
+												 Foreground="White"
+												 FontSize="{StaticResource TIMSFontSizeX1}"
+												 FontFamily="{StaticResource TIMSFontFamily}"/>
+							<TextBlock Text="００"
+												 Foreground="White"
+												 VerticalAlignment="Bottom"
+												 FontSize="12"
+												 FontFamily="{StaticResource TIMSFontFamily}"/>
+						</StackPanel>
+
+						<Grid Width="300">
+							<Rectangle Margin="0,50,0,0"
+												 Height="2"
+												 VerticalAlignment="Top"
+												 Fill="White"/>
+							<local:TIMSButton HorizontalAlignment="Center"
+																VerticalAlignment="Top"
+																Height="45"
+																Width="162"/>
+
+						</Grid>
+									
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
