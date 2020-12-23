@@ -5,12 +5,28 @@
 		<ResourceDictionary Source="/TR.caMonPageMod.TIMSDisp;component/_Resources/ConstVars.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
 	
-	<Style TargetType="{x:Type local:TIMSButton}">
+	<Style TargetType="{x:Type local:TIMSButton}" x:Key="_TIMSButton">
 		<Setter Property="HorizontalAlignment" Value="Left"/>
 		<Setter Property="VerticalAlignment" Value="Top"/>
 		<Setter Property="Padding" Value="3"/>
 		<Setter Property="FontFamily" Value="{StaticResource TIMSFontFamily}"/>
 		<Setter Property="FontSize" Value="{StaticResource TIMSFontSizeX1}"/>
+
+		<Setter Property="ButtonText" Value="TIMSBtn"/>
+
+		<Setter Property="UsualBackground" Value="Blue"/>
+		<Setter Property="PushedBackground" Value="Yellow"/>
+		<Setter Property="FlippedBackground" Value="White"/>
+		<Setter Property="UsualTextColor" Value="White"/>
+		<Setter Property="PushedTextColor" Value="Black"/>
+		<Setter Property="PushedTextColor" Value="Black"/>
+
+		<Setter Property="IsBlinking" Value="False"/>
+		<Setter Property="Holdable" Value="False"/>
+		<Setter Property="IsPushed" Value="False"/>
+
+		<Setter Property="Content" Value="{x:Null}"/>
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type local:TIMSButton}">
@@ -38,18 +54,38 @@
 						<Border x:Name="LightBorder" Margin="0,0,7,7" Padding="0" Background="White" IsHitTestVisible="False"/>
 
 						<Border x:Name="InnerBorder" Margin="{TemplateBinding Padding}" Padding="0"
-										Background="{Binding UsualBackground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}}"/>
+										Background="{TemplateBinding UsualBackground}"/>
 
-						<TextBlock x:Name="TB" Margin="{TemplateBinding Padding}" Padding="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False"
-											 Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Converter={StaticResource BoolToVisibility}}"
-											 TextWrapping="Wrap"
-											 Foreground="{Binding UsualTextColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}}"
-											 Text="{Binding ButtonText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}}"/>
 
+						<Border Background="{x:Null}"
+									  Visibility="{Binding IsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}, Converter={StaticResource BoolToVisibility}}"
+										IsHitTestVisible="False"
+										Margin="{TemplateBinding Padding}"
+										RenderTransform="{TemplateBinding ContentTransform}"
+										Padding="0">
+							<TextBlock Margin="0"
+											 Visibility="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}, Converter={StaticResource CollapsedWhenNotNULL}}"
+										 HorizontalAlignment="Center"
+										 VerticalAlignment="Center"
+										 IsHitTestVisible="False"
+										 TextWrapping="Wrap"
+										 Foreground="{Binding CurrentTextColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}}"
+										 Text="{Binding ButtonText, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TIMSButton}}}"/>
+						</Border>
+
+						<Border x:Name="ContentBorder"
+										Background="{x:Null}"
+									  Visibility="{Binding IsEnabled, RelativeSource={RelativeSource Self}, Converter={StaticResource BoolToVisibility}}"
+										IsHitTestVisible="False"
+										Margin="{TemplateBinding Padding}"
+										RenderTransform="{TemplateBinding ContentTransform}"
+										Padding="0"/>
+						
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
 	</Style>
 
+	<Style TargetType="{x:Type local:TIMSButton}" BasedOn="{StaticResource _TIMSButton}"/>
 </ResourceDictionary>

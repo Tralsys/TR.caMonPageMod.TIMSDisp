@@ -11,16 +11,39 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 	public class TIMSButton : Control
 	{
 		#region DependencyProperties
-		public static readonly DependencyProperty ButtonTextProperty = DependencyProperty.Register("ButtonText", typeof(string), typeof(TIMSButton), new PropertyMetadata("TIMSBtn"));
+		public static readonly DependencyProperty ButtonTextProperty = DependencyProperty.Register("ButtonText", typeof(string), typeof(TIMSButton));
 
-		public static readonly DependencyProperty UsualBackgroundProperty = DependencyProperty.Register("UsualBackground", typeof(Brush), typeof(TIMSButton), new PropertyMetadata(Brushes.Blue));
-		public static readonly DependencyProperty PushedBackgroundProperty = DependencyProperty.Register("PushedBackground", typeof(Brush), typeof(TIMSButton), new PropertyMetadata(Brushes.Yellow));
-		public static readonly DependencyProperty FlippedBackgroundProperty = DependencyProperty.Register("FlippedBackground", typeof(Brush), typeof(TIMSButton), new PropertyMetadata(Brushes.White));
-		public static readonly DependencyProperty UsualTextColorProperty = DependencyProperty.Register("UsualTextColor", typeof(Brush), typeof(TIMSButton), new PropertyMetadata(Brushes.White));
-		public static readonly DependencyProperty PushedTextColorProperty = DependencyProperty.Register("PushedTextColor", typeof(Brush), typeof(TIMSButton), new PropertyMetadata(Brushes.Black));
-		public static readonly DependencyProperty FlippedTextColorProperty = DependencyProperty.Register("FlippedTextColor", typeof(Brush), typeof(TIMSButton), new PropertyMetadata(Brushes.Black));
+		public static readonly DependencyProperty UsualBackgroundProperty = DependencyProperty.Register("UsualBackground", typeof(Brush), typeof(TIMSButton));
+		public static readonly DependencyProperty PushedBackgroundProperty = DependencyProperty.Register("PushedBackground", typeof(Brush), typeof(TIMSButton));
+		public static readonly DependencyProperty FlippedBackgroundProperty = DependencyProperty.Register("FlippedBackground", typeof(Brush), typeof(TIMSButton));
+		
+		public static readonly DependencyProperty UsualTextColorProperty = DependencyProperty.Register("UsualTextColor", typeof(Brush), typeof(TIMSButton));
+		public static readonly DependencyProperty PushedTextColorProperty = DependencyProperty.Register("PushedTextColor", typeof(Brush), typeof(TIMSButton));
+		public static readonly DependencyProperty FlippedTextColorProperty = DependencyProperty.Register("FlippedTextColor", typeof(Brush), typeof(TIMSButton));
 
-		public static readonly DependencyProperty IsBlinkingProperty = DependencyProperty.Register("IsBlinking", typeof(bool), typeof(TIMSButton), new PropertyMetadata(false));
+		public static readonly DependencyProperty CurrentTextColorProperty = DependencyProperty.Register("CurrentTextColor", typeof(Brush), typeof(TIMSButton));
+
+		public static readonly DependencyProperty ContentTransformProperty = DependencyProperty.Register("ContentTransform", typeof(Transform), typeof(TIMSButton));
+
+		public static readonly DependencyProperty IsBlinkingProperty = DependencyProperty.Register("IsBlinking", typeof(bool), typeof(TIMSButton));
+
+		public static readonly DependencyProperty HoldableProperty = DependencyProperty.Register("Holdable", typeof(bool), typeof(TIMSButton));
+		public static readonly DependencyProperty IsPushedProperty = DependencyProperty.Register("IsPushed", typeof(bool), typeof(TIMSButton), new PropertyMetadata((s,e)=>
+		{
+			var v = s as TIMSButton;
+			if ((bool)e.NewValue)
+				v.SetStyleToPushed();
+			else
+				v.SetStyleToReleased();
+			v?.__IsPushedPropertyChanged?.Invoke(v, new ValueChangedEventArgs<bool>((bool)e.OldValue, (bool)e.NewValue));
+		}));
+
+		public static readonly DependencyProperty ContentProperty = DependencyProperty.Register("Content", typeof(UIElement), typeof(TIMSButton), new PropertyMetadata((s,e)=>
+		{
+			var v = s as TIMSButton;
+			if (v?.ContentBorder is not null)
+				v.ContentBorder.Child = e.NewValue as UIElement;
+		}));
 		#endregion
 
 		static TIMSButton() => DefaultStyleKeyProperty.OverrideMetadata(typeof(TIMSButton), new FrameworkPropertyMetadata(typeof(TIMSButton)));
@@ -33,18 +56,18 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 				if (!IsEnabled || IsPushed || !IsBlinking)
 					return;
 
-				if (InnerBorder == null || TB == null)
+				if (InnerBorder == null)
 					return;
 
 				if (FrontPage.DT400_TFLoop)
 				{
 					InnerBorder.SetBinding(BackgroundProperty, new Binding(nameof(FlippedBackground)) { Source = this });
-					TB.SetBinding(ForegroundProperty, new Binding(nameof(FlippedTextColor)) { Source = this });
+					SetBinding(CurrentTextColorProperty, new Binding(nameof(FlippedTextColor)) { Source = this });
 				}
 				else
 				{
 					InnerBorder.SetBinding(BackgroundProperty, new Binding(nameof(UsualBackground)) { Source = this });
-					TB.SetBinding(ForegroundProperty, new Binding(nameof(UsualTextColor)) { Source = this });
+					SetBinding(CurrentTextColorProperty, new Binding(nameof(UsualTextColor)) { Source = this });
 				}
 			};
 		}
@@ -56,7 +79,7 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		const string BtnLight2_Name = "BtnLight2RotateTransform";
 		const string LightBorder_Name = "LightBorder";
 		const string InnerBorder_Name = "InnerBorder";
-		const string TB_Name = "TB";
+		const string ContentBorder_Name = "ContentBorder";
 		const double LightBorder_Padding = 7;
 		static readonly Thickness LightBorder_Margin_Usual = new Thickness(0, 0, LightBorder_Padding, LightBorder_Padding);
 		static readonly Thickness LightBorder_Margin_Pushed = new Thickness(LightBorder_Padding, LightBorder_Padding, 0, 0);
@@ -69,10 +92,10 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 		private RotateTransform BtnLight2;
 		private Border LightBorder;
 		private Border InnerBorder;
-		private TextBlock TB;
+
+		private Border ContentBorder;
 		#endregion
 
-		private bool IsPushed = false;
 		public override void OnApplyTemplate()
 		{
 			base.OnApplyTemplate();
@@ -91,48 +114,37 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			BtnLight2 = GetTemplateChild(BtnLight2_Name) as RotateTransform;
 			LightBorder = GetTemplateChild(LightBorder_Name) as Border;
 			InnerBorder = GetTemplateChild(InnerBorder_Name) as Border;
-			TB = GetTemplateChild(TB_Name) as TextBlock;
+			ContentBorder = GetTemplateChild(ContentBorder_Name) as Border;
 
 			__Pushed += TIMSButton___Pushed;
 			__Released += TIMSButton___Released;
 
-			IsEnabledChanged += (s, e) => TB.Visibility = IsEnabled ? Visibility.Visible : Visibility.Collapsed;
-
+			if (ContentBorder is not null && ContentBorder.Child != Content)
+				ContentBorder.Child = Content;
 
 			if (BaseGrid != null)
 			{
 				BaseGrid.MouseDown += BaseGrid_MouseDown;
 				BaseGrid.MouseUp += BaseGrid_MouseUp;
 			}
+
+			SetStyleToReleased();
 		}
 
 
 		private void TIMSButton___Pushed(object sender, EventArgs e)
 		{
-			IsPushed = true;
-
-			BaseBorder.Background = Brushes.Black;
-			InnerBorder.SetBinding(BackgroundProperty, new Binding(nameof(PushedBackground)) { Source = this });
-
-			TB.SetBinding(ForegroundProperty, new Binding(nameof(PushedTextColor)) { Source = this });
-
-			LightBorder.Margin = LightBorder_Margin_Pushed;
-			BtnLight1.Angle = BtnLight2.Angle = 180;
+			if (Holdable)
+				IsPushed = !IsPushed;
+			else
+				IsPushed = true;
 
 			CommonMethods.ButtonPushed();
 		}
 		private void TIMSButton___Released(object sender, EventArgs e)
 		{
-			IsPushed = false;
-
-			InnerBorder.SetBinding(BackgroundProperty, new Binding(nameof(UsualBackground)) { Source = this });
-			BaseBorder.SetBinding(BackgroundProperty, new Binding(nameof(UsualBackground)) { Source = this });
-
-			TB.SetBinding(ForegroundProperty, new Binding(nameof(UsualTextColor)) { Source = this });
-
-			LightBorder.Margin = LightBorder_Margin_Usual;
-
-			BtnLight1.Angle = BtnLight2.Angle = 0;
+			if (!Holdable)
+				IsPushed = false;
 		}
 
 		private void BaseGrid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -146,6 +158,31 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 				__Released?.Invoke(this, null);
 		}
 
+		#region Button Style Manager
+		private void SetStyleToPushed()
+		{
+			BaseBorder.Background = Brushes.Black;
+			InnerBorder?.SetBinding(BackgroundProperty, new Binding(nameof(PushedBackground)) { Source = this });
+
+			SetBinding(CurrentTextColorProperty, new Binding(nameof(PushedTextColor)) { Source = this });
+
+			LightBorder.Margin = LightBorder_Margin_Pushed;
+			BtnLight1.Angle = BtnLight2.Angle = 180;
+		}
+		private void SetStyleToReleased()
+		{
+			InnerBorder?.SetBinding(BackgroundProperty, new Binding(nameof(UsualBackground)) { Source = this });
+			BaseBorder?.SetBinding(BackgroundProperty, new Binding(nameof(UsualBackground)) { Source = this });
+
+			SetBinding(CurrentTextColorProperty, new Binding(nameof(UsualTextColor)) { Source = this });
+
+			if (LightBorder is not null)
+				LightBorder.Margin = LightBorder_Margin_Usual;
+
+			if (BtnLight1 is not null && BtnLight2 is not null)
+				BtnLight1.Angle = BtnLight2.Angle = 0;
+		}
+		#endregion
 
 		#region Properties
 		public string ButtonText
@@ -169,6 +206,7 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			get => (Brush)GetValue(FlippedBackgroundProperty);
 			set => SetValue(FlippedBackgroundProperty, value);
 		}
+
 		public Brush UsualTextColor
 		{
 			get => (Brush)GetValue(UsualTextColorProperty);
@@ -185,17 +223,48 @@ namespace TR.caMonPageMod.TIMSDisp._CustomControl
 			set => SetValue(FlippedTextColorProperty, value);
 		}
 
+		public Brush CurrentTextColor
+		{
+			get => (Brush)GetValue(CurrentTextColorProperty);
+			private set => SetValue(CurrentTextColorProperty, value);
+		}
+
+		public Transform ContentTransform
+		{
+			get => (Transform)GetValue(ContentTransformProperty);
+			private set => SetValue(ContentTransformProperty, value);
+		}
+
 		public bool IsBlinking
 		{
 			get => (bool)GetValue(IsBlinkingProperty);
 			set => SetValue(IsBlinkingProperty, value);
 		}
+		
+		public bool Holdable
+		{
+			get => (bool)GetValue(HoldableProperty);
+			set => SetValue(HoldableProperty, value);
+		}
+		public bool IsPushed
+		{
+			get => (bool)GetValue(IsPushedProperty);
+			set => SetValue(IsPushedProperty, value);
+		}
+
+		public UIElement Content
+		{
+			get => (UIElement)GetValue(ContentProperty);
+			set => SetValue(ContentProperty, value);
+		}
 		#endregion
 
 		#region Events
-		private event EventHandler __Pushed;
+		protected event EventHandler<ValueChangedEventArgs<bool>> __IsPushedPropertyChanged;
+		public event EventHandler<ValueChangedEventArgs<bool>> IsPushedPropertyChanged { add => __IsPushedPropertyChanged += value; remove => __IsPushedPropertyChanged -= value; }
+		protected event EventHandler __Pushed;
 		public event EventHandler Pushed { add => __Pushed += value; remove => __Pushed -= value; }
-		private event EventHandler __Released;
+		protected event EventHandler __Released;
 		public event EventHandler Released { add => __Released += value; remove => __Released -= value; }
 		#endregion
 	}
